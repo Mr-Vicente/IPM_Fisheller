@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Modify this file to customize your launch splash screen -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@android:color/white" />
+    <item android:drawable="@color/Secondary_black" />
 
-    <!-- You can insert your own image assets here -->
-    <!-- <item>
-        <bitmap
+        <!-- You can insert your own image assets here -->
+        <item
+            android:width="300dp"
+            android:height="300dp"
+            android:drawable="@mipmap/fisheller_logo"
             android:gravity="center"
-            android:src="@mipmap/launch_image" />
-    </item> -->
+        />
+        <!--<LinearLayout
+            android:right="100dp"
+            android:top="100dp">
+            <item
+                android:width="300dp"
+                android:height="300dp"
+                android:drawable="@mipmap/waves">
+            </item>
+        </LinearLayout>
+        <bitmap
+                android:width="10dp"
+                android:height="10dp"
+                android:gravity="center"
+                android:src="@mipmap/fisheller_logo" />-->
 </layer-list>
