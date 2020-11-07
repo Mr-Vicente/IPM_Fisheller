@@ -2,6 +2,7 @@ import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
+import 'package:fisheller_app/components/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +18,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
       //home: LoginScreen(),
-      home: MapPage(title: 'Fisheller'),
+      //home: MapPage(title: 'Fisheller'),
+      home: Home(),
     );
   }
 }
+
