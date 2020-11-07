@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
         primaryColor: PRIMARY_COLOUR,
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
-      home: WelcomeScreen(),
-      //home: MapPage(title: 'Fisheller'),
+      //home: WelcomeScreen(),
+      home: MapPage(),
     );
   }
 }
