@@ -3,6 +3,7 @@ import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
+import 'package:fisheller_app/components/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,8 +18,10 @@ class MyApp extends StatelessWidget {
         primaryColor: PRIMARY_COLOUR,
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
-      //home: WelcomeScreen(),
-      home: MapPage(),
+      //home: LoginScreen(),
+      //home: MapPage(title: 'Fisheller'),
+      home: Home(),
     );
   }
 }
+
