@@ -63,6 +63,7 @@ class _HomeState extends State<Home> {
         child: FittedBox(
           child: FloatingActionButton(
             onPressed: () {},
+            tooltip: 'Increment',
             child: Icon(Icons.add),
             elevation: 3.0,
             backgroundColor: PRIMARY_COLOUR,
@@ -77,6 +78,8 @@ class _HomeState extends State<Home> {
       _currentIndex = index;
     });
   }
+
+  
 }
 
 class SecondRoute extends StatelessWidget {

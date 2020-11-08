@@ -4,6 +4,7 @@ import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/components/rounded_button.dart';
 
 class Map extends StatefulWidget {
   @override
@@ -68,7 +69,24 @@ class MapState extends State<Map> {
     ));
   }
 
+void _currentLocation() async {
+   final GoogleMapController controller = await _controller.future;
+   LocationData currentLocation;
+   var location = new Location();
+   try {
+     currentLocation = await location.getLocation();
+     } on Exception {
+       currentLocation = null;
+       }
 
+    controller.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        bearing: 0,
+        target: LatLng(currentLocation.latitude, currentLocation.longitude),
+        zoom: 17.0,
+      ),
+    ));
+  }
 
   /// ************************* 'Main' methods ***************************/
   @override
@@ -83,19 +101,33 @@ class MapState extends State<Map> {
       body: Stack(
         children: <Widget>[
           GoogleMap(
-              myLocationEnabled: true,
-              compassEnabled: true,
-              tiltGesturesEnabled: false,
-              markers: _markers,
-              mapType: MapType.normal,
-              initialCameraPosition: _initialCameraPosition(),
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-                setState(() {
-                  _addMarkers();
-                });
-                _onMapCreated(controller);
-              })
+            zoomControlsEnabled: false,
+            myLocationEnabled: true,
+            tiltGesturesEnabled: false,
+            myLocationButtonEnabled: false,
+            markers: _markers,
+            mapType: MapType.normal,
+            initialCameraPosition: _initialCameraPosition(),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+              setState(() {
+                _addMarkers();
+              });
+              _onMapCreated(controller);
+              }            
+            ),
+          Positioned(
+            bottom: 70,
+            right: 10,
+            child: FloatingActionButton(
+              onPressed: _currentLocation,
+              mini: true,
+              child: Icon(Icons.location_searching,color: Colors.black),
+              backgroundColor: Colors.white,
+              )
+              )
+          
+          
         ],
       ),
     );

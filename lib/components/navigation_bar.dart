@@ -84,12 +84,15 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
   }
 
   Widget _buildDivider() {
-    return 
-      SizedBox(
-        height: widget.height,
-        child: VerticalDivider(thickness: 1, width: 0,indent: 15,endIndent: 15, color: Colors.grey[400],),
-        
-      
+    return SizedBox(
+      height: widget.height,
+      child: VerticalDivider(
+        thickness: 1,
+        width: 0,
+        indent: 15,
+        endIndent: 15,
+        color: Colors.grey[400],
+      ),
     );
   }
 
@@ -99,6 +102,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+
     return Expanded(
       child: SizedBox(
         height: widget.height,

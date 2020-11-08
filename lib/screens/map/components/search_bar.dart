@@ -6,18 +6,17 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-        child: SafeArea(
-            child:SearchInputField(
-              hintText: "Search Location",
-              onChanged: (value) {},
-            )
+    return SafeArea(
+      child:SearchInputField(
+        hintText: "Search Location",
+        onChanged: (value) {},
         )
-    );
+      );
   }
 }
 
 class SearchInputField extends StatelessWidget {
+  
   final String hintText;
   final IconData icon;
   final ValueChanged<String> onChanged;
@@ -27,6 +26,7 @@ class SearchInputField extends StatelessWidget {
     this.icon = Icons.location_on_outlined,
     this.onChanged,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +39,7 @@ class SearchInputField extends StatelessWidget {
           icon: Icon(
             icon,
             color: PRIMARY_COLOUR,
+            size: 30,
           ),
           hintText: hintText,
           border: InputBorder.none,
