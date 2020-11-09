@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fisheller_app/constants.dart';
 
 class FABBottomAppBarItem {
-  FABBottomAppBarItem({this.iconData, this.text});
+  FABBottomAppBarItem({this.iconData, this.imageName, this.text});
   IconData iconData;
+  String imageName;
   String text;
 }
 
@@ -102,6 +104,22 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     ValueChanged<int> onPressed,
   }) {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    var icon;
+    if (item.iconData != null) {
+      icon = Icon(
+        item.iconData,
+        color: color,
+        size: 30,
+      );
+    } else
+      icon = Column(children: <Widget>[
+        Image.asset(
+          item.imageName,
+          color: color,
+          height: 22,
+        ),
+        SizedBox(height: 4)
+      ]);
 
     return Expanded(
       child: SizedBox(
@@ -111,14 +129,17 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
           child: InkWell(
             onTap: () => onPressed(index),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Icon(item.iconData, color: color, size: widget.iconSize),
+                icon,
                 Text(
                   item.text,
                   style: TextStyle(color: color),
-                )
+                ),
+                SizedBox(
+                  height: 7,
+                ),
               ],
             ),
           ),

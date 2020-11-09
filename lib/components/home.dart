@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/navigation_bar.dart';
+import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,12 +16,38 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   //TODO add Feed and Cart pages here
   final List<Widget> _children = [MapPage(), SecondRoute()];
-
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       extendBody: true,
-      body: _children[_currentIndex],
+      body: Stack(children: <Widget>[
+        _children[_currentIndex],
+        Positioned(
+            top: 25,
+            right: 10,
+            child: SafeArea(
+                child: FloatingActionButton(
+              onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+              child: Image.asset('assets/icons/extra_menu.png', height: 20),
+              backgroundColor: Colors.white,
+            ))),
+      ]),
+      
+      drawerScrimColor: Colors.grey.withOpacity(0.54),
+      endDrawer: AmazDrawer(
+        topPosition:150,
+        width: 300,
+        height: 80,
+        elevation: 5,
+        color: PRIMARY_COLOUR,
+        //backgroundColor: WHITE_COLOUR,
+        items: [
+        AmazDrawerItem(iconData: Icons.face, iconSize: 50.0, text: "Profile"),
+        AmazDrawerItem(iconData: Icons.settings, iconSize: 50.0, text: "Settings"),
+        AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help")
+      ]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
@@ -41,8 +68,9 @@ class _HomeState extends State<Home> {
           onTabSelected: _onTabTapped,
           items: [
             FABBottomAppBarItem(iconData: Icons.location_pin, text: 'Map'),
-            FABBottomAppBarItem(iconData: Icons.search, text: 'Feed'),
-            FABBottomAppBarItem(iconData: Icons.shopping_cart, text: 'Cart'),
+            FABBottomAppBarItem(
+                imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
+            FABBottomAppBarItem(iconData: Icons.shopping_cart, text: 'Orders'),
           ],
         ),
       ),
@@ -78,8 +106,6 @@ class _HomeState extends State<Home> {
       _currentIndex = index;
     });
   }
-
-  
 }
 
 class SecondRoute extends StatelessWidget {
@@ -87,9 +113,6 @@ class SecondRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
