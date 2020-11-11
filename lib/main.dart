@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: LoginScreen(),
       //home: MapPage(),
-      //home: Home(),
-      home: Temp(),
+      home: Home(),
+      //home: Temp(),
     );
   }
 }

@@ -64,10 +64,30 @@ class MapState extends State<Map> {
           position: m.mapLocation,
           icon: markerIcon,
           onTap: (){
-            print("MEOW *********************" + m.name);
-            MarketUI_Screen();
+            editModalBottomSheet(context);
+            //print("MEOW *********************" + m.name);
+            //MarketUI_Screen();
           },
         )
+      );
+    });
+  }
+
+  void editModalBottomSheet(BuildContext context) {
+    double d = MediaQuery.of(context).size.height;
+    showModalBottomSheet(backgroundColor: Colors.transparent,context: context,isScrollControlled: true, builder: (BuildContext bc) {
+      return Container(
+        decoration: new BoxDecoration(
+            color: Colors.blue,
+            borderRadius: new BorderRadius.only(
+                topLeft:  const  Radius.circular(40.0),
+                topRight: const  Radius.circular(40.0))
+        ),
+        height: d * .85,
+        child:Align(
+            alignment: Alignment(0,-0.85),
+            child: Text("Doca de Portimão")
+        ),
       );
     });
   }
