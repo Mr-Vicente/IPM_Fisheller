@@ -4,7 +4,6 @@ import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:fisheller_app/constants.dart';
-import 'package:fisheller_app/components/rounded_button.dart';
 
 class Map extends StatefulWidget {
   @override
@@ -87,6 +86,11 @@ void _currentLocation() async {
       ),
     ));
   }
+
+  void _filterMarkers(){
+
+  }
+
 
   /// ************************* 'Main' methods ***************************/
   @override
