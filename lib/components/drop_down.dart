@@ -11,7 +11,7 @@ class DropDown extends StatefulWidget {
 
   DropDown(this._dropdownLabel, this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize);
 
-  _DropDownState state;
+   _DropDownState state;
   @override
   _DropDownState createState() => (state = new _DropDownState(this._dropdownLabel, this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize));
 

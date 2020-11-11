@@ -4,6 +4,7 @@ import 'package:fisheller_app/screens/map/components/map.dart';
 import 'package:fisheller_app/screens/map/components/filter.dart';
 import 'package:fisheller_app/screens/map/components/search_bar.dart';
 
+
 class MapPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MapPageState();
@@ -11,11 +12,14 @@ class MapPage extends StatefulWidget {
 
 class MapPageState extends State<MapPage> {
 
+  Map map = Map();
+
+
 Future<dynamic> _filter(){
   return showDialog(
       context: context,
       builder: (BuildContext context) {
-        return FilterPopUp();
+        return FilterPopUp(map);
        });
 }
 
@@ -27,7 +31,7 @@ Future<dynamic> _filter(){
         child: new Container(
             child: Stack(
                 children: <Widget>[
-                  Positioned.fill(child: Map()),
+                  Positioned.fill(child: map),
                   Positioned(
                       top: 15,
                       left: 15,

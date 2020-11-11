@@ -1,55 +1,51 @@
 import 'package:fisheller_app/components/slider.dart';
+import 'package:fisheller_app/models/filter_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/components/drop_down.dart';
-
-class FilterModel {
-  String category;
-  String seafood;
-  double maxPrice;
-  double minPrice;
-  double minQuantity;
-  double maxQuantity;
-
-  FilterModel({this.category, this.seafood, this.maxPrice, this.minPrice, this.minQuantity, this.maxQuantity});
-}
-
-
+import 'package:fisheller_app/screens/map/components/map.dart';
 
 class FilterPopUp extends StatefulWidget{
-  @override
-  _FilterPopUpState createState() => _FilterPopUpState();
+  final Map map;
 
+  const FilterPopUp(this.map);
+
+  @override
+  _FilterPopUpState createState() => _FilterPopUpState(this.map);
 }
 
 class _FilterPopUpState extends State<FilterPopUp>{
 
-
+  final Map map;
   FilterModel model = FilterModel();
-
   DropDown categoryDD = DropDown('CATEGORY', CATEGORIES, 137, 40, PRIMARY_COLOUR, Colors.white, 13);
   DropDown seafoodDD = new DropDown('SEAFOOD', SEAFOODS, 120, 40, PRIMARY_COLOUR, Colors.white, 13);
   CustomRangeSlider priceSlider = CustomRangeSlider(max: 40, step: 1,);
   CustomRangeSlider quantitySlider = CustomRangeSlider(max: 10, step: 1,);
 
+  _FilterPopUpState(this.map);
 
 
   void _applyStateFilter(){
+    if(categoryDD.getState().getValue() == null)
+      model.category = '';
+    else
       model.category =  categoryDD.getState().getValue();
+    if(seafoodDD.getState().getValue() ==  null)
+      model.seafood = '';
+    else
       model.seafood = seafoodDD.getState().getValue();
-      model.minPrice = priceSlider.getState().getBottomValue();
-      model.maxPrice = priceSlider.getState().getTopValue();
-      model.minQuantity = quantitySlider.getState().getBottomValue();
-      model.maxQuantity = quantitySlider.getState().getTopValue();
+    model.minPrice = priceSlider.getState().getBottomValue();
+    model.maxPrice = priceSlider.getState().getTopValue();
+    model.minQuantity = quantitySlider.getState().getBottomValue();
+    model.maxQuantity = quantitySlider.getState().getTopValue();
 
-      print('{\n'+ model.category +
-          '\n' + model.seafood +
-          '\n' + model.minPrice.toString() +
-          '\n' + model.maxPrice.toString()+
-          '\n' + model.minQuantity.toString() +
-          '\n' + model.maxQuantity.toString() +'\n}' );
-      //TODO - apply filter to map markers
+    map.getState().filterMarkers(model);
+  }
+
+  void _clearFilter(){
+    map.getState().clearFilter();
   }
 
 
@@ -109,8 +105,22 @@ class _FilterPopUpState extends State<FilterPopUp>{
               quantitySlider,
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  SizedBox(
+                    width: 90.0,
+                    height: 30.0,
+                    child: RaisedButton(
+                      elevation: 0.1,
+                      color: Colors.white38,
+                      child: Text("Clear Filters", style: TextStyle(fontFamily: 'Raleway', fontSize: 10, color: Colors.black),),
+                      onPressed: () {
+                        _clearFilter();
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: RaisedButton(

@@ -25,8 +25,8 @@ const LatLng LISBON_LOCATION = LatLng(38.736946, -9.142685);
 const double CAMERA_ZOOM = 16;
 
 /// ************************* Market Filter ***************************/
-const List<String> CATEGORIES = <String> ['AQUACULTURE', 'IMPORTED', 'SEA'];
-const List<String> SEAFOODS = <String> ['CODFISH', 'LOBSTER','SEA BASS'];
+const List<String> CATEGORIES = <String> ['AQUACULTURE', 'FISH', 'IMPORTED', 'SEA', 'SHELLFISH'];
+const List<String> SEAFOODS = <String> ['COD FISH', 'LOBSTER','SEA BASS', 'TUNA'];
 
 /// ************************* Vendors *******************************/
 
@@ -114,7 +114,7 @@ Seafood lobster2 = Seafood(
 );
 
 Sell josefina_lobster = Sell(
-    seafood: sea_bass2,
+    seafood: lobster2,
     vendor: julio
 );
 

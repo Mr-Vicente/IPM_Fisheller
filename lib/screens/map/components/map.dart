@@ -1,3 +1,4 @@
+import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/screens/market/market_information.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -5,10 +6,20 @@ import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/models/filter_model.dart';
+import 'package:fisheller_app/models/seafood.dart';
+import 'package:fisheller_app/models/seafood_type.dart';
 
 class Map extends StatefulWidget {
+  MapState state;
+
   @override
-  State<StatefulWidget> createState() => MapState();
+  State<StatefulWidget> createState() => (state = MapState());
+
+  MapState getState(){
+    return state;
+  }
+
 }
 
 class MapState extends State<Map> {
@@ -111,7 +122,86 @@ void _currentLocation() async {
     ));
   }
 
-  void _filterMarkers(){
+  void clearFilter(){
+    setState((){
+      _markers = Set<Marker>();
+      _addMarkers();
+    });
+  }
+
+  void filterMarkers(FilterModel fm){
+    Set<Marker> aux = Set<Marker>();
+    print( ' *************************' +
+        '\nCategory: '+ fm.category +
+        '\nSeafood: ' + fm.seafood +
+        '\nPrice min: ' + fm.minPrice.toString() +
+        '\nPrice max: ' + fm.maxPrice.toString() +
+        '\nQuantity min: ' + fm.minQuantity.toString()+
+        '\nQuantity max: ' + fm.maxQuantity.toString()
+    );
+    markets.forEach((m) {
+      print( ' *************************\n' +
+          m.name);
+        for(Sell i in  m.items) {
+          bool addMarket = true;
+          Seafood s = i.seafood;
+          print(' ------------' +
+              '\nTags: ' + s.tags.length.toString() + ' ' +
+              s.tags.contains(fm.category).toString() +
+              '\nSeafood: ' + s.type.name +
+              '\nPrice: ' + s.price.toString() +
+              '\nQuantity: ' + s.quantityMass.toString()
+
+          );
+
+          List<String> tags = s.tagsToString();
+          if (fm.category != '' && tags.isNotEmpty &&
+              !tags.contains(fm.category.toLowerCase().trim())){
+            addMarket = false;
+            print('1');
+          }
+
+
+          if (fm.seafood != '' && s.type != null &&
+              s.type.name.toLowerCase().trim() != fm.seafood.toLowerCase().trim())
+          {
+            addMarket = false;
+            print('2');
+          }
+
+          if (s.price < fm.minPrice || s.price > fm.maxPrice)
+          {
+            addMarket = false;
+            print('3');
+          }
+
+          if (s.quantityMass < fm.minQuantity &&
+              s.quantityMass > fm.maxQuantity)
+          {
+            addMarket = false;
+            print('4');
+          }
+
+
+          print(addMarket.toString());
+
+          if (addMarket) {
+            aux.add(Marker(
+              markerId: MarkerId(m.name + "pin"),
+              position: m.mapLocation,
+              icon: markerIcon,
+              onTap: () {
+                editModalBottomSheet(context);
+              },
+            ));
+            break;
+          }
+        }
+    });
+
+    setState((){
+      _markers = aux;
+    });
 
   }
 

@@ -1,6 +1,5 @@
 import 'package:fisheller_app/models/Tag.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
-import 'package:flutter/material.dart';
 
 class Seafood{
   Seafood_Type type;
@@ -18,4 +17,12 @@ class Seafood{
     this.quantityMass,
     this.media
   });
+
+  List<String> tagsToString(){
+    List<String> aux = List<String>();
+    tags.forEach((t) {
+      aux.add(t.name.toLowerCase().trim());
+    });
+    return aux;
+  }
 }
