@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class Vendor{
   String name;
-  int age;
+  Image image;
   Vendor({
     this.name,
-    this.age,
+    this.image,
   });
 }

@@ -1,3 +1,4 @@
+import 'package:fisheller_app/screens/market/market_information.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -55,17 +56,40 @@ class MapState extends State<Map> {
   }
 
   void _addMarkers() {
-    _markers.add(Marker(
-        markerId: MarkerId('fixeFixePin'),
-        position: FIXE_FIXE_LOCATION,
-        icon: markerIcon
-    ));
 
-    _markers.add(Marker(
-        markerId: MarkerId('docaPortPin'),
-        position: DOCA_PORT_LOCATION,
-        icon: markerIcon
-    ));
+    markets.forEach((m) {
+      _markers.add(
+        Marker(
+          markerId: MarkerId(m.name+"pin"),
+          position: m.mapLocation,
+          icon: markerIcon,
+          onTap: (){
+            editModalBottomSheet(context);
+            //print("MEOW *********************" + m.name);
+            //MarketUI_Screen();
+          },
+        )
+      );
+    });
+  }
+
+  void editModalBottomSheet(BuildContext context) {
+    double d = MediaQuery.of(context).size.height;
+    showModalBottomSheet(backgroundColor: Colors.transparent,context: context,isScrollControlled: true, builder: (BuildContext bc) {
+      return Container(
+        decoration: new BoxDecoration(
+            color: Colors.blue,
+            borderRadius: new BorderRadius.only(
+                topLeft:  const  Radius.circular(40.0),
+                topRight: const  Radius.circular(40.0))
+        ),
+        height: d * .85,
+        child:Align(
+            alignment: Alignment(0,-0.85),
+            child: Text("Doca de Portimão")
+        ),
+      );
+    });
   }
 
 void _currentLocation() async {
