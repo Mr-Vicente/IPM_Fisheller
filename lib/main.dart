@@ -1,6 +1,7 @@
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
+import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/home.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: LoginScreen(),
       //home: MapPage(),
-      home: Home(),
+      //home: Home(),
+      home: Temp(),
     );
   }
 }

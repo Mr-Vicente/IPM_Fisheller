@@ -2,11 +2,22 @@ import 'package:fisheller_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+class MarketUI_Screen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: new GestureDetector(
+          onTap: () {FocusScope.of(context).requestFocus(new FocusNode());},
+          child: MarketUI(),
+        )
+    );
+  }
+}
+
+
 class MarketUI extends StatelessWidget {
-  final Widget child;
   const MarketUI({
     Key key,
-    @required this.child,
   }) : super(key: key);
 
   @override

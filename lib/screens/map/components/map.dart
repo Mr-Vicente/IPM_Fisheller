@@ -1,10 +1,10 @@
+import 'package:fisheller_app/screens/market/market_information.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:fisheller_app/constants.dart';
-import 'package:fisheller_app/components/rounded_button.dart';
 
 class Map extends StatefulWidget {
   @override
@@ -56,17 +56,20 @@ class MapState extends State<Map> {
   }
 
   void _addMarkers() {
-    _markers.add(Marker(
-        markerId: MarkerId('fixeFixePin'),
-        position: FIXE_FIXE_LOCATION,
-        icon: markerIcon
-    ));
 
-    _markers.add(Marker(
-        markerId: MarkerId('docaPortPin'),
-        position: DOCA_PORT_LOCATION,
-        icon: markerIcon
-    ));
+    markets.forEach((m) {
+      _markers.add(
+        Marker(
+          markerId: MarkerId(m.name+"pin"),
+          position: m.mapLocation,
+          icon: markerIcon,
+          onTap: (){
+            print("MEOW *********************" + m.name);
+            MarketUI_Screen();
+          },
+        )
+      );
+    });
   }
 
 void _currentLocation() async {
