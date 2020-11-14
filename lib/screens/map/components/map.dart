@@ -256,7 +256,7 @@ class MapState extends State<Map> {
               position: m.mapLocation,
               icon: markerIcon,
               onTap: () {
-                editModalBottomSheet(context);
+                editModalBottomSheet(context,m);
               },
             ));
             break;
