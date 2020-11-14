@@ -1,5 +1,4 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +24,10 @@ const LatLng DOCA_PORT_LOCATION = LatLng(37.128389, -8.531901);
 const LatLng LISBON_LOCATION = LatLng(38.736946, -9.142685);
 const double CAMERA_ZOOM = 16;
 
+/// ************************* Market Filter ***************************/
+const List<String> CATEGORIES = <String> ['AQUACULTURE', 'FISH', 'IMPORTED', 'SEA', 'SHELLFISH'];
+const List<String> SEAFOODS = <String> ['COD FISH', 'LOBSTER','SEA BASS', 'TUNA'];
+
 /// ************************* Consumers *****************************/
 
 Consumer ana = new Consumer(
@@ -41,14 +44,14 @@ Consumer hakeem = new Consumer(
 /// ************************* Vendors *******************************/
 
 Vendor julio = new Vendor(
-    "Júlio Adamastor", //name
-    "julio@gmail.com", //email
-    "1234", //password
+  "Júlio Adamastor", //name
+  "julio@gmail.com", //email
+  "1234", //password
 );
 Vendor josefina = new Vendor(
-    "Josefina Peixeira",
-    "josefina@gmail.com", //email
-    "1234", //password
+  "Josefina Peixeira",
+  "josefina@gmail.com", //email
+  "1234", //password
 );
 
 /// ************************* Sells ******************************/
@@ -102,6 +105,7 @@ List<Sell> market_fixe_items = [
 ];
 /// ********** Market_Doca ***************/
 
+
 Seafood seabass2 = new Seafood(
   type: Seafood_Type.sea_bass,
   media: null,
@@ -112,8 +116,8 @@ Seafood seabass2 = new Seafood(
 );
 
 Sell josefinaBass = new Sell(
-    seafood: seabass2,
-    vendor: julio,
+  seafood: seabass2,
+  vendor: julio,
 );
 
 Seafood lobster2 = new Seafood(
@@ -126,7 +130,7 @@ Seafood lobster2 = new Seafood(
 );
 
 Sell josefinaLobster = new Sell(
-    seafood: seabass2,
+    seafood: lobster2,
     vendor: julio
 );
 
@@ -140,8 +144,8 @@ Seafood cod2 = new Seafood(
 );
 
 Sell josefinaCod = new Sell(
-    seafood: cod2,
-    vendor: julio,
+  seafood: cod2,
+  vendor: julio,
 );
 
 List<Sell> market_doca_items = [
@@ -151,14 +155,14 @@ List<Sell> market_doca_items = [
 ];
 
 /// ************************* Markets *******************************/
-Market fixeFixe_market = new Market(
+Market fixeFixe_market = Market(
     mapLocation: LatLng(37.133966, -8.530302),
     image: Image.asset(""),
     items: market_fixe_items,
     name: "Fixe Fixe era ser Fish"
 );
 
-Market docaPortimao_market = new Market(
+Market docaPortimao_market = Market(
     mapLocation: LatLng(37.128389, -8.531901),
     image: Image.asset(""),
     items: market_doca_items,

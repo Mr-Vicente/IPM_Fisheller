@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:fisheller_app/screens/map/components/map.dart';
+import 'package:fisheller_app/screens/map/components/filter.dart';
 import 'package:fisheller_app/screens/map/components/search_bar.dart';
-import 'package:flutter/src/painting/borders.dart';
+
 
 class MapPage extends StatefulWidget {
   @override
@@ -11,12 +12,15 @@ class MapPage extends StatefulWidget {
 
 class MapPageState extends State<MapPage> {
 
-void _filter(){
+  Map map = Map();
 
-}
 
-void _menu(){
-
+Future<dynamic> _filter(){
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return FilterPopUp(map);
+       });
 }
 
   @override
@@ -27,23 +31,12 @@ void _menu(){
         child: new Container(
             child: Stack(
                 children: <Widget>[
-                  Positioned.fill(child: Map()),
+                  Positioned.fill(child: map),
                   Positioned(
                       top: 15,
                       left: 15,
                       right: 90,
                       child: SearchBar()
-                  ),   
-                  Positioned(
-                    top: 25,
-                    right: 10,
-                    child: SafeArea(
-                      child: FloatingActionButton(
-                        onPressed: _filter,
-                        child: Image.asset('assets/icons/extra_menu.png', height: 20),
-                        backgroundColor: Colors.white,
-                        )
-                    )
                   ),
                   Positioned(
                     top: 100,
@@ -53,7 +46,7 @@ void _menu(){
                         height: 80.0,
                         width: 80.0,
                         child: FloatingActionButton(
-                            onPressed: _menu,
+                            onPressed: _filter,
                             child: Image.asset('assets/icons/filter_icon.png', height: 50),
                             backgroundColor: Colors.white,
                           )
