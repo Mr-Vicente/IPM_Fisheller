@@ -1,3 +1,5 @@
+import 'package:fisheller_app/components/Selling_Card.dart';
+import 'package:fisheller_app/models/market.dart';
 import 'package:fisheller_app/screens/market/market_information.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -59,48 +61,111 @@ class MapState extends State<Map> {
 
     markets.forEach((m) {
       _markers.add(
-        Marker(
-          markerId: MarkerId(m.name+"pin"),
-          position: m.mapLocation,
-          icon: markerIcon,
-          onTap: (){
-            editModalBottomSheet(context);
-            //print("MEOW *********************" + m.name);
-            //MarketUI_Screen();
-          },
-        )
+          Marker(
+            markerId: MarkerId(m.name+"pin"),
+            position: m.mapLocation,
+            icon: markerIcon,
+            onTap: (){
+              print(m.name);
+              editModalBottomSheet(context,m);
+
+            },
+          )
       );
     });
   }
 
-  void editModalBottomSheet(BuildContext context) {
+  void editModalBottomSheet(BuildContext context, Market m) {
     double d = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
     showModalBottomSheet(backgroundColor: Colors.transparent,context: context,isScrollControlled: true, builder: (BuildContext bc) {
       return Container(
-        decoration: new BoxDecoration(
-            color: Colors.blue,
-            borderRadius: new BorderRadius.only(
-                topLeft:  const  Radius.circular(40.0),
-                topRight: const  Radius.circular(40.0))
-        ),
-        height: d * .85,
-        child:Align(
-            alignment: Alignment(0,-0.85),
-            child: Text("Doca de Portimão")
-        ),
+          decoration: new BoxDecoration(
+              color: WHITE_COLOUR,
+              borderRadius: new BorderRadius.only(
+                  topLeft:  const  Radius.circular(40.0),
+                  topRight: const  Radius.circular(40.0))
+          ),
+          height: d * .85,
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 100,
+                width: w,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(topRight:  Radius.circular(29),topLeft: Radius.circular(29)),
+                  child:Container(child:
+                  Center(child: ClipRRect(
+                    borderRadius: BorderRadius.circular(29),
+                    child: Container(
+                      width: 300,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: WHITE_COLOUR,
+
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 4,
+                            blurRadius: 29,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child:Text(
+                          m.name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  ),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: Image.asset("assets/images/fish_market.png").image,
+                      ),
+                    ),
+                  ),
+                ),
+
+              ),
+              Expanded(child:SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for ( var sell in fixeFixe_market.items )
+                        Selling_Card(
+                          type: "normal",
+                          sell: sell,
+                          press: (){return null;},
+                        ),
+                    ]
+                ),
+              ),
+              ),
+            ],
+          )
       );
     });
   }
 
-void _currentLocation() async {
-   final GoogleMapController controller = await _controller.future;
-   LocationData currentLocation;
-   var location = new Location();
-   try {
-     currentLocation = await location.getLocation();
-     } on Exception {
-       currentLocation = null;
-       }
+  void _currentLocation() async {
+    final GoogleMapController controller = await _controller.future;
+    LocationData currentLocation;
+    var location = new Location();
+    try {
+      currentLocation = await location.getLocation();
+    } on Exception {
+      currentLocation = null;
+    }
 
     controller.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
@@ -124,33 +189,33 @@ void _currentLocation() async {
       body: Stack(
         children: <Widget>[
           GoogleMap(
-            zoomControlsEnabled: false,
-            myLocationEnabled: true,
-            tiltGesturesEnabled: false,
-            myLocationButtonEnabled: false,
-            markers: _markers,
-            mapType: MapType.normal,
-            initialCameraPosition: _initialCameraPosition(),
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-              setState(() {
-                _addMarkers();
-              });
-              _onMapCreated(controller);
-              }            
-            ),
+              zoomControlsEnabled: false,
+              myLocationEnabled: true,
+              tiltGesturesEnabled: false,
+              myLocationButtonEnabled: false,
+              markers: _markers,
+              mapType: MapType.normal,
+              initialCameraPosition: _initialCameraPosition(),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+                setState(() {
+                  _addMarkers();
+                });
+                _onMapCreated(controller);
+              }
+          ),
           Positioned(
-            bottom: 70,
-            right: 10,
-            child: FloatingActionButton(
-              onPressed: _currentLocation,
-              mini: true,
-              child: Icon(Icons.location_searching,color: Colors.black),
-              backgroundColor: Colors.white,
+              bottom: 70,
+              right: 10,
+              child: FloatingActionButton(
+                onPressed: _currentLocation,
+                mini: true,
+                child: Icon(Icons.location_searching,color: Colors.black),
+                backgroundColor: Colors.white,
               )
-              )
-          
-          
+          )
+
+
         ],
       ),
     );

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class User{
+  String email;
+  String password;
   String name;
-  int age;
+  Image image;
   User({
+    this.email,
+    this.password,
     this.name,
-    this.age,
   });
 }

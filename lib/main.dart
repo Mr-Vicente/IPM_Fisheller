@@ -12,6 +12,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    julioBass.market = fixeFixe_market;
+    julioLobster.market = fixeFixe_market;
+    julioCod.market = fixeFixe_market;
+
+    josefinaBass.market = docaPortimao_market;
+    josefinaLobster.market = docaPortimao_market;
+    josefinaCod.market = docaPortimao_market;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',

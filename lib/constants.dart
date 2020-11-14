@@ -1,4 +1,5 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:flutter/material.dart';
@@ -24,21 +25,36 @@ const LatLng DOCA_PORT_LOCATION = LatLng(37.128389, -8.531901);
 const LatLng LISBON_LOCATION = LatLng(38.736946, -9.142685);
 const double CAMERA_ZOOM = 16;
 
+/// ************************* Consumers *****************************/
+
+Consumer ana = new Consumer(
+  "Ana Miguel", //name
+  "ana@gmail.com", //email
+  "1234", //password
+);
+Consumer hakeem = new Consumer(
+  "Hakeem Pedro",
+  "hakeem@gmail.com", //email
+  "1234", //password
+);
+
 /// ************************* Vendors *******************************/
 
-Vendor julio = Vendor(
-    name: "Júlio Adamator",
-    image: null,
+Vendor julio = new Vendor(
+    "Júlio Adamastor", //name
+    "julio@gmail.com", //email
+    "1234", //password
 );
-Vendor josefina = Vendor(
-    name: "Josefina Peixeira",
-    image: null,
+Vendor josefina = new Vendor(
+    "Josefina Peixeira",
+    "josefina@gmail.com", //email
+    "1234", //password
 );
 
 /// ************************* Sells ******************************/
 List<String> m = ["assets/images/sea_bass.png"];
 /// ********** Market_Fixe_Fixe ***************/
-Seafood sea_bass = Seafood(
+Seafood seabass = new Seafood(
   type: Seafood_Type.sea_bass,
   media: m,
   price: 15,
@@ -47,12 +63,12 @@ Seafood sea_bass = Seafood(
   tags: [Tag.fish, Tag.aquaculture],
 );
 
-Sell julio_bass = Sell(
-    seafood: sea_bass,
+Sell julioBass = new Sell(
+    seafood: seabass,
     vendor: julio
 );
 
-Seafood lobster = Seafood(
+Seafood lobster = new Seafood(
   type: Seafood_Type.lobster,
   media: null,
   price: 30,
@@ -61,12 +77,12 @@ Seafood lobster = Seafood(
   tags: [Tag.shellfish, Tag.sea],
 );
 
-Sell julio_lobster = Sell(
+Sell julioLobster = new Sell(
     seafood: lobster,
     vendor: julio
 );
 
-Seafood cod = Seafood(
+Seafood cod = new Seafood(
   type: Seafood_Type.cod_fish,
   media: null,
   price: 10,
@@ -75,18 +91,18 @@ Seafood cod = Seafood(
   tags: [Tag.fish, Tag.imported],
 );
 
-Sell julio_cod = Sell(
+Sell julioCod = new Sell(
     seafood: cod,
     vendor: julio
 );
 List<Sell> market_fixe_items = [
-  julio_bass,
-  julio_lobster,
-  julio_cod
+  julioBass,
+  julioLobster,
+  julioCod
 ];
 /// ********** Market_Doca ***************/
 
-Seafood sea_bass2 = Seafood(
+Seafood seabass2 = new Seafood(
   type: Seafood_Type.sea_bass,
   media: null,
   price: 16,
@@ -95,12 +111,12 @@ Seafood sea_bass2 = Seafood(
   tags: [Tag.fish, Tag.sea],
 );
 
-Sell josefina_bass = Sell(
-    seafood: sea_bass2,
-    vendor: julio
+Sell josefinaBass = new Sell(
+    seafood: seabass2,
+    vendor: julio,
 );
 
-Seafood lobster2 = Seafood(
+Seafood lobster2 = new Seafood(
   type: Seafood_Type.lobster,
   media: null,
   price: 35,
@@ -109,12 +125,12 @@ Seafood lobster2 = Seafood(
   tags: [Tag.shellfish, Tag.sea],
 );
 
-Sell josefina_lobster = Sell(
-    seafood: sea_bass2,
+Sell josefinaLobster = new Sell(
+    seafood: seabass2,
     vendor: julio
 );
 
-Seafood cod2 = Seafood(
+Seafood cod2 = new Seafood(
   type: Seafood_Type.cod_fish,
   media: null,
   price: 11,
@@ -123,26 +139,26 @@ Seafood cod2 = Seafood(
   tags: [Tag.fish, Tag.imported],
 );
 
-Sell josefina_cod = Sell(
+Sell josefinaCod = new Sell(
     seafood: cod2,
-    vendor: julio
+    vendor: julio,
 );
 
 List<Sell> market_doca_items = [
-  josefina_bass,
-  josefina_lobster,
-  josefina_cod
+  josefinaBass,
+  josefinaLobster,
+  josefinaCod
 ];
 
 /// ************************* Markets *******************************/
-Market fixeFixe_market = Market(
+Market fixeFixe_market = new Market(
     mapLocation: LatLng(37.133966, -8.530302),
     image: Image.asset(""),
     items: market_fixe_items,
     name: "Fixe Fixe era ser Fish"
 );
 
-Market docaPortimao_market = Market(
+Market docaPortimao_market = new Market(
     mapLocation: LatLng(37.128389, -8.531901),
     image: Image.asset(""),
     items: market_doca_items,

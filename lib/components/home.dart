@@ -1,3 +1,4 @@
+import 'package:fisheller_app/screens/feed/components/body.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fisheller_app/constants.dart';
@@ -15,7 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   //TODO add Feed and Cart pages here
-  final List<Widget> _children = [MapPage(), SecondRoute()];
+  final List<Widget> _children = [MapPage(), Feed(),Feed()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,20 @@ class _HomeState extends State<Home> {
               child: Image.asset('assets/icons/extra_menu.png', height: 20),
               backgroundColor: Colors.white,
             ))),
+        if(_currentIndex == 1)
+          Positioned(
+            top: 25,
+            left: 10,
+            child: SafeArea(
+                child: FloatingActionButton(
+                  onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+                  child: Icon(
+                      IconData(59828, fontFamily: 'MaterialIcons'),
+                    color: Colors.black87,
+                    size: 35,
+                  ),
+                  backgroundColor: Colors.white,
+                ))),
       ]),
       
       drawerScrimColor: Colors.grey.withOpacity(0.54),
@@ -108,19 +123,12 @@ class _HomeState extends State<Home> {
   }
 }
 
-class SecondRoute extends StatelessWidget {
+class Feed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+      body: FeedBody(),
     );
   }
 }

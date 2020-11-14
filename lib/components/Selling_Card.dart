@@ -6,12 +6,14 @@ import 'package:fisheller_app/models/vendor.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Selling_Card extends StatelessWidget {
   final Sell sell;
   final Function press;
   final Color color, textColor;
   final double percentage_width;
+  final String type;
   const Selling_Card({
     Key key,
     this.sell,
@@ -19,14 +21,16 @@ class Selling_Card extends StatelessWidget {
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
+    this.type,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    double s = type.contains("feed") ? 350 : 300;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
-      height: 250,
+      height: s,
       width: size.width * percentage_width,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -37,8 +41,8 @@ class Selling_Card extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Image_Box(seafood: sell.seafood),
-              Info_Box(sell: sell,),
+              //Image_Box(seafood: sell.seafood),
+              Info_Box(sell: sell,type: type),
             ],
           ),
         ),
@@ -47,9 +51,9 @@ class Selling_Card extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
-            spreadRadius: 4,
-            blurRadius: 20,
-            offset: Offset(0, 3), // changes position of shadow
+            spreadRadius: 3,
+            blurRadius: 6,
+            offset: Offset(0, 2), // changes position of shadow
           ),
         ],
       ),
@@ -78,9 +82,11 @@ class Image_Box extends StatelessWidget {
 
 class Info_Box extends StatelessWidget {
   final Sell sell;
+  final String type;
   const Info_Box({
     Key key,
     this.sell,
+    this.type,
   }) : super(key: key);
 
   @override
@@ -89,14 +95,89 @@ class Info_Box extends StatelessWidget {
     // This size provide us total height and width of our screen
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5),
-      width: size.width * 0.5,
+      width: size.width * 0.8,
       //color: Colors.black38,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Title_Tags_Box(seafood: sell.seafood),
+          if(type.contains("feed"))
+            MarketInfo(sell: sell),
           Numbers_Box(seafood: sell.seafood,),
           Vendor_Box(vendor: sell.vendor,),
+          if(type.contains("feed"))
+           DrawStars(vendor: sell.vendor)
+        ],
+      ),
+    );
+  }
+}
+
+class MarketInfo extends StatelessWidget {
+  final Sell sell;
+  const MarketInfo({
+    Key key,
+    this.sell,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+    // This size provide us total height and width of our screen
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            "Market: ",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+            ),
+          ),
+          Text(
+            sell.market.name,
+            style: TextStyle(
+                fontSize: 15
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DrawStars extends StatelessWidget {
+  final Vendor vendor;
+  const DrawStars({
+    Key key,
+    this.vendor,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    
+    Size size = MediaQuery.of(context).size;
+    // This size provide us total height and width of our screen
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RatingBar.builder(
+              initialRating: vendor.getRating().toDouble(),
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.amber,
+              ),
+              onRatingUpdate: (rating) {},
+            ignoreGestures: true,
+            itemSize: 25.0,
+          ),
         ],
       ),
     );
@@ -119,6 +200,7 @@ class Title_Tags_Box extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Title_Box(title: seafood.type.name),
+          SizedBox(width:10,height:5),
           for ( var tag in seafood.tags)
             Tag_Box(tag:tag.name),
         ],
@@ -137,7 +219,7 @@ class Tag_Box extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: EdgeInsets.symmetric(horizontal: 6),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
@@ -159,7 +241,7 @@ class Title_Box extends StatelessWidget {
   final String title;
   static const TextStyle textStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 20
+      fontSize: 30
   );
   const Title_Box({
     Key key,
@@ -175,10 +257,7 @@ class Title_Box extends StatelessWidget {
         children: <Widget>[
             Text(
             title,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20
-              ),
+            style: textStyle,
             ),
           Container(
             width: _textSize(title, textStyle).width,
@@ -211,10 +290,10 @@ class Numbers_Box extends StatelessWidget {
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Number_Info_Box(number: seafood.price,text:"Price\n(€ / Kg)"),
-          Number_Info_Box(number: seafood.quantityUnits,text:"Quantity\n(Unit.)"),
+          Number_Info_Box(number: seafood.price,text:"Price\n(€ / Kg)",sz:Size(75,75),space: 15.0,),
+          Equivalent_Box(seafood: seafood),
         ],
       ),
     );
@@ -224,10 +303,15 @@ class Numbers_Box extends StatelessWidget {
 class Number_Info_Box extends StatelessWidget {
   final num number;
   final String text;
+  final Size sz;
+  final num space;
   const Number_Info_Box({
     Key key,
     this.number,
     this.text,
+    this.sz,
+    this.space,
+    thi
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -239,20 +323,47 @@ class Number_Info_Box extends StatelessWidget {
         children: <Widget>[
           Number_Circle(
             text: number.toString(),
-            circle_size: Size(90,90),
+            circle_size: sz,
           ),
-          Center(
-            child:
-              Text(
-                text,
-                textAlign: TextAlign.center,
-              ),
-          ),
+           Container(
+             margin: EdgeInsets.only(top: space/2),
+             child:Text(
+                  text,
+                  textAlign: TextAlign.center,
+                ),
+             )
         ],
       ),
     );
   }
 }
+
+class Equivalent_Box extends StatelessWidget {
+  final Seafood seafood;
+  const Equivalent_Box({
+    Key key,
+    this.seafood,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Number_Info_Box(number: seafood.quantityUnits,text:"Quantity\n(Unit.)",sz: Size(60,60),space: 35.0,),
+          Container(
+              margin: EdgeInsets.symmetric(horizontal: 5,),
+              padding: EdgeInsets.only(bottom: 50),
+              child: Text("<->")),
+          Number_Info_Box(number: seafood.quantityMass,text:"Quantity\n(Kg.)",sz: Size(60,60),space: 35.0,),
+        ],
+      ),
+    );
+  }
+}
+
 
 class Vendor_Box extends StatelessWidget {
   final Vendor vendor;
@@ -265,23 +376,37 @@ class Vendor_Box extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     // This size provide us total height and width of our screen
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
+      margin: EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           //vendor.image,
           Container(
+            margin: EdgeInsets.symmetric(horizontal: 15),
             width: 50,
             height: 50,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Container(
-                color: Colors.black38,
+                //color: Colors.black38,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: Image.asset("assets/images/julio.png").image,
+                  ),
+                ),
               ),
             )
           ),
           SizedBox(height: 50,width: 10,),
-          Text(vendor.name),
+          Text(
+            vendor.name,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20
+            ),
+          ),
         ],
       ),
     );
@@ -289,6 +414,47 @@ class Vendor_Box extends StatelessWidget {
 }
 
 class Number_Circle extends StatelessWidget {
+  final num arcWidth;
+  final Size circle_size;
+  static const Size s = Size(200, 200);
+  final String text;
+
+  const Number_Circle({
+    Key key,
+    this.text,
+    this.arcWidth,
+    this.circle_size = s,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    // This size provide us total height and width of our screen
+    return Container(
+      width: circle_size.width,
+      height: circle_size.height,
+        child:Center(
+            child: Text(
+              text,
+              style:
+              TextStyle(
+                fontSize: 30 - (circle_size.width / s.width) * 30,
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        decoration: BoxDecoration(
+          border: Border.all(width: 6,color: PRIMARY_COLOUR,style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(100),
+        ),
+      );
+  }
+}
+
+
+
+/*class Number_Circle extends StatelessWidget {
   final List<charts.Series> seriesList;
   final charts.Color color;
   final num arcWidth;
@@ -332,13 +498,7 @@ class Number_Circle extends StatelessWidget {
               _createData(color),
               animate: true,
               animationDuration: Duration(milliseconds: 500),
-              selectionModels: [
-                new charts.SelectionModelConfig(
-                  type: charts.SelectionModelType.info,
-                  changedListener: null,
-                )
-              ],
-              defaultRenderer: charts.ArcRendererConfig(arcWidth: (12 - (circle_size.width / s.width) * 12).round()),
+              defaultRenderer: charts.ArcRendererConfig(arcWidth: (10 - (circle_size.width / s.width) * 10).round()),
             ),
             Center(
               child: Text(
@@ -356,5 +516,5 @@ class Number_Circle extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
