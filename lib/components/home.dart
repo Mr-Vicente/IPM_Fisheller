@@ -1,4 +1,6 @@
+import 'package:fisheller_app/screens/cart/body.dart';
 import 'package:fisheller_app/screens/feed/components/body.dart';
+import 'package:fisheller_app/screens/feed/components/search_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fisheller_app/constants.dart';
@@ -16,7 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   //TODO add Feed and Cart pages here
-  final List<Widget> _children = [MapPage(), Feed(),Feed()];
+  final List<Widget> _children = [MapPage(), Feed(), Cart()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class _HomeState extends State<Home> {
             left: 10,
             child: SafeArea(
                 child: FloatingActionButton(
-                  onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+                  onPressed: () => SearchBarFeed(),
                   child: Icon(
                       IconData(59828, fontFamily: 'MaterialIcons'),
                     color: Colors.black87,
@@ -129,6 +131,16 @@ class Feed extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: FeedBody(),
+    );
+  }
+}
+
+class Cart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: CartBody(),
     );
   }
 }

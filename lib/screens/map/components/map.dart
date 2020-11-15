@@ -1,7 +1,6 @@
 import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/components/Selling_Card.dart';
 import 'package:fisheller_app/models/market.dart';
-import 'package:fisheller_app/screens/market/market_information.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -34,7 +33,7 @@ class MapState extends State<Map> {
   Location location = new Location();
 
 
-  /// ************************* Aux methods ***************************/
+  /// ************************* Aux methods *************************/
   void _setMarkerIcons()  {
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
