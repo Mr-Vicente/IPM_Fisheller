@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/fish_and_tips.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 
-import '../../../constants.dart';
+import '../../constants.dart';
 
 class FishAndTips extends StatelessWidget {
   final Size circleSize = Size(115, 115);

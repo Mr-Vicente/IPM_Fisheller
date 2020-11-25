@@ -5,7 +5,7 @@ import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/home.dart';
-import 'package:fisheller_app/screens/fish_and_tips/components/body.dart';
+import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 
 void main() => runApp(MyApp());
 
