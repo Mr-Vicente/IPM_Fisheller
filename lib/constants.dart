@@ -1,7 +1,10 @@
+
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
+import 'package:fisheller_app/models/recipies.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -9,6 +12,7 @@ import 'models/Tag.dart';
 import 'models/seafood.dart';
 import 'models/sell.dart';
 import 'models/vendor.dart';
+import 'models/fish_and_tips.dart';
 
 /// ************************* Theme Colours ***************************/
 const PRIMARY_COLOUR = Color(0xFF00847C); // GREEN
@@ -184,3 +188,33 @@ Market docaPortimao_market = Market(
 );
 
 List<Market> markets = [fixeFixe_market, docaPortimao_market];
+
+/// ************************* FishNTips *******************************/
+
+List<String> lobsterNutrition = <String>["Vitamin A", "Vitamin B12",
+  "Vitamin E", "Calcium", "Iron", "..."];
+
+List<String> lobsterFun = <String>[
+  "The rarest colour of lobster is white and the odds of catching one is one in a hundred-million",
+  "Lobster helps protect against depression"
+];
+
+Recipe lobsterRec1 = Recipe("Lobster with Thermidor Butter", 
+'https://www.bbcgoodfood.com/recipes/lobster-thermidor-butter',
+    'assets/images/LobsterThermidor.png');
+
+Recipe lobsterRec2 = Recipe('Lobster rolls',
+    'https://www.bonappetit.com/recipe/bas-ultimate-lobster-rolls',
+    'assets/images/LobsterRolls.png');
+
+
+List<Recipe> lobsterRecipies = <Recipe>[lobsterRec1, lobsterRec2];
+
+FishNTips lobsterTips = FishNTips(
+    Seafood_Type.lobster,
+    145, 129, 1.25, 27.5,
+    lobsterNutrition,
+    lobsterFun,
+    lobsterRecipies);
+
+
