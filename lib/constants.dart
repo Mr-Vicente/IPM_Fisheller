@@ -19,6 +19,19 @@ const WHITE_COLOUR = Colors.white;
 const CHART_PRIMARY_COLOUR = charts.Color(r: 15,g: 115,b: 105);
 const CHART_SECONDARY_COLOUR = charts.Color(r: 46,g: 46,b: 46);
 
+/// ************************* POPUPS TEXTS ***************************/
+
+const String TEXT_QUESTION_COMFIRM = "Are you sure you want to book?";
+const String TEXT_NOTE_COMFIRM = "The deposit (%s€) will be discounted from your account";
+
+const String TEXT_QUESTION_CANCEL = "Are you sure you want to cancel?";
+const String TEXT_NOTE_CANCEL = "The deposit (%s€) will not be reimbursed?";
+
+const String FINALISE_BUY = "Finalise Buy";
+const String FINALISE_SEAFOOD = "Seafood: %s";
+const String FINALISE_Quantity = "Quantity: %s units";
+const String FINALISE_Weight = "Weight: %s Kg";
+
 /// ************************* Google Maps ***************************/
 const LatLng FIXE_FIXE_LOCATION = LatLng(37.133966, -8.530302);
 const LatLng DOCA_PORT_LOCATION = LatLng(37.128389, -8.531901);
