@@ -1,3 +1,4 @@
+import 'package:fisheller_app/components/home_components/add_PopUp.dart';
 import 'package:fisheller_app/screens/cart/body.dart';
 import 'package:fisheller_app/screens/feed/components/body.dart';
 import 'package:fisheller_app/screens/feed/components/search_bar.dart';
@@ -36,35 +37,23 @@ class _HomeState extends State<Home> {
               child: Image.asset('assets/icons/extra_menu.png', height: 20),
               backgroundColor: Colors.white,
             ))),
-        if(_currentIndex == 1)
+        if (_currentIndex == 1)
           Positioned(
-            top: 25,
-            left: 10,
-            child: SafeArea(
-                child: FloatingActionButton(
-                  onPressed: () => SearchBarFeed(),
-                  child: Icon(
-                      IconData(59828, fontFamily: 'MaterialIcons'),
-                    color: Colors.black87,
-                    size: 35,
-                  ),
-                  backgroundColor: Colors.white,
-                ))),
+              top: 25,
+              left: 10,
+              child: SafeArea(
+                  child: FloatingActionButton(
+                onPressed: () => SearchBarFeed(),
+                child: Icon(
+                  IconData(59828, fontFamily: 'MaterialIcons'),
+                  color: Colors.black87,
+                  size: 35,
+                ),
+                backgroundColor: Colors.white,
+              ))),
       ]),
-      
       drawerScrimColor: Colors.grey.withOpacity(0.54),
-      endDrawer: AmazDrawer(
-        topPosition:150,
-        width: 300,
-        height: 80,
-        elevation: 5,
-        color: PRIMARY_COLOUR,
-        //backgroundColor: WHITE_COLOUR,
-        items: [
-        AmazDrawerItem(iconData: Icons.face, iconSize: 50.0, text: "Profile"),
-        AmazDrawerItem(iconData: Icons.settings, iconSize: 50.0, text: "Settings"),
-        AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help")
-      ]),
+      
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
@@ -107,9 +96,12 @@ class _HomeState extends State<Home> {
         ),
         child: FittedBox(
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: add,
             tooltip: 'Increment',
-            child: Icon(Icons.add),
+            child: Icon(
+              Icons.add,
+              size: 50,
+            ),
             elevation: 3.0,
             backgroundColor: PRIMARY_COLOUR,
           ),
@@ -122,6 +114,15 @@ class _HomeState extends State<Home> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  Future<dynamic> add() {
+    return showDialog(
+        barrierColor: Colors.white.withOpacity(0),
+        context: context,
+        builder: (BuildContext context) {
+          return add_PopUp();
+        });
   }
 }
 

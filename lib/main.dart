@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
       ),
       //home: LoginScreen(),
       //home: MapPage(),
-      //home: Home(),
+      home: Home(),
       //home: Temp(),
-      home:FishAndTips(lobsterTips)
+      //home:FishAndTips(lobsterTips)
     );
   }
 }
