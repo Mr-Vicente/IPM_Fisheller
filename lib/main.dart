@@ -5,6 +5,7 @@ import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/home.dart';
+import 'package:fisheller_app/screens/fish_and_tips/components/body.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,17 +22,20 @@ class MyApp extends StatelessWidget {
     josefinaLobster.market = docaPortimao_market;
     josefinaCod.market = docaPortimao_market;
 
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
+        fontFamily:'Raleway',
         primaryColor: PRIMARY_COLOUR,
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
       //home: LoginScreen(),
       //home: MapPage(),
-      home: Home(),
+      //home: Home(),
       //home: Temp(),
+      home:FishAndTips(lobsterTips)
     );
   }
 }

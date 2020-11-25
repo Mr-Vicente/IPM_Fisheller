@@ -33,6 +33,7 @@ dependencies:
   charts_flutter: ^0.9.0
   carousel_slider: ^2.3.1
   flutter_rating_bar: ^3.2.0
+  url_launcher: ^5.4.0
 
 dev_dependencies:
   flutter_test:
@@ -62,9 +63,21 @@ flutter:
   fonts:
     - family: Raleway
       fonts:
-        - asset: fonts/static/Raleway-Regular.ttf
-        - asset: fonts/static/Raleway-Italic.ttf
+        - asset: fonts/Raleway/static/Raleway-Regular.ttf
+        - asset: fonts/Raleway/static/Raleway-Italic.ttf
           style: italic
+        - asset: fonts/Raleway/static/Raleway-ExtraBold.ttf
+          weight: 900
+        - asset: fonts/Raleway/static/Raleway-SemiBold.ttf
+          weight: 500
+
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/Roboto_Mono/static/RobotoMono-Regular.ttf
+        - asset: fonts/Roboto_Mono/static/RobotoMono-Italic.ttf
+          style: italic
+        - asset: fonts/Roboto_Mono/static/RobotoMono-SemiBold.ttf
+          weight: 500
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
