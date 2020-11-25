@@ -53,7 +53,20 @@ class _HomeState extends State<Home> {
               ))),
       ]),
       drawerScrimColor: Colors.grey.withOpacity(0.54),
-      
+      endDrawer: AmazDrawer(
+          topPosition: 150,
+          width: 300,
+          height: 80,
+          elevation: 5,
+          color: PRIMARY_COLOUR,
+          //backgroundColor: WHITE_COLOUR,
+          items: [
+            AmazDrawerItem(
+                iconData: Icons.face, iconSize: 50.0, text: "Profile"),
+            AmazDrawerItem(
+                iconData: Icons.settings, iconSize: 50.0, text: "Settings"),
+            AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help")
+          ]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
