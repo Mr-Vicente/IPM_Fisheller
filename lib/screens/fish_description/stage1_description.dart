@@ -329,7 +329,7 @@ class _Stage1Description extends State<Stage1Description> {
         ),
 
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: BottomAppBar(//app bar geral
         child: Container(
           height:65.0,
         ),
