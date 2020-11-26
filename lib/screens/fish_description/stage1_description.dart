@@ -2,6 +2,7 @@ import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/fish_and_tips.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/sell.dart';
+import 'package:fisheller_app/screens/book_fish/book_screen.dart';
 import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -106,6 +107,7 @@ class _Stage1Description extends State<Stage1Description> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -317,10 +319,10 @@ class _Stage1Description extends State<Stage1Description> {
               ),
               SizedBox(height: 30.0,),
               SlideButton(
-                //onButtonOpened: () {
-                //  Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage3()),//stage2description
-                //  );
-                //},
+                onButtonOpened: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BookFish(description.seafood, description.market.name)),//stage2description
+                  );
+                },
                 height: 64.0,
                 borderRadius: 36.0,
                 backgroundColor: Colors.transparent,
