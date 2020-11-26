@@ -40,7 +40,7 @@ class QuantityState extends State<Quantity>{
   double avrgUnitPrice(){
     return unitValue*
         seafood.price*
-        seafoodTips[seafood.type].avrgWeight;
+        seafoodTips[seafood.type].avrgWeight/1000;
   }
 
   double avrgMassPrice(){
