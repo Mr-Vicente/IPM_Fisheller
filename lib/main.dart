@@ -34,11 +34,13 @@ class MyApp extends StatelessWidget {
       ),
       //home: LoginScreen(),
       //home: MapPage(),
-      //home: Home(),
+      
       //home: Temp(),
+
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       home: BookFish(seabass2, 'Doca Portimão')
+
     );
   }
 }
