@@ -32,9 +32,9 @@ class _HomeState extends State<Home> {
             right: 10,
             child: SafeArea(
                 child: FloatingActionButton(
-              onPressed: () => scaffoldKey.currentState.openEndDrawer(),
-              child: Image.asset('assets/icons/extra_menu.png', height: 20),
-              backgroundColor: Colors.white,
+                  onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+                  child: Image.asset('assets/icons/extra_menu.png', height: 20),
+                  backgroundColor: Colors.white,
             ))),
         if(_currentIndex == 1)
           Positioned(

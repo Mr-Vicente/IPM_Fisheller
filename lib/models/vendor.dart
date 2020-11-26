@@ -23,4 +23,26 @@ class Vendor extends User{
     return sum ~/ stars.length;
   }
 
+  Vendor.fromJson(Map<String, dynamic> json){
+    name = json['name'];
+    email = json['email'];
+    password = json['password'];
+    imageName = json['imageName'];
+    stars = cast<List<int>>(json['stars']);
+    orders = cast<List<Order>>(json['orders']);
+    history = cast<List<Order>>(json['history']);
+    followers = cast<List<User>>(json['followers']);
+  }
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'email': email,
+    'password': password,
+    'imageName': imageName,
+    'orders': orders,
+    'history': history,
+    'followers': followers,
+    'stars': stars,
+  };
+
 }

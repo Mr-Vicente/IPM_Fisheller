@@ -12,6 +12,7 @@ class FeedBody extends StatelessWidget {
     // This size provide us total height and width of our screen
     return Background(
       child: SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 100),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
