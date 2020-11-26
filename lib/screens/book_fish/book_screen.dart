@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 
 import '../../constants.dart';
+import 'components/payment_selection.dart';
 import 'components/select_quantity.dart';
 
 
@@ -43,7 +44,7 @@ class BookFish extends StatelessWidget {
                       Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
                       Text(market, style: TextStyle(fontSize: 15)),
                       SizedBox(height:30),
-                      BookBox(seafood)
+                      BookBox(seafood: seafood)
 
                     ]
                 )
@@ -55,21 +56,19 @@ class BookFish extends StatelessWidget {
 
 class BookBox extends StatelessWidget{
   final Seafood seafood;
-  const BookBox(this.seafood);
+
+  BookBox({
+    this.seafood,
+  });
 
   void _book(){
 
   }
 
-  void _paymentOptions(){
-
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     // This size provide us total height and width of our screen
     return
       Container(
@@ -145,16 +144,14 @@ class BookBox extends StatelessWidget{
                     )
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 5.0),
+                  padding: EdgeInsets.only(left: 25 , top: 5.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text('Select payment method:', style: TextStyle(fontSize: 15)),
-                      FlatButton(
-                        child: Text('PayPal', style: TextStyle(fontSize: 15, color: PRIMARY_COLOUR)),
-                        onPressed: _paymentOptions,
-                      )
+                      Text('Selected payment method:', style: TextStyle(fontSize: 13)),
+                      PaymentMethodButton('PayPal')
+
                     ]
                   ),
 
