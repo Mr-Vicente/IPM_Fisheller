@@ -1,6 +1,7 @@
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/fish_and_tips.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
+import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,6 +10,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+//list of images from fish
 final List<String> imgList = [
   'assets/images/lobster.png',
   'assets/images/sea_bass.png',
@@ -30,12 +32,13 @@ final List<Widget> imageSliders = imgList.map((item) => Container(
 )).toList();
 
 class Stage1Description extends StatefulWidget {
-  Stage1Description({Key key, this.title}) : super(key: key);
 
-  final String title;
+  final Sell description;
+
+  Stage1Description(this.description);
 
   @override
-  _Stage1Description createState() => _Stage1Description();
+  _Stage1Description createState() => _Stage1Description(description);
 }
 
 class CarouselWithIndicatorDemo extends StatefulWidget {
@@ -90,6 +93,10 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
 
 class _Stage1Description extends State<Stage1Description> {
 
+  final Sell description;
+
+  _Stage1Description(this.description);
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -128,12 +135,12 @@ class _Stage1Description extends State<Stage1Description> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Sea Bass',
+                        description.seafood.type.name,
                         textScaleFactor: 2.0,
                       ),
                       SizedBox(width: 10.0),
                       Text(
-                        '(Market Name)',
+                        description.market.name,
                         textScaleFactor: 1.0,
                       ),
                     ]
@@ -168,7 +175,7 @@ class _Stage1Description extends State<Stage1Description> {
                       ),
 
                       Text(
-                        "Júlio Adamastor",
+                        description.vendor.name,
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.left,
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -178,7 +185,7 @@ class _Stage1Description extends State<Stage1Description> {
                         height: 50.0,
                         child: FloatingActionButton(
                           onPressed: (){
-                           Navigator.push(context, MaterialPageRoute(builder: (context) => FishAndTips(seafoodTips[Seafood_Type.sea_bass])),
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => FishAndTips(seafoodTips[description.seafood.type])),
                             );},//fish and tips
                           heroTag: "ht2",
                           backgroundColor: Colors.teal,
@@ -202,7 +209,7 @@ class _Stage1Description extends State<Stage1Description> {
               Align(
                 alignment: Alignment(-0.75,-0.4),
                 child: Text(
-                  'Description',
+                  description.seafood.description,
                 ),
               ),
               SizedBox(height: 30.0,),
@@ -217,7 +224,7 @@ class _Stage1Description extends State<Stage1Description> {
                             width: 80.0,
                             height: 80.0,
                             child:Center(
-                                child: Text("15", style: TextStyle(fontFamily: 'RobotoMono', fontSize: 35))
+                                child: Text(description.seafood.price.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 35))
                             ),
                             decoration: BoxDecoration(
                               border: Border.all(width: 5.0,color: Colors.teal,style: BorderStyle.solid),
@@ -235,7 +242,7 @@ class _Stage1Description extends State<Stage1Description> {
                             width: 50.0,
                             height: 50.0,
                             child:Center(
-                                child: Text("10", style: TextStyle(fontFamily: 'RobotoMono', fontSize: 20))
+                                child: Text(description.seafood.quantityUnits.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 20))
                             ),
                             decoration: BoxDecoration(
                               border: Border.all(width: 5.0,color: Colors.teal,style: BorderStyle.solid),
@@ -258,7 +265,7 @@ class _Stage1Description extends State<Stage1Description> {
                             width: 50.0,
                             height: 50.0,
                             child:Center(
-                                child: Text("8", style: TextStyle(fontFamily: 'RobotoMono', fontSize: 20))
+                                child: Text(description.seafood.quantityMass.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 15))
                             ),
                             decoration: BoxDecoration(
                               border: Border.all(width: 5.0,color: Colors.teal,style: BorderStyle.solid),
@@ -288,29 +295,14 @@ class _Stage1Description extends State<Stage1Description> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                    for ( var tag in description.seafood.tagsToString() )
                       Container(
                         margin: EdgeInsets.symmetric(horizontal: 6.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
                           child: Container(
                             child: Text(
-                              "Fish",
-                              style: TextStyle(
-                                  color: Colors.white
-                              ),
-                            ),
-                            color: Colors.teal,
-                            padding: EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 6.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Container(
-                            child: Text(
-                              "Aquaculture",
+                              tag,
                               style: TextStyle(
                                   color: Colors.white
                               ),

@@ -156,7 +156,8 @@ class MapState extends State<Map> {
                         Selling_Card(
                           type: "normal",
                           sell: sell,
-                          press: (){Navigator.push(context, MaterialPageRoute(builder: (context) => Stage1Description()),
+                          press: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Stage1Description(sell)),
                           );},
                         ),
                     ]
