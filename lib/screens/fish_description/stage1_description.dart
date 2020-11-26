@@ -1,8 +1,13 @@
+import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/models/fish_and_tips.dart';
+import 'package:fisheller_app/models/seafood_type.dart';
+import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:slide_button/slide_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_slider/carousel_options.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 final List<String> imgList = [
   'assets/images/lobster.png',
@@ -144,20 +149,26 @@ class _Stage1Description extends State<Stage1Description> {
                     children: <Widget>[
 
                       Container(
-                        height: 40.0,
-                        child: FloatingActionButton(
-                          //onPressed: ,// profile
-                          heroTag: "ht1",
-                          backgroundColor: Colors.teal,
-                          child: Text(
-                            "IMG",
-                            textScaleFactor: 0.75,
-                          ),
-                        ),
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                          width: 50,
+                          height: 50,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Container(
+                              //color: Colors.black38,
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: Image.asset("assets/images/julio.png").image,
+                                ),
+                              ),
+                            ),
+                          )
                       ),
 
                       Text(
-                        "(Fisherman name)",
+                        "Júlio Adamastor",
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.left,
                         style: TextStyle(fontWeight: FontWeight.bold),
@@ -166,15 +177,19 @@ class _Stage1Description extends State<Stage1Description> {
                       Container(
                         height: 50.0,
                         child: FloatingActionButton(
-                          //onPressed: ,//fish and tips
+                          onPressed: (){
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => FishAndTips(seafoodTips[Seafood_Type.sea_bass])),
+                            );},//fish and tips
                           heroTag: "ht2",
                           backgroundColor: Colors.teal,
-                          child: Text(
-                            "IMG",
-                            textScaleFactor: 0.75,
+                          child: Image(
+                            image:AssetImage('assets/icons/icon_fish_and_tips.png'
+                            ),
+                            height: 30.0,
+                            width: 30.0,
+                            ),
                           ),
                         ),
-                      ),
                       Text(
                         "Fish and Tips",
                         textDirection: TextDirection.ltr,
@@ -231,7 +246,12 @@ class _Stage1Description extends State<Stage1Description> {
                           Text("Quantity (Unit.)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
                         ]
                     ),
-                    SizedBox(width: 20.0),
+                    SizedBox(width: 5.0),
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5,),
+                        padding: EdgeInsets.only(bottom: 25),
+                        child: Text("<->")),
+                    SizedBox(width: 5.0),
                     Column(
                         children: <Widget>[
                           Container(

@@ -1,7 +1,6 @@
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
-import 'package:fisheller_app/screens/book_fish/book_screen.dart';
 import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
@@ -22,25 +21,21 @@ class MyApp extends StatelessWidget {
     josefinaBass.market = docaPortimao_market;
     josefinaLobster.market = docaPortimao_market;
     josefinaCod.market = docaPortimao_market;
-    seabass2.media = seabassMedia;
+
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
         fontFamily:'Raleway',
-        primaryColor: PRIMARY_COLOUR,
-        scaffoldBackgroundColor: PRIMARY_COLOUR,
+        //primaryColor: PRIMARY_COLOUR,//comentar para fish_description
+        //scaffoldBackgroundColor: PRIMARY_COLOUR,//comentar para fish_description
       ),
       //home: LoginScreen(),
-      //home: MapPage(),
-      
+      home: MapPage(),
+      //home: Home(),
       //home: Temp(),
-
-      //home:FishAndTips(codTips),
-      //home:FishAndTips(lobsterTips),
-      home: BookFish(seabass2, 'Doca Portimão')
-
+      //home:FishAndTips(lobsterTips)
     );
   }
 }
