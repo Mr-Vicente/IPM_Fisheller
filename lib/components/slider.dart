@@ -1,3 +1,4 @@
+import 'package:fisheller_app/screens/book_fish/components/select_quantity.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/constants.dart';
 
@@ -8,31 +9,42 @@ class CustomSlider extends StatefulWidget {
   final double min;
   final double step;
   final double fontSize;
-  _CustomSliderState state;
+  final String units;
+  QuantityState parent;
   
    CustomSlider({
-    this.initValue = 0,
-    this.max = 100,
-    this.min = 0,
-    this.step = 0.01,
-    this.fontSize = 12
+     this.initValue = 0,
+     this.max = 100,
+     this.min = 0,
+     this.step = 0.01,
+     this.fontSize = 12,
+     this.units = '',
+     this.parent
   });
 
   @override
-  _CustomSliderState createState() => (state = _CustomSliderState(initValue: this.initValue, max: this.max, min: this.min, step: this.step, fontSize: this.fontSize));
-  _CustomSliderState getState(){
-    return state;
-  }
+  _CustomSliderState createState() =>_CustomSliderState(
+      initValue: this.initValue, 
+      max: this.max, 
+      min: this.min, 
+      step: this.step, 
+      fontSize: this.fontSize, 
+      units: this.units, 
+      parent: this.parent);
+  
+
 }
 
 class _CustomSliderState extends State<CustomSlider> {
 
-  double _value= 0;
+  double _value = 0.0;
   double initValue;
   final double max;
   final double min;
   final double step;
   final double fontSize;
+  final String units;
+  QuantityState parent;
 
 
   _CustomSliderState({
@@ -40,10 +52,10 @@ class _CustomSliderState extends State<CustomSlider> {
     this.max = 100,
     this.min = 0,
     this.step = 0.01,
-    this.fontSize = 12
-  }){
-    _value = initValue;
-  }
+    this.fontSize = 12,
+    this.units = '',
+    this.parent
+  });
 
 
   Slider _slider(){
@@ -54,12 +66,19 @@ class _CustomSliderState extends State<CustomSlider> {
         label: '$_value',
         focusNode: FocusNode(),
         divisions: ((max-min)/step).round(),
-        onChanged: (value) {
+        onChanged: (double value) {
           setState(() {
-            _value = value;
+            _value = double.parse((value).toStringAsFixed(2));
+            _updateParent(value);
           });
         }
     );
+  }
+  
+  void _updateParent(double value){
+    if(parent == null)
+      return;
+    parent.updateSliderValue(value);
   }
 
   Widget _customSlider(){
@@ -67,7 +86,7 @@ class _CustomSliderState extends State<CustomSlider> {
         data: SliderTheme.of(context).copyWith(
           showValueIndicator: ShowValueIndicator.always,
           valueIndicatorColor: PRIMARY_COLOUR,
-          valueIndicatorTextStyle: TextStyle(color: Colors.white, fontSize: fontSize),
+          valueIndicatorTextStyle: TextStyle(color: Colors.white, fontSize: fontSize-8),
           valueIndicatorShape: RectangularSliderValueIndicatorShape(),
           minThumbSeparation: step,
           activeTickMarkColor: PRIMARY_COLOUR,
@@ -75,9 +94,9 @@ class _CustomSliderState extends State<CustomSlider> {
           activeTrackColor: PRIMARY_COLOUR,
           inactiveTrackColor: SECONDARY_COLOUR.withOpacity(1),
           trackShape: RoundedRectSliderTrackShape(),
-          trackHeight: 6.0,
+          trackHeight: fontSize/2,
           thumbColor: PRIMARY_COLOUR,
-          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+          thumbShape: RoundSliderThumbShape(enabledThumbRadius: (fontSize/2) + 1 ),
           overlayColor: SECONDARY_COLOUR.withOpacity(0.5),
           overlayShape: RoundSliderOverlayShape(overlayRadius: 10.0),
         ),
@@ -90,12 +109,26 @@ class _CustomSliderState extends State<CustomSlider> {
   }
 
   @override
+  void initState() {
+    _value = initValue;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String top = max.round().toString() + units;
     return
       Row(
           children: <Widget>[
-            _customSlider(),
-            Text(max.round().toString(), style: TextStyle(fontFamily: 'Raleway', fontSize: 18),),
+            Container(
+              width: 220 ,
+              //child: _customSlider()
+              child: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child:_customSlider()
+              )
+            ),
+            Text(top, style: TextStyle(fontFamily: 'Raleway', fontSize: fontSize + 6, fontWeight: FontWeight.w600))
           ]
       );
   }

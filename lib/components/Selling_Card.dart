@@ -390,7 +390,8 @@ class Vendor_Box extends StatelessWidget {
               child: Container(
                 //color: Colors.black38,
                 decoration: BoxDecoration(
-                  border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
+                  shape: BoxShape.circle,
+                  border: Border.all(width: 3,color: Colors.black,style: BorderStyle.solid),
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: Image.asset("assets/images/julio.png").image,

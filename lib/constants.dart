@@ -1,4 +1,6 @@
 
+import 'dart:collection';
+
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
@@ -123,6 +125,7 @@ List<Sell> market_fixe_items = [
 ];
 /// ********** Market_Doca ***************/
 
+List<String> seabassMedia = <String>["assets/images/sea_bass.png"];
 
 Seafood seabass2 = new Seafood(
   type: Seafood_Type.sea_bass,
@@ -191,6 +194,14 @@ List<Market> markets = [fixeFixe_market, docaPortimao_market];
 
 /// ************************* FishNTips *******************************/
 
+Map<Seafood_Type, FishNTips> seafoodTips = {
+  Seafood_Type.lobster: lobsterTips,
+  Seafood_Type.sea_bass: seaBassTips,
+  Seafood_Type.cod_fish: codTips
+};
+
+
+/// ************ Lobster ************/
 List<String> lobsterNutrition = <String>["Vitamin A", "Vitamin B12",
   "Vitamin E", "Calcium", "Iron", "..."];
 
@@ -203,18 +214,70 @@ Recipe lobsterRec1 = Recipe("Lobster with Thermidor Butter",
 'https://www.bbcgoodfood.com/recipes/lobster-thermidor-butter',
     'assets/images/LobsterThermidor.png');
 
-Recipe lobsterRec2 = Recipe('Lobster rolls',
+Recipe lobsterRec2 = Recipe('Ultimate Lobster Rolls',
     'https://www.bonappetit.com/recipe/bas-ultimate-lobster-rolls',
     'assets/images/LobsterRolls.png');
-
 
 List<Recipe> lobsterRecipies = <Recipe>[lobsterRec1, lobsterRec2];
 
 FishNTips lobsterTips = FishNTips(
     Seafood_Type.lobster,
-    145, 129, 1.25, 27.5,
+    450, 400, 3.88, 85.3,
     lobsterNutrition,
     lobsterFun,
     lobsterRecipies);
+
+/// ************ Sea Bass ************/
+List<String> seaBassNutrition = <String>["Vitamin B6", "Vitamin B12" ,"Phosphorus",
+  "Magnesium", "Pantothenic Acid", "Riboflavin", "..."];
+
+List<String> seaBassFun = <String>[
+  "Most Black Sea Bass are hermaphrodites functioning first as females and then as males",
+  "Giant sea bass can survive around 70 years\tin the wild."
+];
+
+Recipe seaBassRec1 = Recipe("Sea Bass & Artichoke Salad",
+    'https://www.bbcgoodfood.com/recipes/sea-bass-artichoke-salad',
+    'assets/images/SeabassSalad.png');
+
+Recipe seaBassRec2 = Recipe('Baked Sea Bass with Lemon Caper Dressing',
+    'https://www.bbcgoodfood.com/recipes/baked-sea-bass-lemon-caper-dressing',
+    'assets/images/SeabassLemon.png');
+
+Recipe seaBassRec3 = Recipe('Pan-fried Sea Bass with Ratatouille & Basil',
+    'https://www.bbcgoodfood.com/recipes/pan-fried-sea-bass-ratatouille-basil',
+    'assets/images/SeaBassFried.png');
+
+List<Recipe> seaBassRecipies = <Recipe>[seaBassRec1, seaBassRec2, seaBassRec3];
+
+FishNTips seaBassTips = FishNTips(
+    Seafood_Type.sea_bass,
+    600, 582, 12, 110,
+    seaBassNutrition,
+    seaBassFun,
+    seaBassRecipies);
+
+/// ************ Cod ************/
+List<String> codNutrition = <String>["Vitamin B6", "Vitamin B12" ,"Phosphorus",
+  "Selenium", "..."];
+
+List<String> codFun = <String>[
+  "Humans are the only natural enemies of adult cods.",
+  "Cods are slow swimmers that live in large groups called schools.",
+  "Age of cod can be determined by the number of rings that are visible on the skull."
+];
+
+Recipe codRec1 = Recipe("Bacalhau à Brás",
+    'https://www.pingodoce.pt/receitas/bacalhau-a-bras/',
+    'assets/images/CodBras.png');
+
+List<Recipe> codRecipies = <Recipe>[codRec1];
+
+FishNTips codTips = FishNTips(
+    Seafood_Type.cod_fish,
+    500, 530, 5.88, 112,
+    codNutrition,
+    codFun,
+    codRecipies);
 
 
