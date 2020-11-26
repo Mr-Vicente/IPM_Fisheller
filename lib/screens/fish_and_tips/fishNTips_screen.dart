@@ -73,7 +73,7 @@ class FishAndTips extends StatelessWidget {
                             children: <Widget>[
                               Text(seafood.type.name, style: TextStyle(fontSize: 50, fontWeight: FontWeight.w900, color: Colors.black)),
                               SizedBox(width: 5),
-                              Text('Aprox. ' + seafood.avrgWeight.toStringAsPrecision(3) + 'g', style: TextStyle(fontSize: 15, color: Colors.black)),
+                              Text('For aprox. ' + seafood.avrgWeight.toStringAsFixed(0) + 'g', style: TextStyle(fontSize: 15, color: Colors.black)),
                             ]
                         )
                     ),
@@ -84,11 +84,11 @@ class FishAndTips extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            NumberCircle(text: seafood.kcal.toStringAsPrecision(3), circleSize: circleSize, circleColor: Colors.black12, label:'Kcal'),
+                            NumberCircle(text: seafood.kcal.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black12, label:'Kcal'),
                             SizedBox(width: 5),
-                            NumberCircle(text: seafood.fat.toStringAsPrecision(3), circleSize: circleSize, circleColor: Colors.black26, label: 'Fat(g)'),
+                            NumberCircle(text: seafood.fat.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black26, label: 'Fat(g)'),
                             SizedBox(width: 5),
-                            NumberCircle(text: seafood.protein.toStringAsPrecision(3), circleSize: circleSize, circleColor: Colors.black54, label: 'Protein(g)')
+                            NumberCircle(text: seafood.protein.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black54, label: 'Protein(g)')
                           ],
                         )
                       ),
@@ -119,7 +119,7 @@ class FishAndTips extends StatelessWidget {
                     Padding(
                         padding: EdgeInsets.only(left: 20.0, top:20),
                         child: Wrap(
-                            alignment: WrapAlignment.center,
+                            alignment: WrapAlignment.start,
                             runSpacing: 10.0,
                             spacing: 5.0,
                             children:_recipies()
@@ -158,7 +158,7 @@ class NumberCircle extends StatelessWidget {
           width: circleSize.width,
           height: circleSize.height,
           child:Center(
-            child: Text(text, style: TextStyle(fontFamily: 'RobotoMono', fontSize: 35))
+            child: Text(text, style: TextStyle(fontFamily: 'RobotoMono', fontSize: 30))
           ),
           decoration: BoxDecoration(
             border: Border.all(width: 10,color: circleColor,style: BorderStyle.solid),
@@ -270,7 +270,7 @@ class InfoBox extends StatelessWidget{
         },
         child: Container(
             margin: EdgeInsets.symmetric(horizontal: 5),
-            height: size.width * 0.35,
+            height: size.width * 0.40,
             width: size.width * 0.42,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
