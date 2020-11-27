@@ -349,7 +349,7 @@ class Equivalent_Box extends StatelessWidget {
                 horizontal: 5,
               ),
               padding: EdgeInsets.only(bottom: 50),
-              child: Text("<->")),
+              child: Image.asset("assets/icons/double-arrow.png", width: 20,),),
           Number_Info_Box(
             number: seafood.quantityMass,
             text: "Quantity\n(Kg.)",
@@ -377,7 +377,6 @@ class Vendor_Box extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          //vendor.image,
           Container(
             margin: EdgeInsets.symmetric(horizontal: 15),
             width: 50,
@@ -390,7 +389,7 @@ class Vendor_Box extends StatelessWidget {
                     width: 3, color: Colors.black, style: BorderStyle.solid),
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: Image.asset("assets/images/julio.png").image,
+                  image: Image.asset(vendor.profile).image,
                 ),
               ),
             ),

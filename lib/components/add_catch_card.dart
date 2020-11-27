@@ -295,7 +295,7 @@ class Equivalent_Box extends StatelessWidget {
           ),
           Container(
               padding: EdgeInsets.only(bottom: 50),
-              child: Text("<->")),
+              child: Image.asset("assets/icons/double-arrow.png", width: 20,),),
           Number_Info_Box(
             number: seafood.quantityMass,
             text: "Quantity\n(Kg.)",
