@@ -1,9 +1,9 @@
 enum Tag {
-  fish,
   aquaculture,
-  shellfish,
-  sea,
+  fish,
   imported,
+  sea,
+  shellfish,
 }
 
 extension Tag_Extension on Tag {

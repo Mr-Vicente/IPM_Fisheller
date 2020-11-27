@@ -1,17 +1,13 @@
+import 'package:fisheller_app/components/NumberBox.dart';
+import 'package:fisheller_app/components/back.dart';
 import 'package:fisheller_app/constants.dart';
-import 'package:fisheller_app/models/fish_and_tips.dart';
-import 'package:fisheller_app/models/seafood_type.dart';
-import 'package:fisheller_app/models/sell.dart';
-import 'package:fisheller_app/screens/book_fish/book_screen.dart';
-import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:slide_button/slide_button.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:fisheller_app/components/drop_down.dart';
+import 'package:fisheller_app/screens/post/components/TextBox.dart';
+
+import 'add_tags.dart';
 
 
 class Catch extends StatefulWidget {
@@ -24,35 +20,21 @@ class Catch extends StatefulWidget {
 
 class _Catch extends State<Catch> {
 
+  final descriptionController = TextEditingController();
+  final priceController1 = TextEditingController();
+  final priceController2 = TextEditingController();
+  final weightController1 = TextEditingController();
+  final weightController2 = TextEditingController();
+  final quantityController = TextEditingController();
+
   _Catch();
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 200.0,
-          leading:
-          FlatButton.icon(
-              icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-              label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
-              onPressed:() {
-                Navigator.pop(context);
-              }
-          )
-      ),
-      body: Container(
-        child:SingleChildScrollView(
+
+  Widget _screen(){
+    return Container(
+      child:SingleChildScrollView(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
@@ -67,265 +49,257 @@ class _Catch extends State<Catch> {
                     ),
                   ]
               ),
-          Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
-          child:Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-              SizedBox(
-                height: 70,
-                child:TimelineTile(
-                  axis: TimelineAxis.horizontal,
-                  alignment: TimelineAlign.manual,
-                  lineXY:0.5,
-                  isFirst: true,
-                  indicatorStyle: const IndicatorStyle(
-                    width: 20,
-                    color: Colors.teal,
-                  ),
-                  endChild: Text("Info"),
-        ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
+                child:Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 70,
+                        child:TimelineTile(
+                          axis: TimelineAxis.horizontal,
+                          alignment: TimelineAlign.manual,
+                          lineXY:0.5,
+                          isFirst: true,
+                          indicatorStyle: const IndicatorStyle(
+                            width: 20,
+                            color: Colors.teal,
+                          ),
+                          endChild: Text("Info"),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70,
+                        child:TimelineTile(
+                          axis: TimelineAxis.horizontal,
+                          alignment: TimelineAlign.manual,
+                          lineXY:0.5,
+                          endChild: Text("Media"),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 70,
+                        child:TimelineTile(
+                          axis: TimelineAxis.horizontal,
+                          alignment: TimelineAlign.manual,
+                          lineXY:0.5,
+                          isLast: true,
+                          endChild: Text("Review"),
+                        ),
+                      ),
+                    ]
+                ),
               ),
-                SizedBox(
-                  height: 70,
-                  child:TimelineTile(
-                    axis: TimelineAxis.horizontal,
-                    alignment: TimelineAlign.manual,
-                    lineXY:0.5,
-                    endChild: Text("Media"),
-                  ),
-                ),
-                SizedBox(
-                  height: 70,
-                  child:TimelineTile(
-                    axis: TimelineAxis.horizontal,
-                    alignment: TimelineAlign.manual,
-                    lineXY:0.5,
-                    isLast: true,
-                    endChild: Text("Review"),
-                  ),
-                ),
-              ]
-          ),
-          ),
               SizedBox(height: 10.0,),
-            new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 30, PRIMARY_COLOUR, Colors.white, 13),
+              Center(
+                child: new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15),
+              ),
+
               SizedBox(height: 20.0,),
-          Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
-              child:Row(
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+                child: Text(
+                  "Price / Kg:",
+                  textScaleFactor: 1.0,
+                  style: TextStyle(fontWeight: FontWeight.w900),
+                ),
+              ),
+              SizedBox(height: 10.0,),
+              Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      "Price / Kg:",
-                      textScaleFactor: 1.0,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    SizedBox(width: 20.0),
+                    NumberBox(
+                      controller: priceController1,
+                      borderColor: PRIMARY_COLOUR.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      maxLines: 1,
+                      maxChars: 2,
+                      width: 60,
                     ),
+                    SizedBox(width: 10.0),
+                    Text(',',style: TextStyle(fontSize: 30,height: 2.0),),
+                    SizedBox(width: 10.0),
+                    NumberBox(
+                      controller: priceController2,
+                      borderColor: PRIMARY_COLOUR.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      maxLines: 1,
+                      maxChars: 2,
+                      width: 60,
+                    ),
+                    SizedBox(width: 10.0),
+                    Text('€',style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                    SizedBox(width: 5.0),
                   ]
               ),
-          ),
               SizedBox(height: 10.0,),
-          Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
-              child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    margin: const EdgeInsets.all(15.0),
-                    padding: const EdgeInsets.all(3.0),
-                    decoration: BoxDecoration(
-
-                        border: Border.all(color: Colors.teal,width: 5.0),
-                        borderRadius: BorderRadius.circular(10.0),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+                child:
+                Text(
+                  "Total Weight:",
+                  textScaleFactor: 1.0,
+                  style: TextStyle(fontWeight: FontWeight.w900),
+                ),
+              ),
+              SizedBox(height: 10.0,),
+              Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(width: 20.0),
+                    NumberBox(
+                      controller: weightController1,
+                      borderColor: PRIMARY_COLOUR.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      maxLines: 1,
+                      maxChars: 2,
+                      width: 60,
                     ),
-                      child:SizedBox(height:40,width:50,child:TextField(
-                        style: TextStyle(fontSize: 25,height: 2.0),
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                           hintText: '00',
-                        ),
-                        keyboardType: TextInputType.number,
-                      ),
-                      ),
-                ),
-                Text(',',style: TextStyle(fontSize: 30,height: 2.0),),
-                Container(
-                  margin: const EdgeInsets.all(15.0),
-                  padding: const EdgeInsets.all(3.0),
-                  decoration: BoxDecoration(
-
-                    border: Border.all(color: Colors.teal,width: 5.0),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child:SizedBox(height:40,width:50,child:TextField(
-                    style: TextStyle(fontSize: 25,height: 2.0),
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintText: '00',
+                    SizedBox(width: 10.0),
+                    Text(',',style: TextStyle(fontSize: 30,height: 2.0),),
+                    SizedBox(width: 10.0),
+                    NumberBox(
+                      controller: weightController2,
+                      borderColor: PRIMARY_COLOUR.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      maxLines: 1,
+                      maxChars: 2,
+                      width: 60,
                     ),
-                    keyboardType: TextInputType.number,
-                  ),
-                  ),
-                ),
-                Text('\u{20AC}',style: TextStyle(fontSize: 30,height: 2.0),),
-                ]
-          ),
-          ),
-              SizedBox(height: 10.0,),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
-                child:Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Total Weight:",
-                        textScaleFactor: 1.0,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ]
-                ),
-              ),
-              SizedBox(height: 10.0,),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
-                child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-
-                          border: Border.all(color: Colors.teal,width: 5.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child:SizedBox(height:40,width:50,child:TextField(
-                          style: TextStyle(fontSize: 25,height: 2.0),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            hintText: '00',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                        ),
-                      ),
-                      Text(',',style: TextStyle(fontSize: 30,height: 2.0),),
-                      Container(
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-
-                          border: Border.all(color: Colors.teal,width: 5.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child:SizedBox(height:40,width:50,child:TextField(
-                          style: TextStyle(fontSize: 25,height: 2.0),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            hintText: '00',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                        ),
-                      ),
-                      Text('Kg',style: TextStyle(fontSize: 20,height: 2.0),),
-                    ]
-                ),
+                    SizedBox(width: 10.0),
+                    Text('Kg',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  ]
               ),
               SizedBox(height: 10.0,),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
-                child:Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Quantity:",
-                        textScaleFactor: 1.0,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ]
+                child:
+                Text(
+                  "Quantity:",
+                  textScaleFactor: 1.0,
+                  style: TextStyle(fontWeight: FontWeight.w900),
                 ),
               ),
               SizedBox(height: 10.0,),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(100.0, 0.0, 0.0, 0.0),
-                child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        decoration: BoxDecoration(
-
-                          border: Border.all(color: Colors.teal,width: 5.0),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child:SizedBox(height:40,width:50,child:TextField(
-                          style: TextStyle(fontSize: 25,height: 2.0),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            hintText: '00',
-                          ),
-                          keyboardType: TextInputType.number,
-                        ),
-                        ),
-                      ),
-                      Text('Units',style: TextStyle(fontSize: 20,height: 2.0),),
-                    ]
-                ),
+              Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    NumberBox(
+                      controller: quantityController,
+                      borderColor: PRIMARY_COLOUR.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10.0),
+                      maxLines: 1,
+                      maxChars: 2,
+                      width: 60,
+                    ),
+                    SizedBox(width: 10.0),
+                    Text('Units',style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    SizedBox(width: 45.0),
+                  ]
               ),
               SizedBox(height: 10.0,),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
-                child:Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Tags:",
-                        textScaleFactor: 1.0,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ]
+                child:
+                Text(
+                  "Tags:",
+                  style: TextStyle(fontWeight: FontWeight.w900),
                 ),
               ),
               SizedBox(height: 10.0,),
-    Padding(
-    padding: EdgeInsetsDirectional.fromSTEB(50.0, 0.0, 0.0, 0.0),
-    child:Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-
-
-    ]
-    ),
-    ),
-              SizedBox(height: 100.0,),
-          ]
+              Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(21.0, 0.0, 0.0, 0.0),
+                  child: TagsButtons()
               ),
-      ),
-      ),
-      bottomNavigationBar: BottomAppBar(//app bar geral
-        child: Container(
-          height:65.0,
+
+
+              SizedBox(height: 10.0,),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+                child:Text(
+                  "Description:",
+                  style: TextStyle(fontWeight: FontWeight.w900),
+                ),
+              ),
+              SizedBox(height: 10.0,),
+              Center(
+                child:
+                TextBox(
+                  controller: descriptionController,
+                  borderColor: PRIMARY_COLOUR.withOpacity(0.2),
+                  contentPadding: EdgeInsets.fromLTRB(10, 15, 10, 0),
+                  maxLines: 5,
+                  maxChars: 150,
+                  width: 320,
+                ),
+              ),
+              SizedBox(height: 30),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Column(
+                    children: <Widget>[
+
+                      FlatButton(
+                        onPressed: (){
+
+                        },
+                        child: Container(
+                          height: 60,
+                          width: 140,
+                          decoration: BoxDecoration(
+                              color: PRIMARY_COLOUR,
+                              border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                              borderRadius: BorderRadius.circular(100),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
+                                ),
+                              ]
+                          ),
+                          child:Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(width: 10,),
+                              Text(
+                                'Next',
+                                style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.arrow_forward_ios_rounded, size: 22, color: Colors.white)
+                            ]
+                          )
+                        ),
+                      ),
+                      SizedBox(height: 10)
+                    ]
+                ),
+              )
+            ]
         ),
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Back(body:_screen()// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 

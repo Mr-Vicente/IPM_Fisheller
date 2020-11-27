@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       //home: LoginScreen(),
       //home: MapPage(),
       
-      //home: Temp(),
+      //home: Catch(),
       home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
