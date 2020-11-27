@@ -27,21 +27,83 @@ class CatchMedia extends StatefulWidget {
 class _CatchMedia extends State<CatchMedia> {
 
   File imageFile;
+  File imageFile2;
+  File imageFile3;
+  File imageFile4;
 
-  _openGallery () async {
+  _openGallery (int n) async {
     // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
-    this.setState(() {
-      imageFile = picture;
-    });
+    if (n == 1) {
+      this.setState(() {
+        imageFile = picture;
+      });
+    }
+    if (n == 2) {
+      this.setState(() {
+        imageFile2 = picture;
+      });
+    }
+    if (n == 3) {
+      this.setState(() {
+        imageFile3 = picture;
+      });
+    }
+    if (n == 4) {
+      this.setState(() {
+        imageFile4 = picture;
+      });
+    }
   }
 
-  ImageProvider _decideImageView(){
-    if(imageFile == null){
-      return Image.asset("image_placeholder_portrait.png").image;
+  ImageProvider _decideImageView(int n){
+    if (n == 1) {
+      if (imageFile == null) {
+        return Image
+            .asset("assets/images/image_placeholder_portrait.png")
+            .image;
+      }
+      else {
+        return Image
+            .file(imageFile)
+            .image;
+      }
     }
-    else{
-      return Image.file(imageFile).image;
+    if (n == 2) {
+      if (imageFile2 == null) {
+        return Image
+            .asset("assets/images/image_placeholder_portrait.png")
+            .image;
+      }
+      else {
+        return Image
+            .file(imageFile2)
+            .image;
+      }
+    }
+    if (n == 3) {
+      if (imageFile3 == null) {
+        return Image
+            .asset("assets/images/image_placeholder_portrait.png")
+            .image;
+      }
+      else {
+        return Image
+            .file(imageFile3)
+            .image;
+      }
+    }
+    if (n == 4) {
+      if (imageFile4 == null) {
+        return Image
+            .asset("assets/images/image_placeholder_portrait.png")
+            .image;
+      }
+      else {
+        return Image
+            .file(imageFile4)
+            .image;
+      }
     }
   }
 
@@ -138,116 +200,247 @@ class _CatchMedia extends State<CatchMedia> {
                   ),
                 ),
                 SizedBox(height: 20.0,),
-                Row(
+          Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+               child: Row(
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                    children: <Widget>[
                      Container(
-                       child: Column(
-                           mainAxisSize: MainAxisSize.max,
-                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                       height:200,
+                       width: 150,
+                       child: Stack(
                            children: <Widget>[
                              Container(
                                height: 180,
                                width: 120,
                                decoration: BoxDecoration(
                                  borderRadius: BorderRadius.circular(20),
+                                 border: Border.all(width: 3, color: Colors.black26, style: BorderStyle.solid),
                                  image: new DecorationImage(
                                    fit: BoxFit.cover,
-                                   image: _decideImageView(),
+                                   image: _decideImageView(1),
                                  ),
 
                                ),
                              ),
 
-                             RaisedButton(onPressed: (){
-                               _openGallery();
-                             },child: Text('+'),),
+                             Positioned(
+                               left:60,
+                               top:150.0,
+                               bottom:-10.0,
+                               right: 0.0,
+                               child:FlatButton(onPressed: (){
+                               _openGallery(1);
+                             },child: Container(
+                               height: 40,
+                               width: 40,
+                               decoration: BoxDecoration(
+                                   color: PRIMARY_COLOUR,
+                                   border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                                   borderRadius: BorderRadius.circular(100),
+                                   boxShadow: [
+                                     BoxShadow(
+                                       color: Colors.black.withOpacity(0.3),
+                                       spreadRadius: 0,
+                                       blurRadius: 5,
+                                     ),
+                                   ]
+                               ),
+                               child:Image(
+                                 image:AssetImage('assets/icons/plus.png'
+                                 ),
+                                 height: 20.0,
+                                 width: 20.0,
+                               ),
+
+
+                               ),
+                             ),
+                             ),
 
                            ]
                        ),
                      ),
                      Container(
-                       child: Column(
-                           mainAxisSize: MainAxisSize.max,
-                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                       height:200,
+                       width: 150,
+                       child: Stack(
                            children: <Widget>[
                              Container(
                                height: 180,
                                width: 120,
                                decoration: BoxDecoration(
                                  borderRadius: BorderRadius.circular(20),
+                                 border: Border.all(width: 3, color: Colors.black26, style: BorderStyle.solid),
                                  image: new DecorationImage(
                                    fit: BoxFit.cover,
-                                   image: _decideImageView(),
+                                   image: _decideImageView(2),
                                  ),
 
                                ),
                              ),
 
-                             RaisedButton(onPressed: (){
-                               _openGallery();
-                             },child: Text('+'),),
+                             Positioned(
+                               left:60,
+                               top:150.0,
+                               bottom:-10.0,
+                               right: 0.0,
+                               child:FlatButton(onPressed: (){
+                                 _openGallery(2);
+                               },child: Container(
+                                 height: 40,
+                                 width: 40,
+                                 decoration: BoxDecoration(
+                                     color: PRIMARY_COLOUR,
+                                     border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                                     borderRadius: BorderRadius.circular(100),
+                                     boxShadow: [
+                                       BoxShadow(
+                                         color: Colors.black.withOpacity(0.3),
+                                         spreadRadius: 0,
+                                         blurRadius: 5,
+                                       ),
+                                     ]
+                                 ),
+                                 child:Image(
+                                   image:AssetImage('assets/icons/plus.png'
+                                   ),
+                                   height: 20.0,
+                                   width: 20.0,
+                                 ),
+
+
+                               ),
+                               ),
+                             ),
 
                            ]
                        ),
                      ),
           ]
                 ),
-                Row(
+          ),
+                SizedBox(height: 20.0,),
+          Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+               child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Container(
-                        child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              Container(
-                                height: 180,
-                                width: 120,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: new DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: _decideImageView(),
-                                    ),
-
-                                ),
-                              ),
-
-                              RaisedButton(onPressed: (){
-                                _openGallery();
-                              },child: Text('+'),),
-
-                            ]
-                        ),
-                      ),
-                      Container(
-                        child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        height:200,
+                        width: 150,
+                        child: Stack(
                             children: <Widget>[
                               Container(
                                 height: 180,
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(width: 3, color: Colors.black26, style: BorderStyle.solid),
                                   image: new DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: _decideImageView(),
+                                    image: _decideImageView(3),
                                   ),
 
                                 ),
                               ),
 
-                              RaisedButton(onPressed: (){
-                                _openGallery();
-                              },child: Text('+'),),
+                              Positioned(
+                                left:60,
+                                top:150.0,
+                                bottom:-10.0,
+                                right: 0.0,
+                                child:FlatButton(onPressed: (){
+                                  _openGallery(3);
+                                },child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                      color: PRIMARY_COLOUR,
+                                      border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                                      borderRadius: BorderRadius.circular(100),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          spreadRadius: 0,
+                                          blurRadius: 5,
+                                        ),
+                                      ]
+                                  ),
+                                  child:Image(
+                                    image:AssetImage('assets/icons/plus.png'
+                                    ),
+                                    height: 20.0,
+                                    width: 20.0,
+                                  ),
+
+
+                                ),
+                                ),
+                              ),
+
+                            ]
+                        ),
+                      ),
+                      Container(
+                        height:200,
+                        width: 150,
+                        child: Stack(
+                            children: <Widget>[
+                              Container(
+                                height: 180,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(width: 3, color: Colors.black26, style: BorderStyle.solid),
+                                  image: new DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: _decideImageView(4),
+                                  ),
+
+                                ),
+                              ),
+
+                              Positioned(
+                                left:60,
+                                top:150.0,
+                                bottom:-10.0,
+                                right: 0.0,
+                                child:FlatButton(onPressed: (){
+                                  _openGallery(4);
+                                },child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                      color: PRIMARY_COLOUR,
+                                      border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                                      borderRadius: BorderRadius.circular(100),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          spreadRadius: 0,
+                                          blurRadius: 5,
+                                        ),
+                                      ]
+                                  ),
+                                  child:Image(
+                                    image:AssetImage('assets/icons/plus.png'
+                                    ),
+                                    height: 20.0,
+                                    width: 20.0,
+                                  ),
+
+
+                                ),
+                                ),
+                              ),
 
                             ]
                         ),
                       ),
                     ]
                 ),
+          ),
               ]
           ),
         ),
