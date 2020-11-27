@@ -67,24 +67,34 @@ Vendor julio = new Vendor(
   "Júlio Adamastor", //name
   "julio@gmail.com", //email
   "1234", //password
+  "assets/images/julio.png"
 );
 Vendor josefina = new Vendor(
   "Josefina Peixeira",
   "josefina@gmail.com", //email
   "1234", //password
+  "assets/images/josefina.png"
 );
 
 /// ************************* Sells ******************************/
-List<String> m = ["assets/images/sea_bass.png"];
+List<String> seaBassMedia = ["assets/images/sea_bass.png", "assets/images/seabass2.png", "assets/images/seabass3.png"];
+List<String> lobsterMedia = ["assets/images/lobster.png", "assets/images/lobster2.png"];
+List<String> codMedia = ["assets/images/cod.png", "assets/images/cod2.png", "assets/images/cod3.png"];
+
+const String FISH_DISCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus volutpat nisl augue, vitae viverra nibh imperdiet et. Donec quis tortor erat. Aliquam elementum elementum elit, vitae bibendum nunc imperdiet at."
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus volutpat nisl augue, vitae viverra nibh imperdiet et. Donec quis tortor erat. Aliquam elementum elementum elit, vitae bibendum nunc imperdiet at."
+
+;
+
 /// ********** Market_Fixe_Fixe ***************/
 Seafood seabass = new Seafood(
   type: Seafood_Type.sea_bass,
-  media: m,
+  media: seaBassMedia,
   price: 15,
   quantityMass: 8,
   quantityUnits: 10,
   tags: [Tag.fish, Tag.aquaculture],
-  description: "seabass"
+  description: FISH_DISCRIPTION
 );
 
 Sell julioBass = new Sell(
@@ -94,12 +104,12 @@ Sell julioBass = new Sell(
 
 Seafood lobster = new Seafood(
   type: Seafood_Type.lobster,
-  media: null,
+  media: lobsterMedia,
   price: 30,
   quantityMass: 8,
   quantityUnits: 5,
   tags: [Tag.shellfish, Tag.sea],
-  description: "lobster"
+  description: FISH_DISCRIPTION
 );
 
 Sell julioLobster = new Sell(
@@ -109,12 +119,12 @@ Sell julioLobster = new Sell(
 
 Seafood cod = new Seafood(
   type: Seafood_Type.cod_fish,
-  media: null,
+  media: codMedia,
   price: 10,
   quantityMass: 10,
   quantityUnits: 5,
   tags: [Tag.fish, Tag.imported],
-  description: "cod"
+  description: FISH_DISCRIPTION
 );
 
 Sell julioCod = new Sell(
@@ -128,48 +138,49 @@ List<Sell> market_fixe_items = [
 ];
 /// ********** Market_Doca ***************/
 
-List<String> seabassMedia = <String>["assets/images/sea_bass.png"];
-
-Seafood seabass2 = new Seafood(
-  type: Seafood_Type.sea_bass,
-  media: null,
-  price: 16,
-  quantityMass: 7,
-  quantityUnits: 10,
-  tags: [Tag.fish, Tag.sea],
+Seafood seaBass2 = new Seafood(
+    type: Seafood_Type.sea_bass,
+    media: seaBassMedia,
+    price: 16,
+    quantityMass: 7,
+    quantityUnits: 10,
+    tags: [Tag.fish, Tag.sea],
+    description: FISH_DISCRIPTION
 );
 
 Sell josefinaBass = new Sell(
-  seafood: seabass2,
-  vendor: julio,
+  seafood: seaBass2,
+  vendor: josefina,
 );
 
 Seafood lobster2 = new Seafood(
-  type: Seafood_Type.lobster,
-  media: null,
-  price: 35,
-  quantityMass: 6,
-  quantityUnits: 4,
-  tags: [Tag.shellfish, Tag.sea],
+    type: Seafood_Type.lobster,
+    media: lobsterMedia,
+    price: 35,
+    quantityMass: 6,
+    quantityUnits: 4,
+    tags: [Tag.shellfish, Tag.sea],
+    description: FISH_DISCRIPTION
 );
 
 Sell josefinaLobster = new Sell(
     seafood: lobster2,
-    vendor: julio
+    vendor: josefina
 );
 
 Seafood cod2 = new Seafood(
-  type: Seafood_Type.cod_fish,
-  media: null,
-  price: 11,
-  quantityMass: 10,
-  quantityUnits: 5,
-  tags: [Tag.fish, Tag.imported],
+    type: Seafood_Type.cod_fish,
+    media: codMedia,
+    price: 11,
+    quantityMass: 10,
+    quantityUnits: 5,
+    tags: [Tag.fish, Tag.imported],
+    description: FISH_DISCRIPTION
 );
 
 Sell josefinaCod = new Sell(
   seafood: cod2,
-  vendor: julio,
+  vendor: josefina,
 );
 
 List<Sell> market_doca_items = [

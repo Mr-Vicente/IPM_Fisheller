@@ -1,3 +1,4 @@
+import 'package:fisheller_app/components/back.dart';
 import 'package:fisheller_app/models/seafood.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
@@ -13,44 +14,32 @@ class BookFish extends StatelessWidget {
   final String market;
   const BookFish(this.seafood, this.market);
 
-  void _back(){
+  Widget _screen(Size size) {
+    return Container(
+        height: size.height,
+        width: size.width,
+        color: Colors.white,
+        child: SingleChildScrollView(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
+                  Text(market, style: TextStyle(fontSize: 15)),
+                  SizedBox(height:30),
+                  BookBox(seafood: seafood)
 
+                ]
+            )
+        )
+    );
   }
+  
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leadingWidth: size.width,
-            leading:
-            FlatButton.icon(
-              icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-              label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
-              onPressed: _back,
-            )
-        ),
-        body: Container(
-            height: size.height,
-            width: size.width,
-            color: Colors.white,
-            child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
-                      Text(market, style: TextStyle(fontSize: 15)),
-                      SizedBox(height:30),
-                      BookBox(seafood: seafood)
-
-                    ]
-                )
-            )
-        )
-    );
+    return Back(body: _screen(size));
   }
 }
 
@@ -71,7 +60,9 @@ class BookBox extends StatelessWidget{
 
     // This size provide us total height and width of our screen
     return
-      Container(
+      SingleChildScrollView(
+        child:
+        Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
           height: size.height*0.75,
           width: size.width * 0.8,
@@ -159,7 +150,7 @@ class BookBox extends StatelessWidget{
               ],
             ),
           )
-  );
+  ));
   }
 }
 

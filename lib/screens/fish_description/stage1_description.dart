@@ -1,5 +1,8 @@
+import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/home.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/fish_and_tips.dart';
+import 'package:fisheller_app/models/seafood.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/screens/book_fish/book_screen.dart';
@@ -12,25 +15,9 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 //list of images from fish
-final List<String> imgList = [
-  'assets/images/lobster.png',
-  'assets/images/sea_bass.png',
-  'assets/images/fish_market.png'
-];
 
-final List<Widget> imageSliders = imgList.map((item) => Container(
-  child: Container(
-    margin: EdgeInsets.all(5.0),
-    child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        child: Stack(
-          children: <Widget>[
-            Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-          ],
-        )
-    ),
-  ),
-)).toList();
+
+
 
 class Stage1Description extends StatefulWidget {
 
@@ -43,17 +30,46 @@ class Stage1Description extends StatefulWidget {
 }
 
 class CarouselWithIndicatorDemo extends StatefulWidget {
+  Seafood seafood;
+
+  CarouselWithIndicatorDemo(this.seafood);
+  
   @override
   State<StatefulWidget> createState() {
-    return _CarouselWithIndicatorState();
+    return _CarouselWithIndicatorState(seafood);
   }
 }
 
 class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
+
+  List<Widget> imageSliders;
   int _current = 0;
+
+  Seafood seafood;
+
+  _CarouselWithIndicatorState(this.seafood);
+
+  void _getImageSlider(){
+    imageSliders = seafood.media.map((item) => Container(
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            child: Stack(
+              children: <Widget>[
+                Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+              ],
+            )
+        ),
+      ),
+    )).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    _getImageSlider();
+
     return Column(
         children: [
           CarouselSlider(
@@ -71,8 +87,8 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.map((url) {
-              int index = imgList.indexOf(url);
+            children: seafood.media.map((url) {
+              int index = seafood.media.indexOf(url);
               return Container(
                 width: 8.0,
                 height: 8.0,
@@ -98,257 +114,340 @@ class _Stage1Description extends State<Stage1Description> {
 
   _Stage1Description(this.description);
 
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leadingWidth: 200.0,
-          leading:
-          FlatButton.icon(
-              icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-              label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
-              onPressed:() {
-                Navigator.pop(context);
-              }
-          )
-      ),
-      body: Container(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              CarouselWithIndicatorDemo(),
-              SizedBox(height: 10.0,),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
-                child:Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        description.seafood.type.name,
-                        textScaleFactor: 2.0,
-                      ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        description.market.name,
-                        textScaleFactor: 1.0,
-                      ),
-                    ]
-                ),
-              ),
-              SizedBox(height: 10.0,),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                child:Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
 
-                      Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15),
-                          width: 50,
-                          height: 50,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: Container(
-                              //color: Colors.black38,
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: Image.asset("assets/images/julio.png").image,
+  Widget _screen(Size size){
+    return Container(
+      // Center is a layout widget. It takes a single child and positions it
+      // in the middle of the parent.
+      child: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                CarouselWithIndicatorDemo(description.seafood),
+                SizedBox(height: 10.0,),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+                  child:Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                            description.seafood.type.name,
+                            style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900)
+                        ),
+                        SizedBox(width: 10.0),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 8.0),
+                          child: Text(
+                              description.market.name
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 2, bottom: 8.0),
+                          child:  Image(
+                            image:AssetImage('assets/icons/pin_marker_unfilled.png'
+                            ),
+                            height: 20.0,
+                            width: 20.0,
+                          ),
+                        )
+                      ]
+                  ),
+                ),
+                SizedBox(height: 10.0,),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                  child:Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+
+                        Container(
+                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            width: 40,
+                            height: 40,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Container(
+                                //color: Colors.black38,
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
+                                  image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: AssetImage(description.vendor.profile),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                      ),
-
-                      Text(
-                        description.vendor.name,
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(width: 40.0),
-                      Container(
-                        height: 50.0,
-                        child: FloatingActionButton(
-                          onPressed: (){
-                           Navigator.push(context, MaterialPageRoute(builder: (context) => FishAndTips(seafoodTips[description.seafood.type])),
-                            );},//fish and tips
-                          heroTag: "ht2",
-                          backgroundColor: Colors.teal,
-                          child: Image(
-                            image:AssetImage('assets/icons/icon_fish_and_tips.png'
-                            ),
-                            height: 30.0,
-                            width: 30.0,
-                            ),
-                          ),
+                            )
                         ),
-                      Text(
-                        "Fish and Tips",
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ]),
-              ),
-              SizedBox(height: 20.0,),
-              Align(
-                alignment: Alignment(-0.75,-0.4),
-                child: Text(
-                  description.seafood.description,
-                ),
-              ),
-              SizedBox(height: 30.0,),
-              Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Column(
-                        children: <Widget>[
-                          Container(
-                            width: 80.0,
-                            height: 80.0,
-                            child:Center(
-                                child: Text(description.seafood.price.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 35))
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 5.0,color: Colors.teal,style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                          SizedBox(height: 5.0),
-                          Text("Price (Euro/KG)", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
-                        ]
-                    ),
-                    SizedBox(width: 20.0),
-                    Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50.0,
-                            height: 50.0,
-                            child:Center(
-                                child: Text(description.seafood.quantityUnits.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 20))
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 5.0,color: Colors.teal,style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                          SizedBox(height: 5.0),
-                          Text("Quantity (Unit.)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                        ]
-                    ),
-                    SizedBox(width: 5.0),
-                    Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5,),
-                        padding: EdgeInsets.only(bottom: 25),
-                        child: Text("<->")),
-                    SizedBox(width: 5.0),
-                    Column(
-                        children: <Widget>[
-                          Container(
-                            width: 50.0,
-                            height: 50.0,
-                            child:Center(
-                                child: Text(description.seafood.quantityMass.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 15))
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border.all(width: 5.0,color: Colors.teal,style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                          ),
-                          SizedBox(height: 5.0),
-                          Text("Quantity (KG)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                        ]
-                    ),
 
-                  ]
-              ),
-              SizedBox(height: 30.0,),
-              Align(
-                alignment: Alignment(-0.75,-0.4),
-                child: Text(
-                  'Tags',
-                  textScaleFactor: 1.5,
+                        Text(
+                          description.vendor.name,
+                          textDirection: TextDirection.ltr,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(width: 12.0),
+                        FlatButton(
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => FishAndTips(seafoodTips[description.seafood.type])),
+                              );},
+                            child: Stack(
+                                children: <Widget>[
+                                  Padding(
+                                      padding: EdgeInsets.only(left: 30.0, top: 5),
+                                      child:
+
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(5),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black.withOpacity(0.3),
+                                                  spreadRadius: 0,
+                                                  blurRadius: 5,
+                                                ),
+                                              ]
+                                          ),
+                                          child: Padding(
+                                              padding: EdgeInsets.only(left: 20.0 , right: 5.0, top: 6.0, bottom: 6.0),
+                                              child: Text(
+                                                "Fish and Tips",
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                              )
+                                          )
+                                      )),
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                        color: PRIMARY_COLOUR,
+                                        border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                                        borderRadius: BorderRadius.circular(100),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.3),
+                                            spreadRadius: 0,
+                                            blurRadius: 5,
+                                          ),
+                                        ]
+                                    ),
+                                    child: Image(
+                                      image:AssetImage('assets/icons/icon_fish_and_tips.png'
+                                      ),
+                                      height: 30.0,
+                                      width: 30.0,
+                                    ),
+                                  )
+                                ]
+                            )
+                        )
+                      ]),
                 ),
-              ),
-              SizedBox(height: 10.0,),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
-                child:Row(
+                SizedBox(height: 20.0,),
+                Container(
+                  width: size.width*0.8,
+                  child: Text(
+                    description.seafood.description,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+
+                SizedBox(height: 30.0,),
+                Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                    for ( var tag in description.seafood.tagsToString() )
-                      Container(
-                        margin: EdgeInsets.symmetric(horizontal: 6.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Container(
-                            child: Text(
-                              tag,
-                              style: TextStyle(
-                                  color: Colors.white
+                      Column(
+                          children: <Widget>[
+                            Container(
+                              width: 100.0,
+                              height: 100.0,
+                              child:Center(
+                                  child: Text(description.seafood.price.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 45))
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 10.0,color: Colors.teal,style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(100),
                               ),
                             ),
-                            color: Colors.teal,
-                            padding: EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
-                          ),
-                        ),
+                            SizedBox(height: 5.0),
+                            Text("Price (Euro/KG)", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                          ]
                       ),
+                      SizedBox(width: 20.0),
+                      Column(
+                          children: <Widget>[
+                            Container(
+                              width: 70.0,
+                              height: 70.0,
+                              child:Center(
+                                  child: Text(description.seafood.quantityUnits.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 25))
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 7.0,color: Colors.teal,style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                            SizedBox(height: 5.0),
+                            Text("Quantity (Unit.)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                          ]
+                      ),
+                      SizedBox(width: 5.0),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5,),
+                        padding: EdgeInsets.only(bottom: 17),
+                        child: Image.asset("assets/icons/double-arrow.png", width: 20,),
+                      ),
+                      SizedBox(width: 5.0),
+                      Column(
+                          children: <Widget>[
+                            Container(
+                              width: 70.0,
+                              height: 70.0,
+                              child:Center(
+                                  child: Text(description.seafood.quantityMass.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 25))
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 7.0,color: Colors.teal,style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                            ),
+                            SizedBox(height: 5.0),
+                            Text("Quantity (KG)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                          ]
+                      ),
+
                     ]
                 ),
-              ),
-              SizedBox(height: 30.0,),
-              SlideButton(
-                onButtonOpened: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => BookFish(description.seafood, description.market.name)),//stage2description
-                  );
-                },
-                height: 64.0,
-                borderRadius: 36.0,
-                backgroundColor: Colors.transparent,
-                slidingChild: Center(
-                  child: Text("Book",
+                SizedBox(height: 30.0,),
+                Align(
+                  alignment: Alignment(-0.75,-0.4),
+                  child: Text(
+                    'Tags',
                     style: TextStyle(
-                      color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 30
                     ),
                   ),
                 ),
-                slidingBarColor: Colors.teal,
-                slideDirection: SlideDirection.LEFT,
-              ),
-              SizedBox(height: 25.0,),
+                SizedBox(height: 10.0,),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+                  child:Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        for ( var tag in description.seafood.tagsToString() )
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 6.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Container(
+                                child: Text(
+                                  tag,
+                                  style: TextStyle(
+                                      color: Colors.white
+                                  ),
+                                ),
+                                color: Colors.teal,
+                                padding: EdgeInsets.symmetric(horizontal: 5.0,vertical: 5.0),
+                              ),
+                            ),
+                          ),
+                      ]
+                  ),
+                ),
+                SizedBox(height: 30.0,),
 
-            ],
+              ],
+            ),
           ),
-        ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: _bookButton(),
+            )
+          )
+        ]
+      )
 
-      ),
-      bottomNavigationBar: BottomAppBar(//app bar geral
-        child: Container(
-          height:65.0,
-        ),
-      ),// This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Widget _bookButton(){
+    return FlatButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      BookFish(description.seafood, description.market.name)
+              ),//stage2description
+            );
+          },
+          child: Stack(
+              children: <Widget>[
+                Padding(
+                    padding: EdgeInsets.only(left: 35.0),
+                    child:
+                    Container(
+                      height: 74.0,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          color:PRIMARY_COLOUR,
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              spreadRadius: 0,
+                              blurRadius: 10,
+                            ),
+                          ]
+                      ),
+
+                    )),
+                Container(
+                  height: 74.0,
+                  width: 74.0,
+                  decoration: BoxDecoration(
+                    color: PRIMARY_COLOUR,
+                    border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(100),
+
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 40.0, top: 19.0),
+                    child: Text(
+                      "Book",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white),
+                    )
+                )
+              ]
+          )
+      );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Stack(
+      children: <Widget>[
+        Back(body: _screen(size))
+      ]
+    );
+
+
   }
 
 }

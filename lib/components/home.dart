@@ -43,11 +43,11 @@ class _HomeState extends State<Home> {
               left: 10,
               child: SafeArea(
                   child: FloatingActionButton(
-                onPressed: () => SearchBarFeed(),
-                child: Icon(
-                  IconData(59828, fontFamily: 'MaterialIcons'),
-                  color: Colors.black87,
-                  size: 35,
+                    onPressed: () => SearchBarFeed(),
+                    child: Icon(
+                      IconData(59828, fontFamily: 'MaterialIcons'),
+                      color: Colors.black87,
+                      size: 35,
                 ),
                 backgroundColor: Colors.white,
               ))),

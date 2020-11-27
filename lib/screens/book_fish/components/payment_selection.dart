@@ -164,14 +164,12 @@ class PaymentMethodButtonState extends State<PaymentMethodButton>{
             barrierDismissible: false,
             context: context,
             builder: (BuildContext context) {
-              print('1 ' + currentPaymentMethod);
               return pay;
             }).whenComplete((){
               setState(() {
                 currentPaymentMethod = pay.getState().currentSelected;
                 pay = PaymentSelectionPopUp(currentPaymentMethod);
               });
-          print('2 ' + currentPaymentMethod);
         });
       }),
     );

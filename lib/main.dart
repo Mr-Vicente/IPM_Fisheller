@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
     josefinaBass.market = docaPortimao_market;
     josefinaLobster.market = docaPortimao_market;
     josefinaCod.market = docaPortimao_market;
-    seabass2.media = seabassMedia;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -33,8 +32,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
       //home: LoginScreen(),
-      home: MapPage(),
-      
+      home: Home(),
+
       //home: Temp(),
       //home: Home()
       //home:FishAndTips(codTips),
