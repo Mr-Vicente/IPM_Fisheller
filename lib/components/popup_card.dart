@@ -17,20 +17,21 @@ class PopUpCard extends StatelessWidget {
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
-    this.popupType = 2,
+    this.popupType = 0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    switch(popupType) {
+    switch (popupType) {
       case 0:
         return InfoPopUp();
       case 1:
         return PayPopUp();
       case 2:
         return ReviewPopUp();
-    };
+    }
+    ;
   }
 }
 
@@ -46,52 +47,79 @@ class InfoPopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     // This size provide us total height and width of our screen
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      height: 200,
-      width: size.width * percentage_width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            child: Text(
-              TEXT_QUESTION_COMFIRM,
-              style: TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.bold),
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      content: Container(
+        height: 200,
+        width: size.width * percentage_width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Text(
+                TEXT_QUESTION_COMFIRM,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: Text(
-              sprintf(TEXT_NOTE_COMFIRM,[3]),
-              style: TextStyle(fontSize: 11, color: SALMON_COLOUR, fontWeight: FontWeight.bold),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Text(
+                sprintf(TEXT_NOTE_COMFIRM, [3]),
+                style: TextStyle(
+                    fontSize: 11,
+                    color: SALMON_COLOUR,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          createPopButtons(
-              40.0,
-              () {},
-              "Confirm",
-              () {},
-              "Back"
-          ),
-          //Image_Box(seafood: sell.seafood),
-          //Info_Box(sell: sell,type: type),
-        ],
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    RaisedButton(
+                      color: PRIMARY_COLOUR,
+                      child: Text(
+                        "Confirm",
+                        style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 10,
+                            color: WHITE_COLOUR),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    RaisedButton(
+                      color: SALMON_COLOUR,
+                      child: Text(
+                        "back",
+                        style: TextStyle(
+                            fontFamily: 'Raleway',
+                            fontSize: 10,
+                            color: WHITE_COLOUR),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ]),
+            ),
+          ],
+        ),
       ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: WHITE_COLOUR,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 6,
-            offset: Offset(0, 2), // changes position of shadow
-          ),
-        ],
-      ),
-
     );
   }
 }
@@ -118,47 +146,53 @@ class PayPopUp extends StatelessWidget {
             margin: EdgeInsets.only(top: 20),
             child: Text(
               FINALISE_BUY,
-              style: TextStyle(fontSize: 25, color: Colors.black87, fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w900),
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),
             child: Text(
               sprintf(FINALISE_SEAFOOD, ["Lobster"]),
-              style: TextStyle(fontSize: 15, color: PRIMARY_COLOUR, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 15,
+                  color: PRIMARY_COLOUR,
+                  fontWeight: FontWeight.bold),
             ),
-
           ),
           Container(
             margin: EdgeInsets.only(top: 5),
             child: Text(
               sprintf(FINALISE_Quantity, [2]),
-              style: TextStyle(fontSize: 15, color: PRIMARY_COLOUR, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 15,
+                  color: PRIMARY_COLOUR,
+                  fontWeight: FontWeight.bold),
             ),
-
           ),
           Container(
             margin: EdgeInsets.only(top: 5),
             child: Text(
               sprintf(FINALISE_Weight, [4.0]),
-              style: TextStyle(fontSize: 15, color: PRIMARY_COLOUR, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 15,
+                  color: PRIMARY_COLOUR,
+                  fontWeight: FontWeight.bold),
             ),
-
           ),
           Container(
             margin: EdgeInsets.only(top: 20),
             child: Text(
-              sprintf(FINALISE_TOTAL,[120.0]),
-              style: TextStyle(fontSize: 20, color: Colors.black87, fontWeight: FontWeight.w800),
+              sprintf(FINALISE_TOTAL, [120.0]),
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w800),
             ),
           ),
-          createPopButtons(
-              20.0,
-                  () {},
-              "Pay",
-                  () {},
-              "Back"
-          ),
+          createPopButtons(20.0, () {}, "Pay", () {}, "Back"),
           //Image_Box(seafood: sell.seafood),
           //Info_Box(sell: sell,type: type),
         ],
@@ -175,11 +209,9 @@ class PayPopUp extends StatelessWidget {
           ),
         ],
       ),
-
     );
   }
 }
-
 
 class ReviewPopUp extends StatefulWidget {
   ReviewPopUp({
@@ -188,7 +220,7 @@ class ReviewPopUp extends StatefulWidget {
   _ReviewPopUp createState() => _ReviewPopUp();
 }
 
-class _ReviewPopUp extends State<ReviewPopUp>{
+class _ReviewPopUp extends State<ReviewPopUp> {
   _ReviewPopUp({
     Key key,
   });
@@ -209,17 +241,23 @@ class _ReviewPopUp extends State<ReviewPopUp>{
             margin: EdgeInsets.only(top: 20),
             child: Text(
               "Review Vendor",
-              style: TextStyle(fontSize: 25, color: Colors.black87, fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w900),
             ),
           ),
           Vendor_Box(vendor: julio),
           createPopButtons(
               20.0,
-                  () {},
+              () {
+                Navigator.pop(context);
+              },
               "Pay",
-                  () {},
-              "Back"
-          ),
+              () {
+                Navigator.pop(context);
+              },
+              "Back"),
         ],
       ),
       decoration: BoxDecoration(
@@ -234,45 +272,43 @@ class _ReviewPopUp extends State<ReviewPopUp>{
           ),
         ],
       ),
-
     );
   }
 }
 
-
-Widget createPopButtons(double margin, Function pressActionLeft, String textLeft, Function pressActionRight, String textRight){
+Widget createPopButtons(double margin, Function pressActionLeft,
+    String textLeft, Function pressActionRight, String textRight) {
   return Container(
-      margin: EdgeInsets.only(top: margin),
-      child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            RaisedButton(
-                color: PRIMARY_COLOUR,
-                elevation: 0.1,
-                child: Text(
-                    textLeft,
-                    style: TextStyle(fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
-                ),
-                onPressed: pressActionLeft(),
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                ),
+    margin: EdgeInsets.only(top: margin),
+    child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          RaisedButton(
+            color: PRIMARY_COLOUR,
+            child: Text(
+              textLeft,
+              style: TextStyle(
+                  fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
             ),
-            RaisedButton(
-                elevation: 0.1,
-                color: SALMON_COLOUR,
-                child: Text(
-                    textRight,
-                    style: TextStyle(fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
-                ),
-                onPressed: pressActionRight(),
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                ),
+            onPressed: pressActionLeft(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
-        ]
-      ),
+          ),
+          RaisedButton(
+            color: SALMON_COLOUR,
+            child: Text(
+              textRight,
+              style: TextStyle(
+                  fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
+            ),
+            onPressed: pressActionRight(),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        ]),
   );
 }
 
@@ -307,13 +343,13 @@ class Vendor_Box extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 50,width: 10,),
+          SizedBox(
+            height: 50,
+            width: 10,
+          ),
           Text(
             vendor.name,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
         ],
       ),

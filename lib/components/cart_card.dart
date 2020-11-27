@@ -1,5 +1,6 @@
 
 
+import 'package:fisheller_app/components/popup_card.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/Tag.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
@@ -299,20 +300,25 @@ class DrawButtons extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            RaisedButton(
+            FlatButton(
               color: PRIMARY_COLOUR,
-              elevation: 0.1,
               child: Text(
                 "Buy",
                 style: TextStyle(fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
               ),
-              onPressed: (){},
+              onPressed: (){
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return PopUpCard(percentage_width: 0.8,popupType:1);
+                  },
+                );
+              },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
             ),
-            RaisedButton(
-              elevation: 0.1,
+            FlatButton(
               color: SALMON_COLOUR,
               child: Text(
                 "Cancel",
@@ -320,6 +326,12 @@ class DrawButtons extends StatelessWidget {
               ),
               onPressed: (){
                 print("--------CANCEL--------");
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return PopUpCard(percentage_width: 0.8,popupType:0);
+                    },
+                );
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),

@@ -92,12 +92,12 @@ class BackgroundMain extends State<Background>{
             right: 0.0,
             left: 0.0,
           ),
-          Positioned(
+          /*Positioned(
               child: PopUpCard(
                 percentage_width: 0.8,
               ),
             top: 200.0,
-          ),
+          ),*/
         ],
       ),
     );

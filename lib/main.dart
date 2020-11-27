@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
 
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
-      home: BookFish(seabass2, 'Doca Portimão')
+      //home: BookFish(seabass2, 'Doca Portimão')
+      home: Home(),
     );
   }
 }
