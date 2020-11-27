@@ -2,6 +2,7 @@ import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
 import 'package:fisheller_app/screens/book_fish/book_screen.dart';
+import 'package:fisheller_app/screens/catch/catch.dart';
 import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
@@ -33,13 +34,15 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
       //home: LoginScreen(),
-      home: MapPage(),
+      //home: MapPage(),
       
       //home: Temp(),
       //home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
+      home: Catch(),
+
 
     );
   }
