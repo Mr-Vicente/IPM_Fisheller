@@ -1,3 +1,4 @@
+import 'package:fisheller_app/components/add_catch_card.dart';
 import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/components/Selling_Card.dart';
 import 'package:fisheller_app/models/market.dart';
