@@ -8,6 +8,7 @@ class Seafood{
   int quantityUnits;
   double quantityMass;
   List<String> media;
+  String description;
 
   Seafood({
     this.type,
@@ -15,7 +16,8 @@ class Seafood{
     this.price,
     this.quantityUnits,
     this.quantityMass,
-    this.media
+    this.media,
+    this.description
   });
 
   List<String> tagsToString(){

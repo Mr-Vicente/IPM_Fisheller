@@ -85,6 +85,7 @@ Seafood seabass = new Seafood(
   quantityMass: 8,
   quantityUnits: 10,
   tags: [Tag.fish, Tag.aquaculture],
+  description: "seabass"
 );
 
 Sell julioBass = new Sell(
@@ -99,6 +100,7 @@ Seafood lobster = new Seafood(
   quantityMass: 8,
   quantityUnits: 5,
   tags: [Tag.shellfish, Tag.sea],
+  description: "lobster"
 );
 
 Sell julioLobster = new Sell(
@@ -113,6 +115,7 @@ Seafood cod = new Seafood(
   quantityMass: 10,
   quantityUnits: 5,
   tags: [Tag.fish, Tag.imported],
+  description: "cod"
 );
 
 Sell julioCod = new Sell(

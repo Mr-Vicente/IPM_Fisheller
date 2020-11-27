@@ -161,6 +161,7 @@ class PaymentMethodButtonState extends State<PaymentMethodButton>{
       child: Text(currentPaymentMethod, style: TextStyle(fontSize: 13, color: PRIMARY_COLOUR)),
       onPressed: ((){
         showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (BuildContext context) {
               print('1 ' + currentPaymentMethod);
