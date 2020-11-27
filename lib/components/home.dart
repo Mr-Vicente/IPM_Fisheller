@@ -18,7 +18,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  //TODO add Feed and Cart pages here
   final List<Widget> _children = [MapPage(), Feed(), Cart()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -43,11 +42,11 @@ class _HomeState extends State<Home> {
               left: 10,
               child: SafeArea(
                   child: FloatingActionButton(
-                onPressed: () => SearchBarFeed(),
-                child: Icon(
-                  IconData(59828, fontFamily: 'MaterialIcons'),
-                  color: Colors.black87,
-                  size: 35,
+                    onPressed: () => SearchBarFeed(),
+                    child: Icon(
+                      IconData(59828, fontFamily: 'MaterialIcons'),
+                      color: Colors.black87,
+                      size: 35,
                 ),
                 backgroundColor: Colors.white,
               ))),

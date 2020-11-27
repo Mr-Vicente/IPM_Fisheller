@@ -7,7 +7,9 @@ class Vendor extends User{
   List<Order> history;
   List<int> stars;
   List<User> followers;
-  Vendor(String name, String email, String password){
+  String profile;
+
+  Vendor(String name, String email, String password, String profileImage){
     this.name = name;
     this.email = email;
     this.password = password;
@@ -15,6 +17,7 @@ class Vendor extends User{
     this.history = [];
     this.stars = [5];
     this.followers = [];
+    this.profile = profileImage;
   }
 
   int getRating(){

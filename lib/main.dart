@@ -3,6 +3,7 @@ import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
 import 'package:fisheller_app/screens/book_fish/book_screen.dart';
+import 'package:fisheller_app/screens/catch/catch.dart';
 import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           //if (value == false)
             initialiseUsers();
     });
-    seabass2.media = seabassMedia;
+    //seabass2.media = seabassMedia;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -48,11 +49,11 @@ class MyApp extends StatelessWidget {
       //home: MapPage(),
       
       //home: Temp(),
-
+      home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
-      home: Home(),
+      //home: Catch()
     );
   }
 }
