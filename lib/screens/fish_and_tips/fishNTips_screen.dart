@@ -1,3 +1,4 @@
+import 'package:fisheller_app/components/back.dart';
 import 'package:fisheller_app/models/recipies.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,95 +42,86 @@ class FishAndTips extends StatelessWidget {
     return recipies;
   }
 
+  Widget _screen(Size size){
+    return Container(
+        height: size.height,
+        width: size.width,
+        color: Colors.white,
+        child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(left: 20.0),
+                      child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: <Widget>[
+                            Text(seafood.type.name, style: TextStyle(fontSize: 50, fontWeight: FontWeight.w900, color: Colors.black)),
+                            SizedBox(width: 5),
+                            Text('For aprox. ' + seafood.avrgWeight.toStringAsFixed(0) + 'g', style: TextStyle(fontSize: 15, color: Colors.black)),
+                          ]
+                      )
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(top: 25),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          NumberCircle(text: seafood.kcal.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black12, label:'Kcal'),
+                          SizedBox(width: 5),
+                          NumberCircle(text: seafood.fat.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black26, label: 'Fat(g)'),
+                          SizedBox(width: 5),
+                          NumberCircle(text: seafood.protein.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black54, label: 'Protein(g)')
+                        ],
+                      )
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 20.0, top:20),
+                      child: Wrap(
+                          runSpacing: 10.0,
+                          spacing: 10.0,
+                          children: _nutritional()
+                      )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0, top:20),
+                    child: Text('Fun Facts', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 20.0, top:20),
+                      child: Wrap(
+                          runSpacing: 10.0,
+                          spacing: 10.0,
+                          children: _facts()
+                      )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20.0, top:20),
+                    child: Text('Suggestions/Recipes', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 20.0, top:20),
+                      child: Wrap(
+                          alignment: WrapAlignment.start,
+                          runSpacing: 10.0,
+                          spacing: 5.0,
+                          children:_recipies()
+                      )
+                  ),
+                  SizedBox(height: 5),
+                ]
+            )
+        )
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leadingWidth: size.width,
-        leading:
-        FlatButton.icon(
-          icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-          label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
-          onPressed: _back,
-        )
-      ),
-
-      body: Container(
-          height: size.height,
-          width: size.width,
-          color: Colors.white,
-          child: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                        padding: EdgeInsets.only(left: 20.0),
-                        child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            children: <Widget>[
-                              Text(seafood.type.name, style: TextStyle(fontSize: 50, fontWeight: FontWeight.w900, color: Colors.black)),
-                              SizedBox(width: 5),
-                              Text('For aprox. ' + seafood.avrgWeight.toStringAsFixed(0) + 'g', style: TextStyle(fontSize: 15, color: Colors.black)),
-                            ]
-                        )
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(top: 25),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            NumberCircle(text: seafood.kcal.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black12, label:'Kcal'),
-                            SizedBox(width: 5),
-                            NumberCircle(text: seafood.fat.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black26, label: 'Fat(g)'),
-                            SizedBox(width: 5),
-                            NumberCircle(text: seafood.protein.toStringAsFixed(1), circleSize: circleSize, circleColor: Colors.black54, label: 'Protein(g)')
-                          ],
-                        )
-                      ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20.0, top:20),
-                        child: Wrap(
-                            runSpacing: 10.0,
-                            spacing: 10.0,
-                            children: _nutritional()
-                        )
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.0, top:20),
-                      child: Text('Fun Facts', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20.0, top:20),
-                        child: Wrap(
-                            runSpacing: 10.0,
-                            spacing: 10.0,
-                            children: _facts()
-                        )
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.0, top:20),
-                      child: Text('Suggestions/Recipes', style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600)),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20.0, top:20),
-                        child: Wrap(
-                            alignment: WrapAlignment.start,
-                            runSpacing: 10.0,
-                            spacing: 5.0,
-                            children:_recipies()
-                        )
-                    ),
-                    SizedBox(height: 5),
-    ]
-                )
-          )
-    ));
+    return Back(body: _screen(size));
   }
 }
 

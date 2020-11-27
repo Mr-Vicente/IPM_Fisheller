@@ -1,3 +1,4 @@
+import 'package:fisheller_app/screens/post/post.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,10 +31,16 @@ class add_PopUp extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       _buildButton(
+                          onPressed: () => {},
                           imageName: "assets/icons/icon_add_seafood.svg",
                           text: "Add Catch"),
                       SizedBox(width: 5), //Spacer
                       _buildButton(
+                          onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PostPage()),
+                              ),
                           imageName: "assets/icons/icon_add_post.svg",
                           text: "Add Post")
                     ],
@@ -58,7 +65,7 @@ class add_PopUp extends StatelessWidget {
     );
   }
 
-  Widget _buildButton({String imageName, String text}) {
+  Widget _buildButton({Function onPressed, String imageName, String text}) {
     //TODO eventually pass a function as a parameter and use it, on the onPressed, so we can change pages.
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       Container(
@@ -67,7 +74,7 @@ class add_PopUp extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
           child: FlatButton(
             color: WHITE_COLOUR,
-            onPressed: () {},
+            onPressed: onPressed,
             padding: EdgeInsets.all(10),
             child: SvgPicture.asset(
               imageName,

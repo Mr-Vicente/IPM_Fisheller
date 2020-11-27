@@ -152,13 +152,18 @@ class MapState extends State<Map> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      for ( var sell in fixeFixe_market.items )
+                      for ( var sell in m.items)
                         Selling_Card(
                           type: "normal",
                           sell: sell,
                           press: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Stage1Description(sell)),
-                          );},
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Stage1Description(sell)
+                                )
+                              );
+                            },
                         ),
                     ]
                 ),
