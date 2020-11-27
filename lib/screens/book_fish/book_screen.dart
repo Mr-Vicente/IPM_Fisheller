@@ -29,8 +29,8 @@ class BookFish extends StatelessWidget {
                   Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
                   Text(market, style: TextStyle(fontSize: 15)),
                   SizedBox(height:30),
-                  BookBox(seafood: seafood)
-
+                  BookBox(seafood: seafood),
+                  SizedBox(height:10),
                 ]
             )
         )
@@ -67,11 +67,8 @@ class BookBox extends StatelessWidget{
 
     // This size provide us total height and width of our screen
     return
-      SingleChildScrollView(
-        child:
         Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          height: size.height*0.75,
           width: size.width * 0.8,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -157,7 +154,7 @@ class BookBox extends StatelessWidget{
               ],
             ),
           )
-  ));
+  );
   }
 }
 
