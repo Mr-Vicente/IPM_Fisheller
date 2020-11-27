@@ -32,28 +32,22 @@ class Selling_Card extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       height: s,
       width: size.width * percentage_width,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: FlatButton(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-          color: WHITE_COLOUR,
-          onPressed: press,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              //Image_Box(seafood: sell.seafood),
-              Info_Box(sell: sell,type: type),
-            ],
-          ),
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          //Image_Box(seafood: sell.seafood),
+          Info_Box(sell: sell,type: type),
+        ],
       ),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: WHITE_COLOUR,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
-            spreadRadius: 3,
+            spreadRadius: 2,
             blurRadius: 6,
-            offset: Offset(0, 2), // changes position of shadow
+            offset: Offset(0,0), // changes position of shadow
           ),
         ],
       ),
@@ -385,8 +379,6 @@ class Vendor_Box extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 15),
             width: 50,
             height: 50,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
               child: Container(
                 //color: Colors.black38,
                 decoration: BoxDecoration(
@@ -398,7 +390,6 @@ class Vendor_Box extends StatelessWidget {
                   ),
                 ),
               ),
-            )
           ),
           SizedBox(height: 50,width: 10,),
           Text(

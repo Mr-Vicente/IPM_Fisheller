@@ -30,6 +30,9 @@ class CartCard extends StatelessWidget {
       sell: julioBass,
       consumer: ana,
       vendor: julio,
+      quantity: 10.0,
+      isUnits: true,
+      deposit: 10,
     );
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -115,7 +118,7 @@ class Info_Box extends StatelessWidget {
           text_info(categoryText: "Market:", content: order.sell.market.name),
           text_info(categoryText: "Deposit", content: order.deposit.toString()),
           Vendor_Box(vendor: order.vendor),
-          DrawButtons()
+          DrawButtons(order:order),
         ],
       ),
     );
@@ -289,8 +292,10 @@ class Vendor_Box extends StatelessWidget {
 }
 
 class DrawButtons extends StatelessWidget {
+  final Order order;
   const DrawButtons({
     Key key,
+    this.order,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -310,7 +315,7 @@ class DrawButtons extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return PopUpCard(percentage_width: 0.8,popupType:1);
+                    return PopUpCard(order:order,percentage_width: 0.8,popupType:2);
                   },
                 );
               },
@@ -329,7 +334,7 @@ class DrawButtons extends StatelessWidget {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return PopUpCard(percentage_width: 0.8,popupType:0);
+                      return PopUpCard(order:order,percentage_width: 0.8,popupType:1);
                     },
                 );
               },

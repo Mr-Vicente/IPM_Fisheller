@@ -1,3 +1,5 @@
+import 'package:fisheller_app/components/popup_card.dart';
+import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
@@ -61,8 +63,13 @@ class BookBox extends StatelessWidget{
     this.seafood,
   });
 
-  void _book(){
-
+  void _book(BuildContext context, Order order){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return PopUpCard(order:order,percentage_width: 0.8,popupType:0);
+      },
+    );
   }
 
   @override
@@ -139,7 +146,7 @@ class BookBox extends StatelessWidget{
                               borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Text('Book', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white)),
-                          onPressed: _book,
+                          onPressed: (){_book(context, new Order(sell: julioBass, consumer: ana, vendor: julio, deposit: 10));},
                         )
                     )
                 ),

@@ -35,7 +35,7 @@ const String TEXT_NOTE_CANCEL = "The deposit (%d€) will not be reimbursed?";
 
 const String FINALISE_BUY = "Finalise Buy";
 const String FINALISE_SEAFOOD = "Seafood: %s";
-const String FINALISE_Quantity = "Quantity: %d units";
+const String FINALISE_Quantity = "Quantity: %2.1f units";
 const String FINALISE_Weight = "Weight: %2.1f Kg";
 const String FINALISE_TOTAL = "Total: %2.2f €";
 

@@ -16,6 +16,8 @@ class Order {
     this.vendor,
     this.sell,
     this.consumer,
+    this.quantity,
+    this.isUnits,
     this.deposit = 0,
   });
 
@@ -36,4 +38,15 @@ class Order {
     'isUnits': isUnits,
     'deposit': deposit,
   };
+
+  //TODO
+  double getWeight(){
+    return 0.0;
+  }
+
+  //TODO
+  double getTotalPrice(){
+    return 0.0;
+  }
+
 }
