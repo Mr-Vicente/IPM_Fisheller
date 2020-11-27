@@ -32,10 +32,8 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
       //home: LoginScreen(),
-      home: Home(),
-
       //home: Temp(),
-      //home: Home()
+      home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
