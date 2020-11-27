@@ -1,3 +1,4 @@
+import 'package:fisheller_app/components/add_catch_card.dart';
 import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/components/Selling_Card.dart';
 import 'package:fisheller_app/models/market.dart';
@@ -105,17 +106,14 @@ class MapState extends State<Map> {
               Container(
                 height: 100,
                 width: w,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(topRight:  Radius.circular(29),topLeft: Radius.circular(29)),
                   child:Container(child:
-                  Center(child: ClipRRect(
-                    borderRadius: BorderRadius.circular(29),
+                  Center(
                     child: Container(
                       width: 300,
                       height: 50,
                       decoration: BoxDecoration(
                         color: WHITE_COLOUR,
-
+                        borderRadius: BorderRadius.circular(29),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),
@@ -137,8 +135,8 @@ class MapState extends State<Map> {
                       ),
                     ),
                   ),
-                  ),
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(topRight:  Radius.circular(29),topLeft: Radius.circular(29)),
                       image: DecorationImage(
                         fit: BoxFit.fill,
                         image: Image.asset("assets/images/fish_market.png").image,
@@ -146,9 +144,8 @@ class MapState extends State<Map> {
                     ),
                   ),
                 ),
-
-              ),
               Expanded(child:SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[

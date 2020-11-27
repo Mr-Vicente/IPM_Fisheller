@@ -4,10 +4,14 @@ class User{
   String email;
   String password;
   String name;
-  Image image;
+  String imageName;
   User({
     this.email,
     this.password,
     this.name,
+    this.imageName,
   });
+
+  T cast<T>(x) => x is T ? x : null;
+
 }

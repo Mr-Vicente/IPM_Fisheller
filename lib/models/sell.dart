@@ -22,4 +22,16 @@ class Sell{
   set market(Market m) {
     _market = m;
   }
+
+  Sell.fromJson(Map<String, dynamic> json){
+    seafood = json['seafood'];
+    vendor = json['vendor'];
+    _market = json['_market'];
+  }
+
+  Map<String, dynamic> toJson() => {
+    'seafood': seafood,
+    'vendor': vendor,
+    '_market': _market,
+  };
 }

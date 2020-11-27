@@ -28,15 +28,16 @@ const CHART_SECONDARY_COLOUR = charts.Color(r: 46,g: 46,b: 46);
 /// ************************* POPUPS TEXTS ***************************/
 
 const String TEXT_QUESTION_COMFIRM = "Are you sure you want to book?";
-const String TEXT_NOTE_COMFIRM = "The deposit (%s€) will be discounted from your account";
+const String TEXT_NOTE_COMFIRM = "The deposit (%d€) will be discounted from your account";
 
 const String TEXT_QUESTION_CANCEL = "Are you sure you want to cancel?";
-const String TEXT_NOTE_CANCEL = "The deposit (%s€) will not be reimbursed?";
+const String TEXT_NOTE_CANCEL = "The deposit (%d€) will not be reimbursed?";
 
 const String FINALISE_BUY = "Finalise Buy";
 const String FINALISE_SEAFOOD = "Seafood: %s";
-const String FINALISE_Quantity = "Quantity: %s units";
-const String FINALISE_Weight = "Weight: %s Kg";
+const String FINALISE_Quantity = "Quantity: %2.1f units";
+const String FINALISE_Weight = "Weight: %2.1f Kg";
+const String FINALISE_TOTAL = "Total: %2.2f €";
 
 /// ************************* Google Maps ***************************/
 const LatLng FIXE_FIXE_LOCATION = LatLng(37.133966, -8.530302);
@@ -51,14 +52,14 @@ const List<String> SEAFOODS = <String> ['COD FISH', 'LOBSTER','SEA BASS', 'TUNA'
 /// ************************* Consumers *****************************/
 
 Consumer ana = new Consumer(
-  "Ana Miguel", //name
-  "ana@gmail.com", //email
-  "1234", //password
+  name: "Ana Miguel", //name
+  email: "ana@gmail.com", //email
+  password: "1234", //password
 );
 Consumer hakeem = new Consumer(
-  "Hakeem Pedro",
-  "hakeem@gmail.com", //email
-  "1234", //password
+  name: "Hakeem Pedro",
+  email: "hakeem@gmail.com", //email
+  password: "1234", //password
 );
 
 /// ************************* Vendors *******************************/

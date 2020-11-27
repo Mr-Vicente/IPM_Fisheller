@@ -1,4 +1,6 @@
 import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/popup_card.dart';
+import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
@@ -27,14 +29,14 @@ class BookFish extends StatelessWidget {
                   Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
                   Text(market, style: TextStyle(fontSize: 15)),
                   SizedBox(height:30),
-                  BookBox(seafood: seafood)
-
+                  BookBox(seafood: seafood),
+                  SizedBox(height:10),
                 ]
             )
         )
     );
   }
-  
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +52,13 @@ class BookBox extends StatelessWidget{
     this.seafood,
   });
 
-  void _book(){
-
+  void _book(BuildContext context, Order order){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return PopUpCard(order:order,percentage_width: 0.8,popupType:0);
+      },
+    );
   }
 
   @override
@@ -60,11 +67,8 @@ class BookBox extends StatelessWidget{
 
     // This size provide us total height and width of our screen
     return
-      SingleChildScrollView(
-        child:
         Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          height: size.height*0.75,
           width: size.width * 0.8,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -130,7 +134,7 @@ class BookBox extends StatelessWidget{
                               borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Text('Book', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white)),
-                          onPressed: _book,
+                          onPressed: (){_book(context, new Order(sell: julioBass, consumer: ana, vendor: julio, deposit: 10));},
                         )
                     )
                 ),
@@ -150,7 +154,7 @@ class BookBox extends StatelessWidget{
               ],
             ),
           )
-  ));
+  );
   }
 }
 
