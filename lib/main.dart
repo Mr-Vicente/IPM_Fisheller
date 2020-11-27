@@ -36,10 +36,10 @@ class MyApp extends StatelessWidget {
       //home: MapPage(),
       
       //home: Temp(),
-
+      home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
-      home: BookFish(seabass2, 'Doca Portimão')
+      //home: BookFish(seabass2, 'Doca Portimão')
 
     );
   }
