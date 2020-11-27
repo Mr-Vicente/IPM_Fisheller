@@ -441,6 +441,37 @@ class _CatchMedia extends State<CatchMedia> {
                     ]
                 ),
           ),
+                SizedBox(height: 50.0,),
+                Align(
+                  alignment: Alignment.bottomRight,
+                child: FlatButton(onPressed: (){
+                  ;
+                },child: Container(
+                  height: 40,
+                  width: 120,
+                  decoration: BoxDecoration(
+                      color: PRIMARY_COLOUR,
+                      border: Border.all(width: 5, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+                      borderRadius: BorderRadius.circular(100),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                        ),
+                      ]
+                  ),
+                  child:Text(
+                    'Next  >',
+                    style: TextStyle(color: Colors.white,fontSize: 22),
+                    textAlign: TextAlign.center,
+                  ),
+
+
+                ),
+                ),
+                ),
+                SizedBox(height: 20.0,),
               ]
           ),
         ),
