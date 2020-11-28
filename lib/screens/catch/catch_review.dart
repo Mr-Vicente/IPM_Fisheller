@@ -122,7 +122,7 @@ class CatchReviewState extends State<CatchReview> {
   @override
   Widget build(BuildContext context) {
     Widget screen = _screen();
-    return Back(body: screen);
+    return Back(body: screen,current: Text("review"),);
   }
 
 }

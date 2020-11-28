@@ -25,7 +25,7 @@ class FeedBody extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Stage1Description(sell)));
+                            builder: (context) => Stage1Description(sell,"feed")));
                   },
                 )
           ],

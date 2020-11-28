@@ -22,11 +22,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 class Stage1Description extends StatefulWidget {
 
   final Sell description;
+  final String current;
 
-  Stage1Description(this.description);
+  Stage1Description(this.description,this.current);
 
   @override
-  _Stage1Description createState() => _Stage1Description(description);
+  _Stage1Description createState() => _Stage1Description(description,current);
 }
 
 class CarouselWithIndicatorDemo extends StatefulWidget {
@@ -111,8 +112,9 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicatorDemo> {
 class _Stage1Description extends State<Stage1Description> {
 
   final Sell description;
+  final String current;
 
-  _Stage1Description(this.description);
+  _Stage1Description(this.description,this.current);
 
 
   Widget _screen(Size size){
@@ -443,7 +445,7 @@ class _Stage1Description extends State<Stage1Description> {
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: <Widget>[
-        Back(body: _screen(size))
+        Back(body: _screen(size),current:Text(current))
       ]
     );
 

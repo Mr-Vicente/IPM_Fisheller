@@ -418,7 +418,7 @@ class CatchState extends State<Catch> {
   Widget build(BuildContext context) {
     seafoodImages = [];
     tb = TagsButtons(currentTags: currentTags, parent: this);
-    return Back(body: _screen());
+    return Back(body: _screen(),current: Text("catch"),);
   }
 
 }
