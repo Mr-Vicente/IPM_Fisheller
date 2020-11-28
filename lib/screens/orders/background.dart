@@ -3,19 +3,19 @@ import 'package:fisheller_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 
-class BackgroundCart extends StatefulWidget {
+class BackgroundOrders extends StatefulWidget {
   final Widget child;
-  BackgroundCart({
+  BackgroundOrders({
     Key key,
     @required this.child,
   });
-  BackgroundCartMain createState() => BackgroundCartMain(child: child);
+  BackgroundOrdersMain createState() => BackgroundOrdersMain(child: child);
 }
 
-class BackgroundCartMain extends State<BackgroundCart>{
+class BackgroundOrdersMain extends State<BackgroundOrders>{
   List<bool> isSelected = [true,false];
   final Widget child;
-  BackgroundCartMain({
+  BackgroundOrdersMain({
     Key key,
     @required this.child,
   });
@@ -32,7 +32,7 @@ class BackgroundCartMain extends State<BackgroundCart>{
           Positioned(
             top: 50.0,
             child: Text(
-              "CART",
+              "ORDERS",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 50,
