@@ -16,10 +16,7 @@ import 'components/select_quantity.dart';
 
 class BookFish extends StatelessWidget {
   final Sell sell;
-
-
   const BookFish(this.sell);
-
 
   Widget _screen(Size size) {
     return Container(

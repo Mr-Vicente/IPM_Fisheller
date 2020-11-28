@@ -27,6 +27,7 @@ class RoundedInputField extends StatelessWidget {
           hintText: hintText,
           border: InputBorder.none,
         ),
+        keyboardType: TextInputType.emailAddress,
       ),
     );
   }
