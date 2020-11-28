@@ -1,3 +1,5 @@
+import 'package:fisheller_app/components/home.dart';
+import 'package:fisheller_app/components/preferences.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/sell.dart';
@@ -105,7 +107,8 @@ class InfoPopUp extends StatelessWidget {
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        setCurrentUserObject(order);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home(index: 2,)));
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -454,7 +457,6 @@ class Vendor_Box extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          //vendor.image,
           Container(
             width: 30,
             height: 30,
@@ -462,10 +464,9 @@ class Vendor_Box extends StatelessWidget {
               //color: Colors.black38,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                //border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: Image.asset("assets/images/julio.png").image,
+                  image: Image.asset(vendor.profile).image,
                 ),
               ),
             ),

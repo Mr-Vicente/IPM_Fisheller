@@ -1,4 +1,5 @@
 import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
@@ -20,13 +21,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    julioBass.market = fixeFixe_market;
-    julioLobster.market = fixeFixe_market;
-    julioCod.market = fixeFixe_market;
+    julioBass.marketName = fixeFixe_market.name;
+    julioLobster.marketName = fixeFixe_market.name;
+    julioCod.marketName = fixeFixe_market.name;
 
-    josefinaBass.market = docaPortimao_market;
-    josefinaLobster.market = docaPortimao_market;
-    josefinaCod.market = docaPortimao_market;
+    josefinaBass.marketName = docaPortimao_market.name;
+    josefinaLobster.marketName = docaPortimao_market.name;
+    josefinaCod.marketName = docaPortimao_market.name;
 
     MySharedPreferences.instance
         .getBooleanValue("isfirstRun")
@@ -45,11 +46,11 @@ class MyApp extends StatelessWidget {
         primaryColor: PRIMARY_COLOUR,
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
-      //home: LoginScreen(),
+      home: LoginScreen(),
       //home: MapPage(),
       
       //home: Temp(),
-      home: Home()
+      //home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
@@ -59,9 +60,12 @@ class MyApp extends StatelessWidget {
 }
 
 void initialiseUsers(){
-  ana.bookings = new List<Order>();
-  //ana.bookings.add(new Order(vendor: null, consumer: ana, sell: null));
-  hakeem.bookings = new List<Order>();
+  //ana.bookings = new List<Order>();
+  //ana.following = new List<User>();
+  //ana.purchases = new List<Order>();
+  //hakeem.bookings = new List<Order>();
+  //hakeem.following = new List<User>();
+  //hakeem.purchases = new List<Order>();
   MySharedPreferences.instance.setConsumer("ana@gmail.com",ana);
   MySharedPreferences.instance.setConsumer("hakeem@gmail.com",hakeem);
 

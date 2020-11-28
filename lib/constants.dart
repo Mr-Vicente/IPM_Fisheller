@@ -1,9 +1,10 @@
 
 import 'dart:collection';
 
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
+import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/recipies.dart';
 
@@ -21,9 +22,6 @@ const PRIMARY_COLOUR = Color(0xFF00847C); // GREEN
 const SECONDARY_COLOUR = Color(0x00E2E2E2); // DARK GRAY
 const SALMON_COLOUR = Color(0xFFfd766f);
 const WHITE_COLOUR = Colors.white;
-
-const CHART_PRIMARY_COLOUR = charts.Color(r: 15,g: 115,b: 105);
-const CHART_SECONDARY_COLOUR = charts.Color(r: 46,g: 46,b: 46);
 
 /// ************************* POPUPS TEXTS ***************************/
 
@@ -55,11 +53,17 @@ Consumer ana = new Consumer(
   name: "Ana Miguel", //name
   email: "ana@gmail.com", //email
   password: "1234", //password
+  bookings: new List<Order>(),
+  following: new List<User>(),
+  purchases: new List<Order>(),
 );
 Consumer hakeem = new Consumer(
   name: "Hakeem Pedro",
   email: "hakeem@gmail.com", //email
   password: "1234", //password
+  bookings: new List<Order>(),
+  following: new List<User>(),
+  purchases: new List<Order>(),
 );
 
 /// ************************* Vendors *******************************/
@@ -193,14 +197,14 @@ List<Sell> market_doca_items = [
 /// ************************* Markets *******************************/
 Market fixeFixe_market = Market(
     mapLocation: LatLng(37.133966, -8.530302),
-    image: Image.asset(""),
+    imageName: "",
     items: market_fixe_items,
     name: "Fixe Fixe era ser Fish"
 );
 
 Market docaPortimao_market = Market(
     mapLocation: LatLng(37.128389, -8.531901),
-    image: Image.asset(""),
+    imageName: "",
     items: market_doca_items,
     name: "Doca Portimão"
 );
