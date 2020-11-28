@@ -109,16 +109,16 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
       icon = Icon(
         item.iconData,
         color: color,
-        size: 30,
+        size: widget.iconSize,
       );
     } else
       icon = Column(children: <Widget>[
         Image.asset(
           item.imageName,
           color: color,
-          height: 22,
+          height: widget.iconSize*0.73,
         ),
-        SizedBox(height: 4)
+        SizedBox(height: widget.iconSize*0.13)
       ]);
 
     return Expanded(
@@ -138,7 +138,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                   style: TextStyle(color: color),
                 ),
                 SizedBox(
-                  height: 7,
+                  height: widget.iconSize*0.23,
                 ),
               ],
             ),

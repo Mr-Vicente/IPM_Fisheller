@@ -11,42 +11,38 @@ class add_PopUp extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        SizedBox(
-          height: 450,
-        ),
+        SizedBox(height: size.height * 0.56),
         Container(
           child: AlertDialog(
-            insetPadding: EdgeInsets.all(15),
+            insetPadding: EdgeInsets.only(left:size.height * 0.01, right:size.height * 0.01,),
             elevation: 3,
+            contentPadding: EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
             backgroundColor: color,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            content: Stack(
-              overflow: Overflow.visible,
-              children: <Widget>[
-                Container(
-                  width: 400,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      _buildButton(
-                          onPressed: () => {},
-                          imageName: "assets/icons/icon_add_seafood.svg",
-                          text: "Add Catch"),
-                      SizedBox(width: 5), //Spacer
-                      _buildButton(
-                          onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PostPage()),
-                              ),
-                          imageName: "assets/icons/icon_add_post.svg",
-                          text: "Add Post")
-                    ],
-                  ),
-                ),
-              ],
+            content: Container(
+              height: size.height*0.226,
+              width: size.width*0.84,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  _buildButton(
+                      size: size,
+                      onPressed: () => {},
+                      imageName: "assets/icons/icon_add_seafood.svg",
+                      text: "Add Catch"),
+                  SizedBox(width: size.height * 0.01), //Spacer
+                  _buildButton(
+                      size: size,
+                      onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PostPage()),
+                          ),
+                      imageName: "assets/icons/icon_add_post.svg",
+                      text: "Add Post")
+                ],
+              ),
             ),
           ),
           decoration: BoxDecoration(
@@ -65,21 +61,22 @@ class add_PopUp extends StatelessWidget {
     );
   }
 
-  Widget _buildButton({Function onPressed, String imageName, String text}) {
+  Widget _buildButton(
+      {Size size, Function onPressed, String imageName, String text}) {
     //TODO eventually pass a function as a parameter and use it, on the onPressed, so we can change pages.
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       Container(
-        padding: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.only(top: size.width*0.01),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
           child: FlatButton(
             color: WHITE_COLOUR,
             onPressed: onPressed,
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(size.height * 0.017),
             child: SvgPicture.asset(
               imageName,
-              height: 110,
-              width: 110,
+              height: size.height * 0.13,
+              width: size.height * 0.13,
             ),
           ),
         ),
@@ -90,15 +87,17 @@ class add_PopUp extends StatelessWidget {
               color: Colors.black.withOpacity(0.2),
               spreadRadius: 1,
               blurRadius: 6,
-              offset: Offset(0, 7), // changes position of shadow
+              offset: Offset(0, size.width*0.007) // changes position of shadow
             ),
           ],
         ),
       ),
-      SizedBox(
-        height: 15, //spacer
-      ),
-      Text(text, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold))
+      SizedBox(height: size.height * 0.012 //spacer
+          ),
+      Text(text,
+          
+          style: TextStyle(
+              fontSize: size.height * 0.03, fontWeight: FontWeight.bold, ))
     ]);
   }
 }

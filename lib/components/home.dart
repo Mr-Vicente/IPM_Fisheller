@@ -20,8 +20,10 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [MapPage(), Feed(), Cart()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
       extendBody: true,
@@ -53,18 +55,18 @@ class _HomeState extends State<Home> {
       ]),
       drawerScrimColor: Colors.grey.withOpacity(0.54),
       endDrawer: AmazDrawer(
-          topPosition: 150,
-          width: 300,
-          height: 80,
+          topPosition: size.width*0.35,
+          width: size.width*0.74,
+          height: size.height*0.1,
           elevation: 5,
           color: PRIMARY_COLOUR,
           //backgroundColor: WHITE_COLOUR,
           items: [
             AmazDrawerItem(
-                iconData: Icons.face, iconSize: 50.0, text: "Profile"),
+                iconData: Icons.face, iconSize: size.width*0.1, text: "Profile", textSize: size.width*0.08),
             AmazDrawerItem(
-                iconData: Icons.settings, iconSize: 50.0, text: "Settings"),
-            AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help")
+                iconData: Icons.settings, iconSize: size.width*0.1, text: "Settings", textSize: size.width*0.08),
+            AmazDrawerItem(iconData: Icons.help, iconSize: size.width*0.1, text: "Help", textSize: size.width*0.08), 
           ]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -80,6 +82,8 @@ class _HomeState extends State<Home> {
         ),
         child: FABBottomAppBar(
           color: Colors.grey,
+          height: size.height*0.08,
+          iconSize: size.height*0.04,
           backgroundColor: Colors.white, //Color(0xFFFFFFF0)
           selectedColor: PRIMARY_COLOUR,
           notchedShape: CircularNotchedRectangle(),
@@ -94,8 +98,8 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       floatingActionButton: Container(
-        height: 70.0,
-        width: 70.0,
+        height: size.height*0.09,
+        width: size.height*0.09,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           boxShadow: <BoxShadow>[
