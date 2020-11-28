@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+
 class Back extends StatelessWidget{
   Widget body;
   Widget bottom;
+  Text current;
   Back({
     this.body,
-    this.bottom
+    this.bottom,
+    this.current
   });
 
   @override
@@ -24,6 +28,15 @@ class Back extends StatelessWidget{
                 label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
                 onPressed:() {
                   Navigator.pop(context);
+                  if(current.data == "feed"){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) =>
+                      Home(index:1)
+                  ),
+                    );
+                }//sta
                 }
             )
         ),
