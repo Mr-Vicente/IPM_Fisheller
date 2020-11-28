@@ -65,7 +65,7 @@ class _MediaBoxState extends State<MediaBox> {
                 fit: BoxFit.cover,
                 image: widget._image == null
                     ? Image.asset(
-                        'assets/images/image_placeholder_portrait.png')
+                        'assets/images/image_placeholder_portrait.png').image
                     : Image.file(widget._image).image,
               ),
               color: widget.fillColor,
