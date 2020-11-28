@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/home.dart';
 import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
-import 'package:shape_of_view/shape/arc.dart';
-import 'package:shape_of_view/shape_of_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -54,11 +52,13 @@ class _MyAppState extends State<MyApp> {
       ],
     );
   }
+
 }
 
 class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     julioBass.marketName = fixeFixe_market.name;
     julioLobster.marketName = fixeFixe_market.name;
     julioCod.marketName = fixeFixe_market.name;
@@ -75,14 +75,14 @@ class AfterSplash extends StatelessWidget {
     //seabass2.media = seabassMedia;
 
     return LoginScreen();
-    //home: MapPage(),
+      //home: MapPage(),
 
-    //home: Temp(),
-    //home: Home()
-    //home:FishAndTips(codTips),
-    //home:FishAndTips(lobsterTips),
-    //home: BookFish(seabass2, 'Doca Portimão')
-    //home: CatchMedia()
+      //home: Temp(),
+      //home: Home()
+      //home:FishAndTips(codTips),
+      //home:FishAndTips(lobsterTips),
+      //home: BookFish(seabass2, 'Doca Portimão')
+      //home: CatchMedia()
   }
 }
 
@@ -93,3 +93,4 @@ void initialiseUsers() {
   MySharedPreferences.instance.setBooleanValue("isfirstRun", true);
   print("Users Initialized");
 }
+

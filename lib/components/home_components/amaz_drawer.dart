@@ -1,3 +1,4 @@
+import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class AmazDrawerItem {
@@ -101,6 +102,7 @@ class AmazDrawerState extends State<AmazDrawer> {
                 elevation: widget.elevation,
                 child: Row(
                   children: [
+
                     Expanded(
                       child: ListTile(
                         title: Text(
@@ -112,14 +114,33 @@ class AmazDrawerState extends State<AmazDrawer> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pop(context);
+                            redirectScreen(index);
                         },
                       ),
                     ),
                     SizedBox(width: item.iconSize + 20, child: icon),
-                  ],
+
+                  ]
                 ),
               ),
             )));
+  }
+
+  void redirectScreen(int index) {
+    if(index == 0){
+      Navigator.pop(context);
+    }
+    if(index == 1){
+      Navigator.pop(context);
+    }
+    if(index == 2){
+      Navigator.pop(context);
+    }
+    if(index == 3){
+      Navigator.pop(context);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    }
   }
 }
