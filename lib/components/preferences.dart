@@ -53,13 +53,20 @@ getCurrentUserObject() {
 setCurrentUserObject(Order o) {
   MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
     MySharedPreferences.instance.getConsumer(email).then((consumer) {
-      print("Merry Christmas");
       Consumer c = Consumer.fromJson(consumer);
       c.bookings.add(o);
-      print(o.toJson());
+      MySharedPreferences.instance.setConsumer(email,c);
+    });
+  });
+}
+
+removeBookingFromCurrentUser(Order o) {
+  MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    MySharedPreferences.instance.getConsumer(email).then((consumer) {
+      Consumer c = Consumer.fromJson(consumer);
+      //c.bookings.remove(o);
+      //c.bookings.removeLast();
       print(c.bookings);
-      print(c.toJson());
-      print("Merry Christmas_2");
       MySharedPreferences.instance.setConsumer(email,c);
     });
   });

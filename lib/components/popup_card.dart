@@ -31,12 +31,14 @@ class PopUpCard extends StatelessWidget {
         return InfoPopUp(
             order: order,
             question: TEXT_QUESTION_COMFIRM,
-            textNote: TEXT_NOTE_COMFIRM);
+            textNote: TEXT_NOTE_COMFIRM,
+            popupType: popupType);
       case 1:
         return InfoPopUp(
             order: order,
             question: TEXT_QUESTION_CANCEL,
-            textNote: TEXT_NOTE_CANCEL);
+            textNote: TEXT_NOTE_CANCEL,
+            popupType: popupType);
       case 2:
         return PayPopUp(order: order,);
       case 3:
@@ -50,11 +52,13 @@ class InfoPopUp extends StatelessWidget {
   final Order order;
   final String question;
   final String textNote;
+  final int popupType;
   const InfoPopUp({
     Key key,
     this.order,
     this.question,
     this.textNote,
+    this.popupType,
     this.percentage_width = 0.9,
   }) : super(key: key);
   @override
@@ -107,8 +111,14 @@ class InfoPopUp extends StatelessWidget {
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
-                        setCurrentUserObject(order);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Home(index: 2,)));
+                        if(popupType == 0) {
+                          setCurrentUserObject(order);
+                          Navigator.push(context, MaterialPageRoute(builder: (
+                              context) => Home(index: 2,)));
+                        }else{
+                          removeBookingFromCurrentUser(order);
+                          Navigator.pop(context);
+                        }
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
