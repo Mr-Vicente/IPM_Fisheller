@@ -8,6 +8,7 @@ import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood.dart';
 import 'package:fisheller_app/models/vendor.dart';
 import 'package:flutter/material.dart';
+import 'package:sprintf/sprintf.dart';
 
 class CartCard extends StatelessWidget {
   final Function press;
@@ -109,7 +110,7 @@ class Info_Box extends StatelessWidget {
         children: <Widget>[
           Title_Tags_Box(order: order),
           text_info(categoryText: "Market:", content: order.sell.marketName),
-          text_info(categoryText: "Deposit", content: order.deposit.toString()),
+          text_info(categoryText: "Deposit", content: sprintf("%2.2f €",[order.deposit])),
           Vendor_Box(vendor: order.vendor),
           DrawButtons(order:order),
         ],
@@ -183,7 +184,7 @@ class Tag_Box extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8.0),
         child: Container(
           child: Text(
             tag,
@@ -193,7 +194,7 @@ class Tag_Box extends StatelessWidget {
             ),
           ),
           color: PRIMARY_COLOUR,
-          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
         ),
       ),
     );
