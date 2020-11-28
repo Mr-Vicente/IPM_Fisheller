@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       //home: MapPage(),
       
       //home: Catch(),
-      home: Home()
+      home: Home(),
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')

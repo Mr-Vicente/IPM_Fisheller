@@ -6,6 +6,23 @@ enum Tag {
   shellfish,
 }
 
+Tag getTagEnum(String s){
+  switch (s.toLowerCase()) {
+    case 'fish':
+      return Tag.fish;
+    case 'aquaculture':
+      return Tag.aquaculture;
+    case 'shellfish':
+      return Tag.shellfish;
+    case 'sea':
+      return Tag.sea;
+    case 'imported':
+      return Tag.imported;
+    default:
+      return null;
+  }
+}
+
 extension Tag_Extension on Tag {
 
   String get name {
@@ -23,9 +40,5 @@ extension Tag_Extension on Tag {
       default:
         return null;
     }
-  }
-
-  void talk() {
-    print('meow');
   }
 }

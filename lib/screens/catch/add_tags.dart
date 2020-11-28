@@ -1,7 +1,10 @@
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/Tag.dart';
+import 'package:fisheller_app/models/seafood.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'catch.dart';
 
 
 class TagSelectionPopUp extends StatefulWidget{
@@ -11,7 +14,7 @@ class TagSelectionPopUp extends StatefulWidget{
   TagSelectionPopUp(this.currentSelected);
 
   @override
-  TagSelectionPopUpState createState() => (state= TagSelectionPopUpState(currentSelected));
+  TagSelectionPopUpState createState() => (state = TagSelectionPopUpState(currentSelected));
 
   TagSelectionPopUpState getState(){
     return state;
@@ -145,22 +148,24 @@ class TagOption{
 class TagsButtons extends StatefulWidget{
 
   List<String> currentTags;
+  CatchState parent;
 
-  TagsButtons({this.currentTags});
+  TagsButtons({this.currentTags, this.parent});
 
 
 
   @override
   State<StatefulWidget> createState() =>
-      TagsButtonsState(currentTags: currentTags);
+      TagsButtonsState(currentTags: currentTags, parent: parent);
 
 }
 
 class TagsButtonsState extends State<TagsButtons>{
   List<String> currentTags;
   TagSelectionPopUp tag;
+  CatchState parent;
 
-  TagsButtonsState({this.currentTags});
+  TagsButtonsState({this.currentTags, this.parent});
 
 
   List<Widget> _getTags(){
@@ -224,6 +229,7 @@ class TagsButtonsState extends State<TagsButtons>{
           setState(() {
             currentTags = tag.getState().currentSelected;
             tag = TagSelectionPopUp(currentTags);
+            parent.setTags(currentTags);
           });
         });
       }),

@@ -4,7 +4,7 @@ import 'package:fisheller_app/models/seafood_type.dart';
 class Seafood{
   Seafood_Type type;
   List<Tag> tags;
-  int price;
+  double price;
   int quantityUnits;
   double quantityMass;
   List<String> media;

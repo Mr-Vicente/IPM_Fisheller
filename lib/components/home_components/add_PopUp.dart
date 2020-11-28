@@ -35,7 +35,7 @@ class add_PopUp extends StatelessWidget {
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Catch()),
+                                builder: (context) => Catch(null, null)),
                           ),
                           imageName: "assets/icons/icon_add_seafood.svg",
                           text: "Add Catch"),

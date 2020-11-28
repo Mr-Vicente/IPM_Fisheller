@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:fisheller_app/components/NumberBox.dart';
 import 'package:fisheller_app/components/back.dart';
 import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/models/Tag.dart';
+import 'package:fisheller_app/models/seafood.dart';
+import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -8,17 +13,20 @@ import 'package:fisheller_app/components/drop_down.dart';
 import 'package:fisheller_app/screens/post/components/TextBox.dart';
 
 import 'add_tags.dart';
+import 'catch_media.dart';
 
 
 class Catch extends StatefulWidget {
+  List<Seafood> seafoods;
+  List<File> seafoodImages;
 
-  Catch();
+  Catch(this.seafoods, this.seafoodImages);
 
   @override
-  _Catch createState() => _Catch();
+  CatchState createState() => CatchState(seafoods, seafoodImages);
 }
 
-class _Catch extends State<Catch> {
+class CatchState extends State<Catch> {
 
   final descriptionController = TextEditingController();
   final priceController1 = TextEditingController();
@@ -27,7 +35,110 @@ class _Catch extends State<Catch> {
   final weightController2 = TextEditingController();
   final quantityController = TextEditingController();
 
-  _Catch();
+  List<Seafood> seafoods;
+  List<File> seafoodImages;
+
+  Seafood seafood = new Seafood();
+  DropDown dd = new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15);
+  TagsButtons tb;
+  List<String> currentTags = [];
+
+
+  CatchState(this.seafoods, this.seafoodImages);
+
+  void setTags(List<String> tags){
+    setState(() {
+      currentTags = tags;
+      List<Tag> temp = [];
+      for(String s in tags){
+        temp.add(getTagEnum(s));
+      }
+      seafood.tags = temp;
+    });
+  }
+
+  void _updateSeafood(){
+    setState(() {
+      double p1, p2, m1, m2;
+      seafood.type = getSeafoodTypeEnum(dd.getState().getValue());
+      seafood.description = descriptionController.text;
+      try{
+        p1 = double.parse(priceController1.text);
+      } on Exception catch(e){
+        p1 = 0;
+      }
+
+      try{
+        p2 = double.parse(priceController2.text)*0.01 ;
+      } on Exception catch(e){
+        p2 = 0;
+      }
+      seafood.price = p1 + p2;
+
+      try{
+        seafood.quantityUnits = int.parse(quantityController.text);
+      } on Exception catch(e){
+        seafood.quantityUnits = 0;
+      }
+
+
+      try{
+         m1 = double.parse(weightController1.text);
+      } on Exception catch(e){
+        m1 = 0;
+      }
+      try{
+        m2 = double.parse(weightController2.text)*0.01;
+      } on Exception catch(e){
+        m2 = 0;
+      }
+      seafood.quantityMass = m1 + m2;
+      seafoods.removeLast();
+      seafoods.add(seafood);
+    });
+  }
+
+  bool _checkState(){
+    bool canAdd = true;
+    List<String> errors = [];
+    if(dd.getState() == null || dd.getState().getValue() == null){
+      canAdd = false;
+      errors.add("Seafood type cannot be empty.");
+    }
+    if(priceController1.text.isEmpty && priceController2.text.isEmpty){
+      canAdd = false;
+      errors.add("Price per kilo cannot be empty.");
+    }
+
+    if(weightController1.text.isEmpty && weightController2.text.isEmpty){
+      canAdd = false;
+      errors.add("Total weight cannot be empty.");
+    }
+    if(quantityController.text.isEmpty){
+      canAdd = false;
+      errors.add("Quantity of caught seafood cannot be empty.");
+    }
+
+    if(currentTags.isEmpty){
+      canAdd = false;
+      errors.add("At least one Tag must be assigned to this seafood");
+    }
+
+    if(descriptionController.text.isEmpty){
+      canAdd = false;
+      errors.add("Description for this seafood cannot be empty.");
+    }
+    if(!canAdd){
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return ErrorPopUp(errors);
+          });
+    }
+    return canAdd;
+  }
+
 
 
   Widget _screen(){
@@ -94,7 +205,7 @@ class _Catch extends State<Catch> {
               ),
               SizedBox(height: 10.0,),
               Center(
-                child: new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15),
+                child: dd,
               ),
 
               SizedBox(height: 20.0,),
@@ -218,7 +329,7 @@ class _Catch extends State<Catch> {
               SizedBox(height: 10.0,),
               Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(21.0, 0.0, 0.0, 0.0),
-                  child: TagsButtons()
+                  child:  tb
               ),
 
 
@@ -247,11 +358,15 @@ class _Catch extends State<Catch> {
                 alignment: Alignment.bottomRight,
                 child: Column(
                     children: <Widget>[
-
                       FlatButton(
                         onPressed: (){
-
-                        },
+                          if(_checkState()){
+                            _updateSeafood();
+                            Navigator.push(
+                              context, SlideLeftRoute(page: CatchMedia(seafoods, seafoodImages)),
+                            );
+                          }
+                         },
                         child: Container(
                           height: 60,
                           width: 140,
@@ -292,15 +407,133 @@ class _Catch extends State<Catch> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if(seafoods == null)
+      seafoods = [];
+    seafoods.add(seafood);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Back(body:_screen()// This trailing comma makes auto-formatting nicer for build methods.
+    seafoodImages = [];
+    tb = TagsButtons(currentTags: currentTags ,parent: this);
+    return Back(body: _screen());
+  }
+
+}
+
+
+class SlideLeftRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideLeftRoute({this.page})
+      : super(
+    pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        ) =>
+    page,
+    transitionsBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+        ) =>
+        SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(1, 0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: child,
+        ),
+  );
+}
+
+
+class ErrorPopUp extends StatefulWidget{
+  List<String> errors;
+
+  ErrorPopUp(this.errors);
+
+  @override
+  ErrorPopUpState createState() => ErrorPopUpState(errors);
+}
+
+class ErrorPopUpState extends State<ErrorPopUp>{
+  List<String> errors;
+
+
+  ErrorPopUpState(this.errors);
+
+ Widget _messages(){
+    List <Widget> m = [];
+
+    for(String e in errors){
+      m.add(SizedBox(height: 10,));
+      m.add(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 3),
+              child: Icon(Icons.fiber_manual_record, size: 12 )
+            ),
+            SizedBox(width: 5),
+            Flexible(child: Text( e,
+              textAlign: TextAlign.justify,
+            ))
+          ]
+        )
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: m,
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        content: Container(
+            height: 100.0 + (35*errors.length),
+            width: 600,
+            child:Stack(
+                children: <Widget>[
+                  Scaffold(
+                      backgroundColor: Colors.white,
+                      body: Stack(
+                          children: <Widget>[
+                            Text('Error:', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 22, color: SALMON_COLOUR)),
+
+                            Padding(
+                                padding: EdgeInsets.only(top: 30.0),
+                                child: Text('All fields must be filled', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SALMON_COLOUR)),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(top: 60.0),
+                                child: _messages()
+                            ),
+                            Align(
+                                alignment: Alignment.bottomRight,
+                                child:
+                                FlatButton(
+                                  color: SALMON_COLOUR,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                  ),
+                                  child: Text('Ok', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.white)),
+                                  onPressed: ((){
+                                    Navigator.pop(context);
+                                  }),
+                                ))
+                          ]
+                      )
+                  )
+                ]
+            )
+        )
+    );
+  }
 }
