@@ -1,7 +1,10 @@
 import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/home.dart';
 import 'package:fisheller_app/components/popup_card.dart';
+import 'package:fisheller_app/components/preferences.dart';
 import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood.dart';
+import 'package:fisheller_app/models/sell.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 
@@ -12,9 +15,8 @@ import 'components/select_quantity.dart';
 
 
 class BookFish extends StatelessWidget {
-  final Seafood seafood;
-  final String market;
-  const BookFish(this.seafood, this.market);
+  final Sell sell;
+  const BookFish(this.sell);
 
   Widget _screen(Size size) {
     return Container(
@@ -26,10 +28,10 @@ class BookFish extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
-                  Text(market, style: TextStyle(fontSize: 15)),
+                  Text(sell.seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
+                  Text(sell.marketName, style: TextStyle(fontSize: 15)),
                   SizedBox(height:30),
-                  BookBox(seafood: seafood),
+                  BookBox(sell: sell),
                   SizedBox(height:10),
                 ]
             )
@@ -46,10 +48,10 @@ class BookFish extends StatelessWidget {
 }
 
 class BookBox extends StatelessWidget{
-  final Seafood seafood;
+  final Sell sell;
 
   BookBox({
-    this.seafood,
+    this.sell,
   });
 
   void _book(BuildContext context, Order order){
@@ -94,7 +96,7 @@ class BookBox extends StatelessWidget{
                       width: size.width * 0.7,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(seafood.media.first),
+                            image: AssetImage(sell.seafood.media.first),
                             fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -110,7 +112,7 @@ class BookBox extends StatelessWidget{
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),
-                  child: Quantity(seafood)
+                  child: Quantity(sell.seafood)
                 ),
                 Padding(
                     padding: EdgeInsets.only(top: 20.0),
@@ -134,7 +136,11 @@ class BookBox extends StatelessWidget{
                               borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Text('Book', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white)),
-                          onPressed: (){_book(context, new Order(sell: julioBass, consumer: ana, vendor: julio, deposit: 10));},
+                          onPressed: (){
+                             getCurrentUserObject().then((currentUser) {
+                               _book(context, new Order(sell: sell, consumer: currentUser, vendor: sell.vendor, deposit: 5));
+                             });
+                            },
                         )
                     )
                 ),

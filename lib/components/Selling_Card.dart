@@ -131,7 +131,7 @@ class MarketInfo extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           Text(
-            sell.market.name,
+            sell.marketName,
             style: TextStyle(fontSize: 15),
           ),
         ],

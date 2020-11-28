@@ -141,7 +141,7 @@ class _Stage1Description extends State<Stage1Description> {
                         Padding(
                           padding: EdgeInsets.only(bottom: 8.0),
                           child: Text(
-                              description.market.name
+                              description.marketName
                           ),
                         ),
                         Padding(
@@ -390,7 +390,7 @@ class _Stage1Description extends State<Stage1Description> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      BookFish(description.seafood, description.market.name)
+                      BookFish(description)
               ),//stage2description
             );
           },

@@ -26,14 +26,7 @@ class CartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Order order = new Order(
-      sell: julioBass,
-      consumer: ana,
-      vendor: julio,
-      quantity: 10.0,
-      isUnits: true,
-      deposit: 10,
-    );
+    Order order = booking;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 200,
@@ -41,7 +34,7 @@ class CartCard extends StatelessWidget {
       child:  Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Image_Box(seafood: null),
+              Image_Box(seafood: booking.sell.seafood),
               Info_Box(order: order),
             ],
           ),
@@ -79,7 +72,7 @@ class Image_Box extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         image: new DecorationImage(
           fit: BoxFit.cover,
-          image: Image.asset("assets/images/sea_bass.png").image,
+          image: Image.asset(seafood.media[0]).image,
         ),
         boxShadow: [
           BoxShadow(
@@ -115,7 +108,7 @@ class Info_Box extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Title_Tags_Box(order: order),
-          text_info(categoryText: "Market:", content: order.sell.market.name),
+          text_info(categoryText: "Market:", content: order.sell.marketName),
           text_info(categoryText: "Deposit", content: order.deposit.toString()),
           Vendor_Box(vendor: order.vendor),
           DrawButtons(order:order),
@@ -261,7 +254,6 @@ class Vendor_Box extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          //vendor.image,
           Container(
               width: 30,
               height: 30,
@@ -269,10 +261,9 @@ class Vendor_Box extends StatelessWidget {
                   //color: Colors.black38,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    //border: Border.all(width: 10,color: Colors.black38,style: BorderStyle.solid),
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: Image.asset("assets/images/julio.png").image,
+                      image: Image.asset(vendor.profile).image,
                     ),
                   ),
                 ),
