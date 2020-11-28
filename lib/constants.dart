@@ -1,9 +1,10 @@
 
 import 'dart:collection';
 
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
+import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/recipies.dart';
 
@@ -22,21 +23,19 @@ const SECONDARY_COLOUR = Color(0x00E2E2E2); // DARK GRAY
 const SALMON_COLOUR = Color(0xFFfd766f);
 const WHITE_COLOUR = Colors.white;
 
-const CHART_PRIMARY_COLOUR = charts.Color(r: 15,g: 115,b: 105);
-const CHART_SECONDARY_COLOUR = charts.Color(r: 46,g: 46,b: 46);
-
 /// ************************* POPUPS TEXTS ***************************/
 
 const String TEXT_QUESTION_COMFIRM = "Are you sure you want to book?";
-const String TEXT_NOTE_COMFIRM = "The deposit (%s€) will be discounted from your account";
+const String TEXT_NOTE_COMFIRM = "The deposit (%d€) will be discounted from your account";
 
 const String TEXT_QUESTION_CANCEL = "Are you sure you want to cancel?";
-const String TEXT_NOTE_CANCEL = "The deposit (%s€) will not be reimbursed?";
+const String TEXT_NOTE_CANCEL = "The deposit (%d€) will not be reimbursed?";
 
 const String FINALISE_BUY = "Finalise Buy";
 const String FINALISE_SEAFOOD = "Seafood: %s";
-const String FINALISE_Quantity = "Quantity: %s units";
-const String FINALISE_Weight = "Weight: %s Kg";
+const String FINALISE_Quantity = "Quantity: %2.1f units";
+const String FINALISE_Weight = "Weight: %2.1f Kg";
+const String FINALISE_TOTAL = "Total: %2.2f €";
 
 /// ************************* Google Maps ***************************/
 const LatLng FIXE_FIXE_LOCATION = LatLng(37.133966, -8.530302);
@@ -51,14 +50,20 @@ const List<String> SEAFOODS = <String> ['COD FISH', 'LOBSTER','SEA BASS', 'TUNA'
 /// ************************* Consumers *****************************/
 
 Consumer ana = new Consumer(
-  "Ana Miguel", //name
-  "ana@gmail.com", //email
-  "1234", //password
+  name: "Ana Miguel", //name
+  email: "ana@gmail.com", //email
+  password: "1234", //password
+  bookings: new List<Order>(),
+  following: new List<User>(),
+  purchases: new List<Order>(),
 );
 Consumer hakeem = new Consumer(
-  "Hakeem Pedro",
-  "hakeem@gmail.com", //email
-  "1234", //password
+  name: "Hakeem Pedro",
+  email: "hakeem@gmail.com", //email
+  password: "1234", //password
+  bookings: new List<Order>(),
+  following: new List<User>(),
+  purchases: new List<Order>(),
 );
 
 /// ************************* Vendors *******************************/
@@ -67,24 +72,34 @@ Vendor julio = new Vendor(
   "Júlio Adamastor", //name
   "julio@gmail.com", //email
   "1234", //password
+  "assets/images/julio.png"
 );
 Vendor josefina = new Vendor(
   "Josefina Peixeira",
   "josefina@gmail.com", //email
   "1234", //password
+  "assets/images/josefina.png"
 );
 
 /// ************************* Sells ******************************/
-List<String> m = ["assets/images/sea_bass.png"];
+List<String> seaBassMedia = ["assets/images/sea_bass.png", "assets/images/seabass2.png", "assets/images/seabass3.png"];
+List<String> lobsterMedia = ["assets/images/lobster.png", "assets/images/lobster2.png"];
+List<String> codMedia = ["assets/images/cod.png", "assets/images/cod2.png", "assets/images/cod3.png"];
+
+const String FISH_DISCRIPTION = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus volutpat nisl augue, vitae viverra nibh imperdiet et. Donec quis tortor erat. Aliquam elementum elementum elit, vitae bibendum nunc imperdiet at."
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus volutpat nisl augue, vitae viverra nibh imperdiet et. Donec quis tortor erat. Aliquam elementum elementum elit, vitae bibendum nunc imperdiet at."
+
+;
+
 /// ********** Market_Fixe_Fixe ***************/
 Seafood seabass = new Seafood(
   type: Seafood_Type.sea_bass,
-  media: m,
+  media: seaBassMedia,
   price: 15,
   quantityMass: 8,
   quantityUnits: 10,
   tags: [Tag.fish, Tag.aquaculture],
-  description: "seabass"
+  description: FISH_DISCRIPTION
 );
 
 Sell julioBass = new Sell(
@@ -94,12 +109,12 @@ Sell julioBass = new Sell(
 
 Seafood lobster = new Seafood(
   type: Seafood_Type.lobster,
-  media: null,
+  media: lobsterMedia,
   price: 30,
   quantityMass: 8,
   quantityUnits: 5,
   tags: [Tag.shellfish, Tag.sea],
-  description: "lobster"
+  description: FISH_DISCRIPTION
 );
 
 Sell julioLobster = new Sell(
@@ -109,12 +124,12 @@ Sell julioLobster = new Sell(
 
 Seafood cod = new Seafood(
   type: Seafood_Type.cod_fish,
-  media: null,
+  media: codMedia,
   price: 10,
   quantityMass: 10,
   quantityUnits: 5,
   tags: [Tag.fish, Tag.imported],
-  description: "cod"
+  description: FISH_DISCRIPTION
 );
 
 Sell julioCod = new Sell(
@@ -128,48 +143,49 @@ List<Sell> market_fixe_items = [
 ];
 /// ********** Market_Doca ***************/
 
-List<String> seabassMedia = <String>["assets/images/sea_bass.png"];
-
-Seafood seabass2 = new Seafood(
-  type: Seafood_Type.sea_bass,
-  media: null,
-  price: 16,
-  quantityMass: 7,
-  quantityUnits: 10,
-  tags: [Tag.fish, Tag.sea],
+Seafood seaBass2 = new Seafood(
+    type: Seafood_Type.sea_bass,
+    media: seaBassMedia,
+    price: 16,
+    quantityMass: 7,
+    quantityUnits: 10,
+    tags: [Tag.fish, Tag.sea],
+    description: FISH_DISCRIPTION
 );
 
 Sell josefinaBass = new Sell(
-  seafood: seabass2,
-  vendor: julio,
+  seafood: seaBass2,
+  vendor: josefina,
 );
 
 Seafood lobster2 = new Seafood(
-  type: Seafood_Type.lobster,
-  media: null,
-  price: 35,
-  quantityMass: 6,
-  quantityUnits: 4,
-  tags: [Tag.shellfish, Tag.sea],
+    type: Seafood_Type.lobster,
+    media: lobsterMedia,
+    price: 35,
+    quantityMass: 6,
+    quantityUnits: 4,
+    tags: [Tag.shellfish, Tag.sea],
+    description: FISH_DISCRIPTION
 );
 
 Sell josefinaLobster = new Sell(
     seafood: lobster2,
-    vendor: julio
+    vendor: josefina
 );
 
 Seafood cod2 = new Seafood(
-  type: Seafood_Type.cod_fish,
-  media: null,
-  price: 11,
-  quantityMass: 10,
-  quantityUnits: 5,
-  tags: [Tag.fish, Tag.imported],
+    type: Seafood_Type.cod_fish,
+    media: codMedia,
+    price: 11,
+    quantityMass: 10,
+    quantityUnits: 5,
+    tags: [Tag.fish, Tag.imported],
+    description: FISH_DISCRIPTION
 );
 
 Sell josefinaCod = new Sell(
   seafood: cod2,
-  vendor: julio,
+  vendor: josefina,
 );
 
 List<Sell> market_doca_items = [
@@ -181,14 +197,14 @@ List<Sell> market_doca_items = [
 /// ************************* Markets *******************************/
 Market fixeFixe_market = Market(
     mapLocation: LatLng(37.133966, -8.530302),
-    image: Image.asset(""),
+    imageName: "",
     items: market_fixe_items,
     name: "Fixe Fixe era ser Fish"
 );
 
 Market docaPortimao_market = Market(
     mapLocation: LatLng(37.128389, -8.531901),
-    image: Image.asset(""),
+    imageName: "",
     items: market_doca_items,
     name: "Doca Portimão"
 );

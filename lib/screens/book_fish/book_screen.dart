@@ -1,4 +1,10 @@
+import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/home.dart';
+import 'package:fisheller_app/components/popup_card.dart';
+import 'package:fisheller_app/components/preferences.dart';
+import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood.dart';
+import 'package:fisheller_app/models/sell.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 
@@ -9,60 +15,52 @@ import 'components/select_quantity.dart';
 
 
 class BookFish extends StatelessWidget {
-  final Seafood seafood;
-  final String market;
-  const BookFish(this.seafood, this.market);
+  final Sell sell;
+  const BookFish(this.sell);
 
-  void _back(){
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            leadingWidth: size.width,
-            leading:
-            FlatButton.icon(
-              icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-              label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
-              onPressed: _back,
-            )
-        ),
-        body: Container(
-            height: size.height,
-            width: size.width,
-            color: Colors.white,
-            child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
-                      Text(market, style: TextStyle(fontSize: 15)),
-                      SizedBox(height:30),
-                      BookBox(seafood: seafood)
-
-                    ]
-                )
+  Widget _screen(Size size) {
+    return Container(
+        height: size.height,
+        width: size.width,
+        color: Colors.white,
+        child: SingleChildScrollView(
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(sell.seafood.type.name, style: TextStyle(fontSize: 55, fontWeight: FontWeight.w900)),
+                  Text(sell.marketName, style: TextStyle(fontSize: 15)),
+                  SizedBox(height:30),
+                  BookBox(sell: sell),
+                  SizedBox(height:10),
+                ]
             )
         )
     );
   }
+
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Back(body: _screen(size));
+  }
 }
 
 class BookBox extends StatelessWidget{
-  final Seafood seafood;
+  final Sell sell;
 
   BookBox({
-    this.seafood,
+    this.sell,
   });
 
-  void _book(){
-
+  void _book(BuildContext context, Order order){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return PopUpCard(order:order,percentage_width: 0.8,popupType:0);
+      },
+    );
   }
 
   @override
@@ -71,9 +69,8 @@ class BookBox extends StatelessWidget{
 
     // This size provide us total height and width of our screen
     return
-      Container(
+        Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
-          height: size.height*0.75,
           width: size.width * 0.8,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -99,7 +96,7 @@ class BookBox extends StatelessWidget{
                       width: size.width * 0.7,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage(seafood.media.first),
+                            image: AssetImage(sell.seafood.media.first),
                             fit: BoxFit.fill,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -115,7 +112,7 @@ class BookBox extends StatelessWidget{
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),
-                  child: Quantity(seafood)
+                  child: Quantity(sell.seafood)
                 ),
                 Padding(
                     padding: EdgeInsets.only(top: 20.0),
@@ -139,7 +136,11 @@ class BookBox extends StatelessWidget{
                               borderRadius: BorderRadius.circular(50.0),
                           ),
                           child: Text('Book', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white)),
-                          onPressed: _book,
+                          onPressed: (){
+                             getCurrentUserObject().then((currentUser) {
+                               _book(context, new Order(sell: sell, consumer: currentUser, vendor: sell.vendor, deposit: 5));
+                             });
+                            },
                         )
                     )
                 ),

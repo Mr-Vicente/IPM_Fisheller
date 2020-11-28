@@ -95,8 +95,6 @@ class BackgroundMain extends State<Background>{
           /*Positioned(
               child: PopUpCard(
                 percentage_width: 0.8,
-                textQuestion: TEXT_QUESTION_COMFIRM,
-                textNote: sprintf(TEXT_NOTE_COMFIRM,[3]),
               ),
             top: 200.0,
           ),*/

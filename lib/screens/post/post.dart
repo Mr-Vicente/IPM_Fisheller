@@ -17,7 +17,7 @@ class PostPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          toolbarHeight: size.height*0.08,
+          toolbarHeight: size.height*0.09,
           actions: <Widget>[
             SafeArea(
                 child: FloatingActionButton(

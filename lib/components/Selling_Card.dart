@@ -32,28 +32,26 @@ class Selling_Card extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       height: s,
       width: size.width * percentage_width,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: FlatButton(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-          color: WHITE_COLOUR,
-          onPressed: press,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              //Image_Box(seafood: sell.seafood),
-              Info_Box(sell: sell,type: type),
-            ],
-          ),
+      child: FlatButton(
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        onPressed: press,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            //Image_Box(seafood: sell.seafood),
+            Info_Box(sell: sell, type: type),
+          ],
         ),
       ),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: WHITE_COLOUR,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
-            spreadRadius: 3,
+            spreadRadius: 2,
             blurRadius: 6,
-            offset: Offset(0, 2), // changes position of shadow
+            offset: Offset(0, 0), // changes position of shadow
           ),
         ],
       ),
@@ -75,7 +73,6 @@ class Image_Box extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 5),
       width: size.width * 0.3,
       child: Image.asset("assets/images/sea_bass.png"),
-
     );
   }
 }
@@ -101,12 +98,14 @@ class Info_Box extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Title_Tags_Box(seafood: sell.seafood),
-          if(type.contains("feed"))
-            MarketInfo(sell: sell),
-          Numbers_Box(seafood: sell.seafood,),
-          Vendor_Box(vendor: sell.vendor,),
-          if(type.contains("feed"))
-           DrawStars(vendor: sell.vendor)
+          if (type.contains("feed")) MarketInfo(sell: sell),
+          Numbers_Box(
+            seafood: sell.seafood,
+          ),
+          Vendor_Box(
+            vendor: sell.vendor,
+          ),
+          if (type.contains("feed")) DrawStars(vendor: sell.vendor)
         ],
       ),
     );
@@ -121,7 +120,6 @@ class MarketInfo extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
     // This size provide us total height and width of our screen
     return Container(
@@ -130,16 +128,11 @@ class MarketInfo extends StatelessWidget {
         children: [
           Text(
             "Market: ",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           Text(
-            sell.market.name,
-            style: TextStyle(
-                fontSize: 15
-            ),
+            sell.marketName,
+            style: TextStyle(fontSize: 15),
           ),
         ],
       ),
@@ -155,7 +148,6 @@ class DrawStars extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
     Size size = MediaQuery.of(context).size;
     // This size provide us total height and width of our screen
     return Container(
@@ -164,17 +156,17 @@ class DrawStars extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           RatingBar.builder(
-              initialRating: vendor.getRating().toDouble(),
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder: (context, _) => Icon(
-                Icons.star,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {},
+            initialRating: vendor.getRating().toDouble(),
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {},
             ignoreGestures: true,
             itemSize: 25.0,
           ),
@@ -186,10 +178,7 @@ class DrawStars extends StatelessWidget {
 
 class Title_Tags_Box extends StatelessWidget {
   final Seafood seafood;
-  const Title_Tags_Box({
-    Key key,
-    this.seafood
-  }) : super(key: key);
+  const Title_Tags_Box({Key key, this.seafood}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -200,9 +189,8 @@ class Title_Tags_Box extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Title_Box(title: seafood.type.name),
-          SizedBox(width:10,height:5),
-          for ( var tag in seafood.tags)
-            Tag_Box(tag:tag.name),
+          SizedBox(width: 10, height: 5),
+          for (var tag in seafood.tags) Tag_Box(tag: tag.name),
         ],
       ),
     );
@@ -223,14 +211,12 @@ class Tag_Box extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
-            child: Text(
-              tag,
-              style: TextStyle(
-                color: WHITE_COLOUR
-              ),
-            ),
-            color: PRIMARY_COLOUR,
-            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+          child: Text(
+            tag,
+            style: TextStyle(color: WHITE_COLOUR),
+          ),
+          color: PRIMARY_COLOUR,
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         ),
       ),
     );
@@ -239,10 +225,8 @@ class Tag_Box extends StatelessWidget {
 
 class Title_Box extends StatelessWidget {
   final String title;
-  static const TextStyle textStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 30
-  );
+  static const TextStyle textStyle =
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 30);
   const Title_Box({
     Key key,
     this.title,
@@ -255,10 +239,10 @@ class Title_Box extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-            Text(
+          Text(
             title,
             style: textStyle,
-            ),
+          ),
           Container(
             width: _textSize(title, textStyle).width,
             height: 2,
@@ -272,7 +256,9 @@ class Title_Box extends StatelessWidget {
 
 Size _textSize(String text, TextStyle style) {
   final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)
+      text: TextSpan(text: text, style: style),
+      maxLines: 1,
+      textDirection: TextDirection.ltr)
     ..layout(minWidth: 0, maxWidth: double.infinity);
   return textPainter.size;
 }
@@ -292,7 +278,12 @@ class Numbers_Box extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Number_Info_Box(number: seafood.price,text:"Price\n(€ / Kg)",sz:Size(75,75),space: 15.0,),
+          Number_Info_Box(
+            number: seafood.price,
+            text: "Price\n(€ / Kg)",
+            sz: Size(75, 75),
+            space: 15.0,
+          ),
           Equivalent_Box(seafood: seafood),
         ],
       ),
@@ -305,14 +296,9 @@ class Number_Info_Box extends StatelessWidget {
   final String text;
   final Size sz;
   final num space;
-  const Number_Info_Box({
-    Key key,
-    this.number,
-    this.text,
-    this.sz,
-    this.space,
-    thi
-  }) : super(key: key);
+  const Number_Info_Box(
+      {Key key, this.number, this.text, this.sz, this.space, thi})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -325,13 +311,13 @@ class Number_Info_Box extends StatelessWidget {
             text: number.toString(),
             circle_size: sz,
           ),
-           Container(
-             margin: EdgeInsets.only(top: space/2),
-             child:Text(
-                  text,
-                  textAlign: TextAlign.center,
-                ),
-             )
+          Container(
+            margin: EdgeInsets.only(top: space / 2),
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+            ),
+          )
         ],
       ),
     );
@@ -352,18 +338,29 @@ class Equivalent_Box extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Number_Info_Box(number: seafood.quantityUnits,text:"Quantity\n(Unit.)",sz: Size(60,60),space: 35.0,),
+          Number_Info_Box(
+            number: seafood.quantityUnits,
+            text: "Quantity\n(Unit.)",
+            sz: Size(60, 60),
+            space: 35.0,
+          ),
           Container(
-              margin: EdgeInsets.symmetric(horizontal: 5,),
+              margin: EdgeInsets.symmetric(
+                horizontal: 5,
+              ),
               padding: EdgeInsets.only(bottom: 50),
-              child: Text("<->")),
-          Number_Info_Box(number: seafood.quantityMass,text:"Quantity\n(Kg.)",sz: Size(60,60),space: 35.0,),
+              child: Image.asset("assets/icons/double-arrow.png", width: 20,),),
+          Number_Info_Box(
+            number: seafood.quantityMass,
+            text: "Quantity\n(Kg.)",
+            sz: Size(60, 60),
+            space: 35.0,
+          ),
         ],
       ),
     );
   }
 }
-
 
 class Vendor_Box extends StatelessWidget {
   final Vendor vendor;
@@ -380,33 +377,30 @@ class Vendor_Box extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          //vendor.image,
           Container(
             margin: EdgeInsets.symmetric(horizontal: 15),
             width: 50,
             height: 50,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Container(
-                //color: Colors.black38,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 3,color: Colors.black,style: BorderStyle.solid),
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: Image.asset("assets/images/julio.png").image,
-                  ),
+            child: Container(
+              //color: Colors.black38,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    width: 3, color: Colors.black, style: BorderStyle.solid),
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: Image.asset(vendor.profile).image,
                 ),
               ),
-            )
+            ),
           ),
-          SizedBox(height: 50,width: 10,),
+          SizedBox(
+            height: 50,
+            width: 10,
+          ),
           Text(
             vendor.name,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ],
       ),
@@ -434,26 +428,24 @@ class Number_Circle extends StatelessWidget {
     return Container(
       width: circle_size.width,
       height: circle_size.height,
-        child:Center(
-            child: Text(
-              text,
-              style:
-              TextStyle(
-                fontSize: 30 - (circle_size.width / s.width) * 30,
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 30 - (circle_size.width / s.width) * 30,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
           ),
-        decoration: BoxDecoration(
-          border: Border.all(width: 6,color: PRIMARY_COLOUR,style: BorderStyle.solid),
-          borderRadius: BorderRadius.circular(100),
         ),
-      );
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(
+            width: 6, color: PRIMARY_COLOUR, style: BorderStyle.solid),
+        borderRadius: BorderRadius.circular(100),
+      ),
+    );
   }
 }
-
-
 
 /*class Number_Circle extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -518,4 +510,3 @@ class Number_Circle extends StatelessWidget {
     );
   }
 }*/
-

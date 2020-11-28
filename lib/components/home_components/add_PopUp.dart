@@ -1,3 +1,4 @@
+import 'package:fisheller_app/screens/catch/catch.dart';
 import 'package:fisheller_app/screens/post/post.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/constants.dart';
@@ -29,7 +30,11 @@ class add_PopUp extends StatelessWidget {
                 children: <Widget>[
                   _buildButton(
                       size: size,
-                      onPressed: () => {},
+                      onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Catch(null, null)),
+                          ),
                       imageName: "assets/icons/icon_add_seafood.svg",
                       text: "Add Catch"),
                   SizedBox(width: size.height * 0.01), //Spacer

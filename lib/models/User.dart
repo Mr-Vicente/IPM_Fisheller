@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'User.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class User{
   String email;
   String password;
   String name;
-  Image image;
+  String imageName;
   User({
     this.email,
     this.password,
     this.name,
+    this.imageName,
   });
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  /*User.fromJson(Map<String, dynamic> json){
+    name = json['name'];
+    email = json['email'];
+    password = json['password'];
+    imageName = json['imageName'];
+  }
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'email': email,
+    'password': password,
+    'imageName': imageName,
+  };*/
+
 }
