@@ -49,6 +49,7 @@ class BookFish extends StatelessWidget {
 
 class BookBox extends StatelessWidget{
   final Sell sell;
+  Order order;
 
   BookBox({
     this.sell,
@@ -61,6 +62,11 @@ class BookBox extends StatelessWidget{
         return PopUpCard(order:order,percentage_width: 0.8,popupType:0);
       },
     );
+  }
+
+  void setOrder(double avrgPrice, double deposit, double mass, double units, bool isUnits){
+    double quantity = isUnits ? units: mass;
+    order = new Order(sell: sell, vendor: sell.vendor, deposit: deposit, isUnits: isUnits, quantity: quantity);
   }
 
   @override
@@ -112,7 +118,7 @@ class BookBox extends StatelessWidget{
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 20.0),
-                  child: Quantity(sell.seafood)
+                  child: Quantity(sell.seafood, this)
                 ),
                 Padding(
                     padding: EdgeInsets.only(top: 20.0),
@@ -138,7 +144,8 @@ class BookBox extends StatelessWidget{
                           child: Text('Book', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white)),
                           onPressed: (){
                              getCurrentUserObject().then((currentUser) {
-                               _book(context, new Order(sell: sell, consumer: currentUser, vendor: sell.vendor, deposit: 5));
+                               order.consumer = currentUser;
+                               _book(context, order);
                              });
                             },
                         )

@@ -1,4 +1,3 @@
-
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/Tag.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
@@ -7,9 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
 import 'dart:io';
-
-
-
 
 class CatchCard extends StatelessWidget {
   final Seafood seafood;
@@ -32,7 +28,7 @@ class CatchCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       height: 200,
       width: size.width * percentage_width,
-      child:  Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Image_Box(image: image),
@@ -62,10 +58,9 @@ class Image_Box extends StatelessWidget {
     this.image,
   }) : super(key: key);
 
-  ImageProvider _image(){
+  ImageProvider _image() {
     if (image == null) {
-      return Image.asset("assets/images/image_placeholder_portrait.png")
-          .image;
+      return Image.asset("assets/images/image_placeholder_portrait.png").image;
     } else {
       return Image.file(image).image;
     }
@@ -78,7 +73,7 @@ class Image_Box extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 5),
       width: size.width * 0.3,
-      height:  180,
+      height: 180,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         image: new DecorationImage(
@@ -119,7 +114,9 @@ class Info_Box extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Title_Tags_Box(seafood: seafood),
-          Numbers_Box(seafood: seafood,),
+          Numbers_Box(
+            seafood: seafood,
+          ),
           DrawButtons(),
         ],
       ),
@@ -127,25 +124,20 @@ class Info_Box extends StatelessWidget {
   }
 }
 
-
 class Title_Tags_Box extends StatelessWidget {
   final Seafood seafood;
-  const Title_Tags_Box({
-    Key key,
-    this.seafood
-  }) : super(key: key);
+  const Title_Tags_Box({Key key, this.seafood}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // This size provide us total height and width of our screen
     return Container(
-      margin: EdgeInsets.only(top: 5,left: 5),
+      margin: EdgeInsets.only(top: 5, left: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Title_Box(title: seafood.type.name),
-          SizedBox(width:10,height:5),
-          for ( var tag in seafood.tags)
-            Tag_Box(tag:tag.name),
+          SizedBox(width: 10, height: 5),
+          for (var tag in seafood.tags) Tag_Box(tag: tag.name),
         ],
       ),
     );
@@ -174,7 +166,7 @@ class Tag_Box extends StatelessWidget {
             ),
           ),
           color: PRIMARY_COLOUR,
-          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         ),
       ),
     );
@@ -183,10 +175,8 @@ class Tag_Box extends StatelessWidget {
 
 class Title_Box extends StatelessWidget {
   final String title;
-  static const TextStyle textStyle = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 20
-  );
+  static const TextStyle textStyle =
+      TextStyle(fontWeight: FontWeight.bold, fontSize: 20);
   const Title_Box({
     Key key,
     this.title,
@@ -215,7 +205,9 @@ class Title_Box extends StatelessWidget {
 
 Size _textSize(String text, TextStyle style) {
   final TextPainter textPainter = TextPainter(
-      text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)
+      text: TextSpan(text: text, style: style),
+      maxLines: 1,
+      textDirection: TextDirection.ltr)
     ..layout(minWidth: 0, maxWidth: double.infinity);
   return textPainter.size;
 }
@@ -241,6 +233,7 @@ class Numbers_Box extends StatelessWidget {
             text: "Price\n(€ / Kg)",
             sz: Size(60, 60),
             space: 15.0,
+            fontSize: 30,
           ),
           Equivalent_Box(seafood: seafood),
         ],
@@ -254,8 +247,9 @@ class Number_Info_Box extends StatelessWidget {
   final String text;
   final Size sz;
   final num space;
+  final double fontSize;
   const Number_Info_Box(
-      {Key key, this.number, this.text, this.sz, this.space, thi})
+      {Key key, this.number, this.text, this.sz, this.space, this.fontSize})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -268,6 +262,7 @@ class Number_Info_Box extends StatelessWidget {
           Number_Circle(
             text: number.toString(),
             circle_size: sz,
+            fontSize: fontSize,
           ),
           Container(
             margin: EdgeInsets.only(top: space / 2),
@@ -304,8 +299,12 @@ class Equivalent_Box extends StatelessWidget {
             space: 35.0,
           ),
           Container(
-              padding: EdgeInsets.only(bottom: 50),
-              child: Image.asset("assets/icons/double-arrow.png", width: 20,),),
+            padding: EdgeInsets.only(bottom: 50),
+            child: Image.asset(
+              "assets/icons/double-arrow.png",
+              width: 20,
+            ),
+          ),
           Number_Info_Box(
             number: seafood.quantityMass,
             text: "Quantity\n(Kg.)",
@@ -321,14 +320,16 @@ class Equivalent_Box extends StatelessWidget {
 class Number_Circle extends StatelessWidget {
   final num arcWidth;
   final Size circle_size;
+  final double fontSize;
   static const Size s = Size(200, 200);
   final String text;
 
   const Number_Circle({
     Key key,
+    this.fontSize: 30,
     this.text,
     this.arcWidth,
-    this.circle_size = s,
+    this.circle_size: s,
   }) : super(key: key);
 
   @override
@@ -338,11 +339,12 @@ class Number_Circle extends StatelessWidget {
     return Container(
       width: circle_size.width,
       height: circle_size.height,
-      child: Center(
+      child: Align(
+        alignment: Alignment.center,
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 20 - (circle_size.width / s.width) * 20,
+            fontSize: fontSize,
             color: Colors.black,
             fontWeight: FontWeight.w600,
           ),
@@ -358,7 +360,6 @@ class Number_Circle extends StatelessWidget {
 }
 
 class DrawButtons extends StatelessWidget {
-
   const DrawButtons({
     Key key,
   }) : super(key: key);
@@ -366,49 +367,46 @@ class DrawButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Stack(
           children: <Widget>[
-            FlatButton(
-              color: PRIMARY_COLOUR,
-              child: Text(
-                "Edit",
-                style: TextStyle(fontFamily: 'Raleway', fontSize: 15, color: WHITE_COLOUR),
-              ),
-              onPressed: (){
-                /*showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return PopUpCard(sell:sell,percentage_width: 0.8,popupType:2);
-                  },
-                ),*/
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
+            Padding(
+              padding: EdgeInsets.only(left: 15, top: 4),
+              child: Container(
+                  height: 40,
+                  width: 40,
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Icon(Icons.create_outlined,
+                          color: Colors.black45, size: 25)),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        width: 3,
+                        color: Colors.black45,
+                        style: BorderStyle.solid),
+                    borderRadius: BorderRadius.circular(100),
+                  )),
             ),
-            FlatButton(
-              color: SALMON_COLOUR,
-              child: Text(
-                "Delete",
-                style: TextStyle(fontFamily: 'Raleway', fontSize: 15, color: WHITE_COLOUR),
-              ),
-              onPressed: (){
-                print("--------Delete--------");
-                /*showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return PopUpCard(order:order,percentage_width: 0.8,popupType:1);
-                  },
-                );*/
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: FlatButton(
+                  child: Container(
+                      height: 40,
+                      width: 40,
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Image.asset('assets/icons/trash_icon.png', width: 20, color: SALMON_COLOUR)
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 3,
+                            color: SALMON_COLOUR,
+                            style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(100),
+                      )),
+                  onPressed: () {},
+                )
             ),
-          ]
-      ),
+          ]),
     );
   }
 }

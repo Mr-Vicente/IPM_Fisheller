@@ -67,25 +67,25 @@ class _CatchMedia extends State<CatchMedia> {
 
   _openGallery(int n) async {
     // ignore: deprecated_member_use
-    var picture = await ImagePicker().getImage(source: ImageSource.gallery);
+    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (n == 1) {
       this.setState(() {
-        imageFile = File(picture.path);
+        imageFile = picture;
       });
     }
     if (n == 2) {
       this.setState(() {
-        imageFile2 = File(picture.path);
+        imageFile2 = picture;
       });
     }
     if (n == 3) {
       this.setState(() {
-        imageFile3 = File(picture.path);
+        imageFile3 = picture;
       });
     }
     if (n == 4) {
       this.setState(() {
-        imageFile4 = File(picture.path);
+        imageFile4 = picture;
       });
     }
   }

@@ -16,18 +16,16 @@ import 'package:splashscreen/splashscreen.dart';
 
 import 'components/preferences.dart';
 
-void main() => runApp(
-    new MaterialApp(
+void main() => runApp(new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
-        fontFamily:'Raleway',
+        fontFamily: 'Raleway',
         primaryColor: PRIMARY_COLOUR,
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
       home: MyApp(),
-    )
-);
+    ));
 
 class MyApp extends StatefulWidget {
   @override
@@ -38,21 +36,21 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
   Widget build(BuildContext context) {
-    return Stack(children: [
-      new SplashScreen(
-        seconds: 4,
-        navigateAfterSeconds: new AfterSplash(),
-        image: new Image.asset(
-          "assets/images/fisheller_logo.png",
-          width: 200,
+    return Stack(
+      children: [
+        new SplashScreen(
+          seconds: 4,
+          navigateAfterSeconds: new AfterSplash(),
+          image: new Image.asset(
+            "assets/images/fisheller_logo.png",
+            width: 200,
+          ),
+          backgroundColor: SECONDARY_COLOUR,
+          photoSize: 100.0,
+          onClick: () {},
+          loaderColor: PRIMARY_COLOUR,
         ),
-        backgroundColor: SECONDARY_COLOUR,
-        photoSize: 100.0,
-        onClick: () {},
-        loaderColor: PRIMARY_COLOUR,
-
-      ),
-    ],
+      ],
     );
   }
 
@@ -70,9 +68,7 @@ class AfterSplash extends StatelessWidget {
     josefinaLobster.marketName = docaPortimao_market.name;
     josefinaCod.marketName = docaPortimao_market.name;
 
-    MySharedPreferences.instance
-        .getBooleanValue("isfirstRun")
-        .then((value) {
+    MySharedPreferences.instance.getBooleanValue("isfirstRun").then((value) {
       print(value);
       //if (value == false)
       initialiseUsers();
@@ -80,22 +76,22 @@ class AfterSplash extends StatelessWidget {
     //seabass2.media = seabassMedia;
 
     return LoginScreen();
-    //home: MapPage(),
+      //home: MapPage(),
 
-    //home: Temp(),
-    //home: Home()
-    //home:FishAndTips(codTips),
-    //home:FishAndTips(lobsterTips),
-    //home: BookFish(seabass2, 'Doca Portimão')
-    //home: CatchMedia()
+      //home: Temp(),
+      //home: Home()
+      //home:FishAndTips(codTips),
+      //home:FishAndTips(lobsterTips),
+      //home: BookFish(seabass2, 'Doca Portimão')
+      //home: CatchMedia()
   }
 }
 
-void initialiseUsers(){
-  MySharedPreferences.instance.setConsumer("ana@gmail.com",ana);
-  MySharedPreferences.instance.setConsumer("hakeem@gmail.com",hakeem);
+void initialiseUsers() {
+  MySharedPreferences.instance.setConsumer("ana@gmail.com", ana);
+  MySharedPreferences.instance.setConsumer("hakeem@gmail.com", hakeem);
 
-  MySharedPreferences.instance
-      .setBooleanValue("isfirstRun", true);
+  MySharedPreferences.instance.setBooleanValue("isfirstRun", true);
   print("Users Initialized");
 }
+

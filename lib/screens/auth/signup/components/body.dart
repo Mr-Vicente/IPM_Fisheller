@@ -24,6 +24,7 @@ class Body extends StatelessWidget {
               "assets/images/fisheller_logo.png",
               height: size.height * 0.2,
             ),
+            SizedBox(height: size.height * 0.03),
             RoundedInputField(
               hintText: "Your Email",
               onChanged: (value) {},
@@ -36,6 +37,7 @@ class Body extends StatelessWidget {
               press: () {},
               color: WHITE_COLOUR,
               textColor: PRIMARY_COLOUR,
+              percentage_width: 0.4,
             ),
             SizedBox(height: size.height * 0.03),
             AlreadyHaveAnAccountCheck(

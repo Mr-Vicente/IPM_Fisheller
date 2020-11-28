@@ -6,15 +6,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../book_screen.dart';
 
 class Quantity extends StatefulWidget {
   final Seafood seafood;
-  const Quantity(this.seafood);
-  QuantityState createState() => QuantityState(seafood);
+  BookBox parent;
+  Quantity(this.seafood, this.parent);
+
+  QuantityState createState() => QuantityState(seafood, parent);
 }
 
 class QuantityState extends State<Quantity>{
   final Seafood seafood;
+  BookBox parent;
+
   List<bool> isSelected = [true,false];
   CustomSlider unitSlider;
   CustomSlider massSlider;
@@ -29,7 +34,9 @@ class QuantityState extends State<Quantity>{
 
   Widget displayedSlider;
 
-  QuantityState(this.seafood);
+  QuantityState(this.seafood, this.parent);
+
+
 
   double avrgPrice(){
     if(isSelected[0])
@@ -52,6 +59,7 @@ class QuantityState extends State<Quantity>{
     deposit = (avrgPrice()*0.1).toStringAsFixed(2)+'€';
     nP.updateText(price);
     nD.updateText(deposit);
+    parent.setOrder(avrgPrice(), avrgPrice()*0.1, massValue, unitValue, isSelected[0]);
   }
 
 

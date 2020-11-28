@@ -417,7 +417,7 @@ class CatchState extends State<Catch> {
   @override
   Widget build(BuildContext context) {
     seafoodImages = [];
-    tb = TagsButtons(currentTags: currentTags ,parent: this);
+    tb = TagsButtons(currentTags: currentTags, parent: this);
     return Back(body: _screen());
   }
 
