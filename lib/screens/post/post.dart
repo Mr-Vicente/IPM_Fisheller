@@ -1,30 +1,67 @@
+import 'dart:io';
+
 import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 import 'package:fisheller_app/screens/post/components/MediaBox.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/post/components/TextBox.dart';
+import 'package:fisheller_app/components/add_catch_card.dart';
 import '../../constants.dart';
 
 class PostPage extends StatelessWidget {
+  
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  var image1_Box = MediaBox();
+  var image2_Box = MediaBox();
+
+  var image1_FilePath;
+  var image2_FilePath;
+
+
+  String getFP1(){
+    return image1_FilePath;
+  }
+
+  String getFP2(){
+    return image1_FilePath;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var scaffoldKey = GlobalKey<ScaffoldState>();
+    
+
+    var mediaBox1 = MediaBox(
+      borderColor: Color(0xFFc2d1e2),
+      fillColor: Color(0xFFc3c7d1),
+      mediaSize: Size(size.width * 0.7, size.width * 0.3),
+    );
+
+    var mediaBox2 = MediaBox(
+      borderColor: Color(0xFFc2d1e2),
+      fillColor: Color(0xFFc3c7d1),
+      mediaSize: Size(size.width * 0.7, size.width * 0.3),
+    );
+    image1_Box = mediaBox1;
+    image2_Box = mediaBox2;
+
     return Scaffold(
-      backgroundColor: WHITE_COLOUR,
+        backgroundColor: WHITE_COLOUR,
         key: scaffoldKey,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          toolbarHeight: size.height*0.09,
+          toolbarHeight: size.height * 0.09,
           actions: <Widget>[
-            SafeArea(
+            Container(
+                margin: EdgeInsets.only(right: 10),
                 child: FloatingActionButton(
-              onPressed: () => scaffoldKey.currentState.openEndDrawer(),
-              child: Image.asset('assets/icons/extra_menu.png', height: 20),
-              backgroundColor: Colors.white,
-            )),
+                  onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+                  child: Image.asset('assets/icons/extra_menu.png', height: 20),
+                  backgroundColor: Colors.white,
+                )),
           ],
           leadingWidth: size.width,
           leading: FlatButton.icon(
@@ -41,7 +78,6 @@ class PostPage extends StatelessWidget {
             height: size.height * 0.1,
             elevation: 5,
             color: PRIMARY_COLOUR,
-            //backgroundColor: WHITE_COLOUR,
             items: [
               AmazDrawerItem(
                   iconData: Icons.face,
@@ -70,10 +106,11 @@ class PostPage extends StatelessWidget {
               }
             }, //TODO add drawerButton, how? if you want all scroll -> put stack with back button and drawer btn there inside scrollview, else just put it outside
             child: SingleChildScrollView(
+              
               //To avoid
               child: Container(
                 color: WHITE_COLOUR,
-                height: size.height*0.9,
+                height: size.height * 0.9,
                 width: size.width,
                 child: Column(
                   children: <Widget>[
@@ -118,19 +155,11 @@ class PostPage extends StatelessWidget {
                       maxChars: 150,
                       width: size.width * 0.9,
                     ),
-                    MediaBox(
-                      borderColor: Colors.green,
-                      fillColor: Colors.grey,
-                      mediaSize: Size(size.width * 0.7, size.width * 0.3),
-                    ),
+                    mediaBox1,
                     SizedBox(
                       height: size.height * 0.025,
                     ),
-                    MediaBox(
-                      borderColor: Colors.green,
-                      fillColor: Colors.grey,
-                      mediaSize: Size(size.width * 0.7, size.width * 0.3),
-                    ),
+                    mediaBox2,
 
                     Expanded(
                         child: Align(
@@ -169,6 +198,8 @@ class PostPage extends StatelessWidget {
   Future<dynamic> publish(context) {
     //TODO Icon
     Size size = MediaQuery.of(context).size;
+    image1_FilePath = image1_Box.getFilePath();
+    image2_FilePath = image2_Box.getFilePath();
 
     double hPercentage = 0.05;
     double wPercentage = 0.32;
@@ -256,3 +287,5 @@ class PostPage extends StatelessWidget {
         });
   }
 }
+
+
