@@ -10,12 +10,20 @@ class MediaBox extends StatefulWidget {
   final Color borderColor;
 
   File _image;
+  String _filePath;
   final picker = ImagePicker();
-
-
 
   MediaBox({Key key, this.mediaSize, this.fillColor, this.borderColor})
       : super(key: key);
+
+  File getFile() {
+    return _image;
+  }
+
+  String getFilePath() {
+    return _filePath;
+  }
+
   @override
   State<StatefulWidget> createState() {
     return _MediaBoxState();
@@ -23,13 +31,14 @@ class MediaBox extends StatefulWidget {
 }
 
 class _MediaBoxState extends State<MediaBox> {
-  
   void _getMedia() async {
-    final pickedFile = await widget.picker.getImage(source: ImageSource.gallery);
-    
+    final pickedFile =
+        await widget.picker.getImage(source: ImageSource.gallery);
+
     setState(() {
       if (pickedFile != null) {
-        print('whatttt'+pickedFile.path);
+        print('whatttt' + pickedFile.path);
+        widget._filePath = pickedFile.path;
         widget._image = File(pickedFile.path);
       } else {
         print('No image selected.');
@@ -49,11 +58,16 @@ class _MediaBoxState extends State<MediaBox> {
             width: widget.mediaSize.width,
             height: widget.mediaSize.height,
             child: Center(
-              child: widget._image == null
-                  ? Container()
-                  : Image.file(widget._image),
+              child: Container(),
             ),
             decoration: BoxDecoration(
+              image: new DecorationImage(
+                fit: BoxFit.cover,
+                image: widget._image == null
+                    ? Image.asset(
+                        'assets/images/image_placeholder_portrait.png')
+                    : Image.file(widget._image).image,
+              ),
               color: widget.fillColor,
               border: Border.all(
                 color: widget.borderColor,
@@ -63,8 +77,8 @@ class _MediaBoxState extends State<MediaBox> {
           ),
         ),
         Positioned(
-          top: widget.mediaSize.height* 0.75,
-          left: widget.mediaSize.width*1.05,
+          top: widget.mediaSize.height * 0.75,
+          left: widget.mediaSize.width * 1.05,
           child: Container(
             height: 40.0,
             width: 40.0,

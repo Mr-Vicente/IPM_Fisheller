@@ -77,7 +77,7 @@ class AfterSplash extends StatelessWidget {
     });
     //seabass2.media = seabassMedia;
 
-    return LoginScreen();
+    return Home();
       //home: MapPage(),
 
       //home: Temp(),
