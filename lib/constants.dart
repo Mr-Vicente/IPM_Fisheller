@@ -19,7 +19,7 @@ import 'models/fish_and_tips.dart';
 
 /// ************************* Theme Colours ***************************/
 const PRIMARY_COLOUR = Color(0xFF00847C); // GREEN
-const SECONDARY_COLOUR = Color(0x00E2E2E2); // DARK GRAY
+const SECONDARY_COLOUR = Color.fromRGBO(35, 35, 35, 1.0); // DARK GRAY
 const SALMON_COLOUR = Color(0xFFfd766f);
 const WHITE_COLOUR = Colors.white;
 
@@ -41,6 +41,7 @@ const String FINALISE_TOTAL = "Total: %2.2f €";
 const LatLng FIXE_FIXE_LOCATION = LatLng(37.133966, -8.530302);
 const LatLng DOCA_PORT_LOCATION = LatLng(37.128389, -8.531901);
 const LatLng LISBON_LOCATION = LatLng(38.736946, -9.142685);
+const LatLng PORTIMAO_LOCATION = LatLng(37.131041, -8.530654);
 const double CAMERA_ZOOM = 16;
 
 /// ************************* Market Filter ***************************/

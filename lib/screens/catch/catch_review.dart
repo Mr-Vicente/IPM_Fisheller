@@ -39,7 +39,7 @@ class CatchReviewState extends State<CatchReview> {
     return Container(
       child:SingleChildScrollView(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
