@@ -67,6 +67,10 @@ class BookBox extends StatelessWidget{
   void setOrder(double avrgPrice, double deposit, double mass, double units, bool isUnits){
     double quantity = isUnits ? units: mass;
     order = new Order(sell: sell, vendor: sell.vendor, deposit: deposit, isUnits: isUnits, quantity: quantity);
+
+    print(
+      order.deposit
+    );
   }
 
   @override

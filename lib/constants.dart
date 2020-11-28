@@ -26,10 +26,10 @@ const WHITE_COLOUR = Colors.white;
 /// ************************* POPUPS TEXTS ***************************/
 
 const String TEXT_QUESTION_COMFIRM = "Are you sure you want to book?";
-const String TEXT_NOTE_COMFIRM = "The deposit (%d€) will be discounted from your account";
+const String TEXT_NOTE_COMFIRM = "The deposit (%2.1f€) will be discounted from your account";
 
 const String TEXT_QUESTION_CANCEL = "Are you sure you want to cancel?";
-const String TEXT_NOTE_CANCEL = "The deposit (%d€) will not be reimbursed?";
+const String TEXT_NOTE_CANCEL = "The deposit (%2.1f€) will not be reimbursed?";
 
 const String FINALISE_BUY = "Finalise Buy";
 const String FINALISE_SEAFOOD = "Seafood: %s";
