@@ -18,7 +18,6 @@ import 'catch.dart';
 class CatchMedia extends StatefulWidget {
   List<Seafood> seafoods;
   List<File> seafoodImages;
-  final picker = ImagePicker();
 
   CatchMedia(this.seafoods, this.seafoodImages);
 
@@ -35,6 +34,9 @@ class _CatchMedia extends State<CatchMedia> {
   File imageFile4;
 
   _CatchMedia(this.seafoods, this.seafoodImages);
+
+
+
 
 
   void _updateSeafood(){
@@ -64,25 +66,26 @@ class _CatchMedia extends State<CatchMedia> {
 
 
   _openGallery(int n) async {
-    var pickedFile = await widget.picker.getImage(source: ImageSource.gallery);
+    // ignore: deprecated_member_use
+    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (n == 1) {
       this.setState(() {
-        imageFile = File(pickedFile.path);
+        imageFile = picture;
       });
     }
     if (n == 2) {
       this.setState(() {
-        imageFile2 = File(pickedFile.path);
+        imageFile2 = picture;
       });
     }
     if (n == 3) {
       this.setState(() {
-        imageFile3 = File(pickedFile.path);
+        imageFile3 = picture;
       });
     }
     if (n == 4) {
       this.setState(() {
-        imageFile4 = File(pickedFile.path);
+        imageFile4 = picture;
       });
     }
   }
@@ -498,6 +501,6 @@ class _CatchMedia extends State<CatchMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return Back(body: _screen());
+    return Back(body: _screen(),current: Text("media"),);
   }
 }

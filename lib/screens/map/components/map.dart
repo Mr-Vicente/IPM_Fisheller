@@ -173,7 +173,7 @@ class MapState extends State<Map> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Stage1Description(sell)
+                                    builder: (context) => Stage1Description(sell,"map")
                                 )
                               );
                             },

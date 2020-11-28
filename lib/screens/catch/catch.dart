@@ -39,7 +39,8 @@ class CatchState extends State<Catch> {
   List<File> seafoodImages;
 
   Seafood seafood = new Seafood();
-  DropDown dd = new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15);
+  DropDown dd = new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15, null);
+
   TagsButtons tb;
   List<String> currentTags = [];
 
@@ -48,6 +49,9 @@ class CatchState extends State<Catch> {
 
   void setTags(List<String> tags){
     setState(() {
+      String dropDownValue = dd.state.getValue();
+      dd = new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15, dropDownValue);
+      dd = dd;
       currentTags = tags;
       List<Tag> temp = [];
       for(String s in tags){
@@ -418,7 +422,7 @@ class CatchState extends State<Catch> {
   Widget build(BuildContext context) {
     seafoodImages = [];
     tb = TagsButtons(currentTags: currentTags, parent: this);
-    return Back(body: _screen());
+    return Back(body: _screen(),current: Text("catch"),);
   }
 
 }
