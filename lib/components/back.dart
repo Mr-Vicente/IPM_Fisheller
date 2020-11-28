@@ -1,12 +1,17 @@
+import 'package:fisheller_app/screens/feed/components/body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'home.dart';
 
 class Back extends StatelessWidget{
   Widget body;
   Widget bottom;
+  Text current;
   Back({
     this.body,
-    this.bottom
+    this.bottom,
+    this.current
   });
 
   @override
@@ -23,7 +28,14 @@ class Back extends StatelessWidget{
                 icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
                 label: new Text('back', style: TextStyle(fontSize:20, fontWeight: FontWeight.w600)),
                 onPressed:() {
+                  //Navigator.pop(context);
                   Navigator.pop(context);
+                  if(current.data == "feed") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Home(index: 1)));
+                  }
                 }
             )
         ),
