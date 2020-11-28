@@ -11,13 +11,52 @@ import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/home.dart';
 import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 import 'components/preferences.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+    new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Login',
+      theme: ThemeData(
+        fontFamily:'Raleway',
+        primaryColor: PRIMARY_COLOUR,
+        scaffoldBackgroundColor: PRIMARY_COLOUR,
+      ),
+      home: MyApp(),
+    )
+);
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+  Widget build(BuildContext context) {
+    return new SplashScreen(
+        seconds: 4,
+        navigateAfterSeconds: new AfterSplash(),
+        title: new Text('Welcome In SplashScreen',
+          style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0
+          ),),
+        image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
+        backgroundColor: Colors.white,
+        styleTextUnderTheLoader: new TextStyle(),
+        photoSize: 100.0,
+        onClick: ()=>print("Flutter Egypt"),
+        loaderColor: Colors.red
+    );
+  }
+
+}
+
+class AfterSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -32,30 +71,21 @@ class MyApp extends StatelessWidget {
     MySharedPreferences.instance
         .getBooleanValue("isfirstRun")
         .then((value) {
-          print(value);
-          //if (value == false)
-            initialiseUsers();
+      print(value);
+      //if (value == false)
+      initialiseUsers();
     });
     //seabass2.media = seabassMedia;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Login',
-      theme: ThemeData(
-        fontFamily:'Raleway',
-        primaryColor: PRIMARY_COLOUR,
-        scaffoldBackgroundColor: PRIMARY_COLOUR,
-      ),
-      home: LoginScreen(),
+    return LoginScreen();
       //home: MapPage(),
-      
+
       //home: Temp(),
       //home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
       //home: CatchMedia()
-    );
   }
 }
 
