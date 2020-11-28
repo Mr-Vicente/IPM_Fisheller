@@ -12,7 +12,7 @@ Seafood _$SeafoodFromJson(Map<String, dynamic> json) {
     tags: (json['tags'] as List)
         ?.map((e) => _$enumDecodeNullable(_$TagEnumMap, e))
         ?.toList(),
-    price: json['price'] as int,
+    price: json['price'] as double,
     quantityUnits: json['quantityUnits'] as int,
     quantityMass: (json['quantityMass'] as num)?.toDouble(),
     media: (json['media'] as List)?.map((e) => e as String)?.toList(),
