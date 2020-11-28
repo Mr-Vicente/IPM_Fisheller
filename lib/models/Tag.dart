@@ -23,6 +23,23 @@ Tag getTagEnum(String s){
   }
 }
 
+Tag getTagEnum(String s){
+  switch (s) {
+    case 'Fish':
+      return Tag.fish;
+    case 'Aquaculture':
+      return Tag.aquaculture;
+    case 'Shellfish':
+      return Tag.shellfish;
+    case 'Sea':
+      return Tag.sea;
+    case 'Imported':
+      return Tag.imported;
+    default:
+      return null;
+  }
+}
+
 extension Tag_Extension on Tag {
 
   String get name {

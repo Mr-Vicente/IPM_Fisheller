@@ -1,4 +1,5 @@
 import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
@@ -10,34 +11,12 @@ import 'package:fisheller_app/screens/map/map_screen.dart';
 import 'package:fisheller_app/components/home.dart';
 import 'package:fisheller_app/screens/fish_and_tips/fishNTips_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 import 'components/preferences.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-
-    julioBass.market = fixeFixe_market;
-    julioLobster.market = fixeFixe_market;
-    julioCod.market = fixeFixe_market;
-
-    josefinaBass.market = docaPortimao_market;
-    josefinaLobster.market = docaPortimao_market;
-    josefinaCod.market = docaPortimao_market;
-
-    MySharedPreferences.instance
-        .getBooleanValue("isfirstRun")
-        .then((value) {
-          print(value);
-          //if (value == false)
-            initialiseUsers();
-    });
-    //seabass2.media = seabassMedia;
-
-    return MaterialApp(
+void main() => runApp(
+    new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
@@ -45,23 +24,72 @@ class MyApp extends StatelessWidget {
         primaryColor: PRIMARY_COLOUR,
         scaffoldBackgroundColor: PRIMARY_COLOUR,
       ),
-      //home: LoginScreen(),
+      home: MyApp(),
+    )
+);
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
+
+  Widget build(BuildContext context) {
+    return new SplashScreen(
+        seconds: 4,
+        navigateAfterSeconds: new AfterSplash(),
+        title: new Text('Welcome In SplashScreen',
+          style: new TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0
+          ),),
+        image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
+        backgroundColor: Colors.white,
+        styleTextUnderTheLoader: new TextStyle(),
+        photoSize: 100.0,
+        onClick: ()=>print("Flutter Egypt"),
+        loaderColor: Colors.red
+    );
+  }
+
+}
+
+class AfterSplash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    julioBass.marketName = fixeFixe_market.name;
+    julioLobster.marketName = fixeFixe_market.name;
+    julioCod.marketName = fixeFixe_market.name;
+
+    josefinaBass.marketName = docaPortimao_market.name;
+    josefinaLobster.marketName = docaPortimao_market.name;
+    josefinaCod.marketName = docaPortimao_market.name;
+
+    MySharedPreferences.instance
+        .getBooleanValue("isfirstRun")
+        .then((value) {
+      print(value);
+      //if (value == false)
+      initialiseUsers();
+    });
+    //seabass2.media = seabassMedia;
+
+    return LoginScreen();
       //home: MapPage(),
-      
-      //home: Catch(),
-      home: Home(),
+
+      //home: Temp(),
+      //home: Home()
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
-      //home: Catch()
-    );
+      //home: CatchMedia()
   }
 }
 
 void initialiseUsers(){
-  ana.bookings = new List<Order>();
-  //ana.bookings.add(new Order(vendor: null, consumer: ana, sell: null));
-  hakeem.bookings = new List<Order>();
   MySharedPreferences.instance.setConsumer("ana@gmail.com",ana);
   MySharedPreferences.instance.setConsumer("hakeem@gmail.com",hakeem);
 

@@ -1,7 +1,11 @@
 import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/order.dart';
 import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'vendor.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Vendor extends User{
   List<Order> orders;
   List<Order> history;
@@ -9,7 +13,7 @@ class Vendor extends User{
   List<User> followers;
   String profile;
 
-  Vendor(String name, String email, String password, String profileImage){
+  Vendor(String name, String email, String password, String profile){
     this.name = name;
     this.email = email;
     this.password = password;
@@ -17,7 +21,7 @@ class Vendor extends User{
     this.history = [];
     this.stars = [5];
     this.followers = [];
-    this.profile = profileImage;
+    this.profile = profile;
   }
 
   int getRating(){
@@ -26,26 +30,29 @@ class Vendor extends User{
     return sum ~/ stars.length;
   }
 
-  Vendor.fromJson(Map<String, dynamic> json){
+  factory Vendor.fromJson(Map<String, dynamic> json) => _$VendorFromJson(json);
+  Map<String, dynamic> toJson() => _$VendorToJson(this);
+
+  /*Vendor.fromJson(Map<String, dynamic> json){
     name = json['name'];
     email = json['email'];
     password = json['password'];
-    imageName = json['imageName'];
-    stars = cast<List<int>>(json['stars']);
-    orders = cast<List<Order>>(json['orders']);
-    history = cast<List<Order>>(json['history']);
-    followers = cast<List<User>>(json['followers']);
+    profile = json['profile'];
+    stars = List<int>.from(json["stars"].map((x) => x));
+    orders  = List<Order>.from(json["orders"].map((x) => Order.fromJson(x)));
+    history = List<Order>.from(json["history"].map((x) => Order.fromJson(x)));
+    followers = List<User>.from(json["followers"].map((x) => User.fromJson(x)));
   }
 
   Map<String, dynamic> toJson() => {
     'name': name,
     'email': email,
     'password': password,
-    'imageName': imageName,
-    'orders': orders,
-    'history': history,
-    'followers': followers,
-    'stars': stars,
-  };
+    'profile': profile,
+    'orders': List<dynamic>.from(orders.map((x) => x.toJson())),
+    'history': List<dynamic>.from(history.map((x) => x.toJson())),
+    'followers': List<dynamic>.from(followers.map((x) => x.toJson())),
+    'stars': List<dynamic>.from(stars.map((x) => x)),
+  };*/
 
 }

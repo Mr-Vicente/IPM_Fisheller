@@ -10,23 +10,33 @@ import 'package:fisheller_app/components/navigation_bar.dart';
 import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 
 class Home extends StatefulWidget {
+  final int index;
+  Home({
+    this.index = 0,
+  });
+
   @override
   State<StatefulWidget> createState() {
-    return _HomeState();
+    return _HomeState(currentIndex: index);
   }
 }
 
 class _HomeState extends State<Home> {
-  int _currentIndex = 0;
+  int currentIndex;
   final List<Widget> _children = [MapPage(), Feed(), Cart()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  _HomeState({
+    this.currentIndex = 0,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       extendBody: true,
       body: Stack(children: <Widget>[
-        _children[_currentIndex],
+        _children[currentIndex],
         Positioned(
             top: 25,
             right: 10,
@@ -36,7 +46,7 @@ class _HomeState extends State<Home> {
                   child: Image.asset('assets/icons/extra_menu.png', height: 20),
                   backgroundColor: Colors.white,
             ))),
-        if (_currentIndex == 1)
+        if (currentIndex == 1)
           Positioned(
               top: 25,
               left: 10,
@@ -124,7 +134,7 @@ class _HomeState extends State<Home> {
 
   void _onTabTapped(int index) {
     setState(() {
-      _currentIndex = index;
+      currentIndex = index;
     });
   }
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fisheller_app/models/consumer.dart';
+import 'package:fisheller_app/models/order.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharedPreferences {
@@ -30,11 +31,36 @@ class MySharedPreferences {
 
   setConsumer(String key, Consumer value) async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
-    myPrefs.setString(key, json.encode(value));
+    myPrefs.setString(key, json.encode(value.toJson()));
   }
 
   getConsumer(String key) async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
     return json.decode(myPrefs.getString(key));
   }
+
+}
+
+getCurrentUserObject() {
+  return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    print(email);
+    return MySharedPreferences.instance.getConsumer(email).then((value) {
+      return Consumer.fromJson(value);
+    });
+  });
+}
+
+setCurrentUserObject(Order o) {
+  MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    MySharedPreferences.instance.getConsumer(email).then((consumer) {
+      print("Merry Christmas");
+      Consumer c = Consumer.fromJson(consumer);
+      c.bookings.add(o);
+      print(o.toJson());
+      print(c.bookings);
+      print(c.toJson());
+      print("Merry Christmas_2");
+      MySharedPreferences.instance.setConsumer(email,c);
+    });
+  });
 }
