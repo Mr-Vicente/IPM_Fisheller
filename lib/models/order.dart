@@ -11,7 +11,7 @@ class Order {
   Vendor vendor;
   Sell sell;
   Consumer consumer;
-  int deposit;
+  double deposit;
 
   double quantity;
   bool isUnits;
