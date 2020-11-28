@@ -54,18 +54,12 @@ class MyApp extends StatelessWidget {
       //home:FishAndTips(codTips),
       //home:FishAndTips(lobsterTips),
       //home: BookFish(seabass2, 'Doca Portimão')
-      //home: Catch()
+      //home: CatchMedia()
     );
   }
 }
 
 void initialiseUsers(){
-  //ana.bookings = new List<Order>();
-  //ana.following = new List<User>();
-  //ana.purchases = new List<Order>();
-  //hakeem.bookings = new List<Order>();
-  //hakeem.following = new List<User>();
-  //hakeem.purchases = new List<Order>();
   MySharedPreferences.instance.setConsumer("ana@gmail.com",ana);
   MySharedPreferences.instance.setConsumer("hakeem@gmail.com",hakeem);
 
