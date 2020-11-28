@@ -20,9 +20,9 @@ class Order {
     this.vendor,
     this.sell,
     this.consumer,
-    this.quantity,
-    this.isUnits,
-    this.deposit = 0,
+    this.quantity = 0.0,
+    this.isUnits = false,
+    this.deposit = 0.0,
   });
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
