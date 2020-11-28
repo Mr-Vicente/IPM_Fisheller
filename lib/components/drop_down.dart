@@ -8,12 +8,13 @@ class DropDown extends StatefulWidget {
   final Color _color;
   final Color _textColor;
   final double _fontSize;
+  String _dropdownValue;
 
-  DropDown(this._dropdownLabel, this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize);
+  DropDown(this._dropdownLabel, this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize, this._dropdownValue);
 
    _DropDownState state;
   @override
-  _DropDownState createState() => (state = new _DropDownState(this._dropdownLabel, this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize));
+  _DropDownState createState() => (state = new _DropDownState(this._dropdownLabel, this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize, this._dropdownValue));
 
   _DropDownState getState(){
     return state;
@@ -31,7 +32,7 @@ class _DropDownState extends State<DropDown> {
   List<DropdownMenuItem<String>> _items;
   String _dropdownValue;
 
-  _DropDownState(this._dropdownLabel,  this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize);
+  _DropDownState(this._dropdownLabel,  this._dropDownItems, this._width, this._height, this._color, this._textColor, this._fontSize, this._dropdownValue);
 
 
   List<Widget> _selectedItem(String item){

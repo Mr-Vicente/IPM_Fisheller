@@ -19,8 +19,8 @@ class _FilterPopUpState extends State<FilterPopUp>{
 
   final Map map;
   FilterModel model = FilterModel();
-  DropDown categoryDD = DropDown('CATEGORY', CATEGORIES, 137, 40, PRIMARY_COLOUR, Colors.white, 13);
-  DropDown seafoodDD = new DropDown('SEAFOOD', SEAFOODS, 120, 40, PRIMARY_COLOUR, Colors.white, 13);
+  DropDown categoryDD = DropDown('CATEGORY', CATEGORIES, 137, 40, PRIMARY_COLOUR, Colors.white, 13, null);
+  DropDown seafoodDD = new DropDown('SEAFOOD', SEAFOODS, 120, 40, PRIMARY_COLOUR, Colors.white, 13, null);
   CustomRangeSlider priceSlider = CustomRangeSlider(max: 40, step: 1,);
   CustomRangeSlider quantitySlider = CustomRangeSlider(max: 10, step: 1,);
 
