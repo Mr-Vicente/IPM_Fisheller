@@ -80,7 +80,7 @@ class InfoPopUp extends StatelessWidget {
               child: Text(
                 question,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     color: Colors.black87,
                     fontWeight: FontWeight.bold),
               ),
@@ -96,7 +96,7 @@ class InfoPopUp extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 30),
               child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -107,7 +107,7 @@ class InfoPopUp extends StatelessWidget {
                         "Confirm",
                         style: TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 10,
+                            fontSize: 15,
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
@@ -118,6 +118,9 @@ class InfoPopUp extends StatelessWidget {
                         }else{
                           removeBookingFromCurrentUser(order);
                           Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(builder: (
+                              context) => Home(index: 2,)));
                         }
                       },
                       shape: RoundedRectangleBorder(
@@ -127,10 +130,10 @@ class InfoPopUp extends StatelessWidget {
                     RaisedButton(
                       color: SALMON_COLOUR,
                       child: Text(
-                        "back",
+                        "Back",
                         style: TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 10,
+                            fontSize: 15,
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
@@ -237,6 +240,7 @@ class PayPopUp extends StatelessWidget {
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
+                        paySeafoodFromCurrentUser(order);
                         Navigator.pop(context);
                         showDialog(
                           context: context,

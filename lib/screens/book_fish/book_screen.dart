@@ -138,7 +138,15 @@ class BookBox extends StatelessWidget{
                           child: Text('Book', style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white)),
                           onPressed: (){
                              getCurrentUserObject().then((currentUser) {
-                               _book(context, new Order(sell: sell, consumer: currentUser, vendor: sell.vendor, deposit: 5));
+                               _book(context,
+                                   new Order(
+                                       sell: sell,
+                                       consumer: currentUser,
+                                       vendor: sell.vendor,
+                                       deposit: 5,
+                                       quantity: 10.0,
+                                       isUnits: false)
+                               );
                              });
                             },
                         )

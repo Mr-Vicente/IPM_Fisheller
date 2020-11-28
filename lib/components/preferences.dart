@@ -65,8 +65,22 @@ removeBookingFromCurrentUser(Order o) {
     MySharedPreferences.instance.getConsumer(email).then((consumer) {
       Consumer c = Consumer.fromJson(consumer);
       //c.bookings.remove(o);
-      //c.bookings.removeLast();
+      if(c.bookings.isNotEmpty)
+        c.bookings.removeLast();
       print(c.bookings);
+      MySharedPreferences.instance.setConsumer(email,c);
+    });
+  });
+}
+
+paySeafoodFromCurrentUser(Order o) {
+  MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    MySharedPreferences.instance.getConsumer(email).then((consumer) {
+      Consumer c = Consumer.fromJson(consumer);
+      if(c.bookings.isNotEmpty)
+        c.bookings.removeLast();
+      print(c.bookings);
+      c.purchases.add(o);
       MySharedPreferences.instance.setConsumer(email,c);
     });
   });
