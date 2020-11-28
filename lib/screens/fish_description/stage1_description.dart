@@ -270,7 +270,7 @@ class _Stage1Description extends State<Stage1Description> {
                               width: 100.0,
                               height: 100.0,
                               child:Center(
-                                  child: Text(description.seafood.price.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 45))
+                                  child: Text(description.seafood.price.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 30))
                               ),
                               decoration: BoxDecoration(
                                 border: Border.all(width: 10.0,color: Colors.teal,style: BorderStyle.solid),

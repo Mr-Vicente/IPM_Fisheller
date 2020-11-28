@@ -74,8 +74,7 @@ class _HomeState extends State<Home> {
                 iconData: Icons.face, iconSize: 50.0, text: "Profile"),
             AmazDrawerItem(
                 iconData: Icons.settings, iconSize: 50.0, text: "Settings"),
-            AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help"),
-            AmazDrawerItem(iconData: Icons.logout, iconSize: 50.0, text: "Logout")
+            AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help")
           ]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

@@ -49,9 +49,9 @@ class MapState extends State<Map> {
     if (currentLocation != null) {
       target = LatLng(currentLocation.latitude, currentLocation.longitude);
     }else {
-      target = LISBON_LOCATION;
+      target = PORTIMAO_LOCATION;
     }
-    return CameraPosition( zoom: CAMERA_ZOOM, target: target);
+    return CameraPosition( zoom: CAMERA_ZOOM, target: PORTIMAO_LOCATION);
   }
 
   void _onMapCreated(GoogleMapController controller) async{
@@ -62,7 +62,7 @@ class MapState extends State<Map> {
           var currentLat = currentLocation.latitude;
           var currentLong = currentLocation.longitude;
           var pinPosition =  LatLng(currentLat, currentLong);
-          controller.moveCamera(CameraUpdate.newLatLng(pinPosition));
+          //controller.moveCamera(CameraUpdate.newLatLng(pinPosition));
         });
     } catch (e) {
       currentLocation = null;

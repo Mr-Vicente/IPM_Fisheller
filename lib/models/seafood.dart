@@ -9,7 +9,7 @@ part 'seafood.g.dart';
 class Seafood{
   Seafood_Type type;
   List<Tag> tags;
-  int price;
+  double price;
   int quantityUnits;
   double quantityMass;
   List<String> media;
