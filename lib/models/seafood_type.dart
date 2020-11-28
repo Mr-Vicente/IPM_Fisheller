@@ -9,14 +9,14 @@ enum Seafood_Type {
 }
 
 Seafood_Type getSeafoodTypeEnum(String s){
-  switch (s) {
-    case 'Sea Bass':
+  switch (s.toLowerCase()) {
+    case 'sea bass':
       return Seafood_Type.sea_bass;
-    case 'Lobster':
+    case 'lobster':
       return Seafood_Type.lobster;
-    case 'Tuna':
+    case 'tuna':
       return Seafood_Type.tuna;
-    case 'Cod Fish':
+    case 'cod fish':
       return Seafood_Type.cod_fish;
     default:
       return null;

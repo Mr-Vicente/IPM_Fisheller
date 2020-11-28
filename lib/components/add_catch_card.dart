@@ -1,23 +1,25 @@
 
-
-import 'package:fisheller_app/components/popup_card.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/Tag.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
-import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/models/seafood.dart';
-import 'package:fisheller_app/models/vendor.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter/widgets.dart';
+import 'dart:io';
+
+
+
+
 class CatchCard extends StatelessWidget {
-  final Function press;
-  final Sell sell;
+  final Seafood seafood;
+  final File image;
   final Color color, textColor;
   final double percentage_width;
   const CatchCard({
     Key key,
-    this.sell,
-    this.press,
+    this.seafood,
+    this.image,
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
@@ -33,8 +35,8 @@ class CatchCard extends StatelessWidget {
       child:  Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Image_Box(seafood: null),
-          Info_Box(sell: sell),
+          Image_Box(image: image),
+          Info_Box(seafood: seafood),
         ],
       ),
       decoration: BoxDecoration(
@@ -54,11 +56,21 @@ class CatchCard extends StatelessWidget {
 }
 
 class Image_Box extends StatelessWidget {
-  final Seafood seafood;
+  final File image;
   const Image_Box({
     Key key,
-    this.seafood,
+    this.image,
   }) : super(key: key);
+
+  ImageProvider _image(){
+    if (image == null) {
+      return Image.asset("assets/images/image_placeholder_portrait.png")
+          .image;
+    } else {
+      return Image.file(image).image;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -71,7 +83,7 @@ class Image_Box extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         image: new DecorationImage(
           fit: BoxFit.cover,
-          image: Image.asset("assets/images/sea_bass.png").image,
+          image: _image(),
         ),
         boxShadow: [
           BoxShadow(
@@ -87,16 +99,16 @@ class Image_Box extends StatelessWidget {
 }
 
 class Info_Box extends StatelessWidget {
-  final Sell sell;
+  final Seafood seafood;
   const Info_Box({
     Key key,
-    this.sell,
+    this.seafood,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Seafood seafood = sell.seafood;
+
     // This size provide us total height and width of our screen
     return Container(
       margin: EdgeInsets.only(left: 5),
@@ -106,9 +118,9 @@ class Info_Box extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Title_Tags_Box(sell: sell),
-          Numbers_Box(seafood: sell.seafood,),
-          DrawButtons(sell: sell),
+          Title_Tags_Box(seafood: seafood),
+          Numbers_Box(seafood: seafood,),
+          DrawButtons(),
         ],
       ),
     );
@@ -117,15 +129,13 @@ class Info_Box extends StatelessWidget {
 
 
 class Title_Tags_Box extends StatelessWidget {
-  final Sell sell;
+  final Seafood seafood;
   const Title_Tags_Box({
     Key key,
-    this.sell
+    this.seafood
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    Seafood seafood = sell.seafood;
     // This size provide us total height and width of our screen
     return Container(
       margin: EdgeInsets.only(top: 5,left: 5),
@@ -348,10 +358,9 @@ class Number_Circle extends StatelessWidget {
 }
 
 class DrawButtons extends StatelessWidget {
-  final Sell sell;
+
   const DrawButtons({
     Key key,
-    this.sell,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {

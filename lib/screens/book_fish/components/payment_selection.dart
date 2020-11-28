@@ -56,7 +56,7 @@ class PaymentSelectionPopUpState extends State<PaymentSelectionPopUp>{
                   methods[index].data,
                   style: TextStyle(
                       color: methods[index].isSelected ?
-                      PRIMARY_COLOUR : Colors.black,
+                      PRIMARY_COLOUR : Colors.black26,
                       fontWeight: methods[index].isSelected ?
                       FontWeight.w600: FontWeight.normal
                   )

@@ -1,22 +1,22 @@
 enum Tag {
-  fish,
   aquaculture,
-  shellfish,
-  sea,
+  fish,
   imported,
+  sea,
+  shellfish,
 }
 
 Tag getTagEnum(String s){
-  switch (s) {
-    case 'Fish':
+  switch (s.toLowerCase()) {
+    case 'fish':
       return Tag.fish;
-    case 'Aquaculture':
+    case 'aquaculture':
       return Tag.aquaculture;
-    case 'Shellfish':
+    case 'shellfish':
       return Tag.shellfish;
-    case 'Sea':
+    case 'sea':
       return Tag.sea;
-    case 'Imported':
+    case 'imported':
       return Tag.imported;
     default:
       return null;
@@ -40,9 +40,5 @@ extension Tag_Extension on Tag {
       default:
         return null;
     }
-  }
-
-  void talk() {
-    print('meow');
   }
 }
