@@ -43,7 +43,7 @@ class BookFish extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Back(body: _screen(size));
+    return Back(body: _screen(size),current: Text("book"),);
   }
 }
 

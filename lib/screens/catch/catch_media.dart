@@ -501,6 +501,6 @@ class _CatchMedia extends State<CatchMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return Back(body: _screen());
+    return Back(body: _screen(),current: Text("media"),);
   }
 }
