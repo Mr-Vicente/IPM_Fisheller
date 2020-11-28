@@ -65,6 +65,12 @@ class Back extends StatelessWidget{
                 iconSize: size.width * 0.1,
                 text: "Help",
                 textSize: size.width * 0.08),
+            AmazDrawerItem(
+                iconData: Icons.logout,
+                iconSize: 50.0,
+                text: "Logout",
+                textSize: size.width * 0.08
+            )
           ]),
         
         body:
