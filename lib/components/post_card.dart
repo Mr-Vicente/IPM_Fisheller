@@ -15,14 +15,12 @@ class PostCard extends StatelessWidget {
   final Post post;
   final Color color, textColor;
   final double percentage_width;
-  final Vendor vendor;
   const PostCard({
     Key key,
     this.post,
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
-    this.vendor,
   }) : super(key: key);
 
   @override
@@ -37,7 +35,7 @@ class PostCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Image_Box(imageName: images.isEmpty ? null : images[0]),
-          Info_Box(post: post),
+          Info_Box(post: post,vendor:post.vendor),
         ],
       ),
       decoration: BoxDecoration(
@@ -100,9 +98,11 @@ class Image_Box extends StatelessWidget {
 
 class Info_Box extends StatelessWidget {
   final Post post;
+  final Vendor vendor;
   const Info_Box({
     Key key,
     this.post,
+    this.vendor,
   }) : super(key: key);
 
   @override
@@ -120,7 +120,7 @@ class Info_Box extends StatelessWidget {
         children: <Widget>[
           Title_Box(title: post.title),
           Description(description: post.description,),
-          Image.asset("assets/images/post_wave.png"),
+          Vendor_Box(vendor: vendor,),
         ],
       ),
     );
@@ -189,6 +189,52 @@ class Description extends StatelessWidget {
         textAlign: TextAlign.justify,
       ),
     );
+  }
+}
+
+class Vendor_Box extends StatelessWidget {
+  final Vendor vendor;
+  const Vendor_Box({
+    Key key,
+    this.vendor,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    // This size provide us total height and width of our screen
+    return /*SizedBox(height: 50,width:100,child:*/Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 5),
+            width: 30,
+            height: 30,
+            child: Container(
+              //color: Colors.black38,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    width: 3, color: Colors.black, style: BorderStyle.solid),
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: Image.asset(vendor.profile).image,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+            width: 5,
+          ),
+          Text(
+            vendor.name,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+        ],
+      ),
+    );
+
   }
 }
 
