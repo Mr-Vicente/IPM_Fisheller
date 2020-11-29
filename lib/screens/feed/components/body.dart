@@ -62,8 +62,6 @@ class FeedToggleState extends State<FeedToggle>{
               color: WHITE_COLOUR,
             )
         ),
-        for(var post in posts)
-          PostCard(post: post,),
         //food
         Padding(
             padding: EdgeInsets.only(top: 70),
@@ -91,13 +89,13 @@ class FeedList extends StatefulWidget{
 
 }
 
-class FeedListState extends State<FeedList>{
+class FeedListState extends State<FeedList> {
 
   bool isFood;
 
   FeedListState(this.isFood);
 
-  Widget _getFood(){
+  Widget _getFood() {
     return SingleChildScrollView(
       padding: EdgeInsets.only(bottom: 100),
       child: Column(
@@ -113,7 +111,8 @@ class FeedListState extends State<FeedList>{
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Stage1Description(sell,"feed")));
+                          builder: (context) =>
+                              Stage1Description(sell, "feed")));
                 },
               )
         ],
@@ -121,23 +120,35 @@ class FeedListState extends State<FeedList>{
     );
   }
 
-  Widget _getPosts(){
+  Widget _getPosts() {
     return SingleChildScrollView(
       padding: EdgeInsets.only(bottom: 100),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-
+          for(var post in posts)
+            PostCard(post: post,),
         ],
       ),
     );
   }
 
 
-
-  Widget _getList(){
-    if(isFood)
+  Widget _getList() {
+    if (isFood)
       return _getFood();
     else
       return _getPosts();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return SingleChildScrollView(
+        child: SizedBox(
+            height: size.height - 150,
+            child: _getList()
+    )
+    );
+  }
+}
