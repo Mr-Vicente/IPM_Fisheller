@@ -31,14 +31,14 @@ class BackgroundMain extends State<CartBackground>{
             child: Text(
               "CART",
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
                 fontSize: 50,
               ),
             ),
           ),
           Positioned(child:
             CartToggle(),
-            top: 150.0,
+            top: 130.0,
           ),
         ],
       ),

@@ -99,6 +99,18 @@ class Info_Box extends StatelessWidget {
     this.isPending,
   }) : super(key: key);
 
+
+  Widget _getHistoryInfo(){
+    String unit = (order.quantity == 1) ? "%2.0f Unit": "%2.0f Units";
+    String format = order.isUnits ? unit: "%2.2f Kg";
+    return Column(
+      children: <Widget>[
+        text_info(categoryText: "Price", content: sprintf("%2.2f €",[order.getTotalPrice()])),
+        text_info(categoryText: "Quantity", content: sprintf(format,[order.quantity]))
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -114,7 +126,10 @@ class Info_Box extends StatelessWidget {
         children: <Widget>[
           Title_Tags_Box(order: order),
           text_info(categoryText: "Market:", content: order.sell.marketName),
-          text_info(categoryText: "Deposit", content: sprintf("%2.2f €",[order.deposit])),
+          if(!isPending)
+            _getHistoryInfo(),
+          if(isPending)
+              text_info(categoryText: "Deposit", content: sprintf("%2.2f €",[order.deposit])),
           Vendor_Box(vendor: order.vendor),
           if(isPending)
             DrawButtons(order:order),
@@ -267,6 +282,8 @@ class Vendor_Box extends StatelessWidget {
                   //color: Colors.black38,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                        width: 2, color: Colors.black, style: BorderStyle.solid),
                     image: DecorationImage(
                       fit: BoxFit.fill,
                       image: Image.asset(vendor.profile).image,
@@ -312,7 +329,7 @@ class DrawButtons extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return PopUpCard(order:order,percentage_width: 0.8,popupType:2);
+                    return PopUpCard(order:order,percentage_width: 0.8, popupType:2);
                   },
                 );
               },

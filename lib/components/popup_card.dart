@@ -326,7 +326,7 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                   fontWeight: FontWeight.w900),
             ),
           ),
-          Vendor_Box(vendor: julio),
+          Vendor_Box(vendor: order.vendor),
           RatingBar.builder(
             initialRating: 1,
             minRating: 1,
