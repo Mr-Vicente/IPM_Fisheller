@@ -71,7 +71,7 @@ class AfterSplash extends StatelessWidget {
     MySharedPreferences.instance.getBooleanValue("isfirstRun").then((value) {
       print(value);
       //if (value == false)
-      initialiseUsers();
+        initialiseUsers();
     });
     //seabass2.media = seabassMedia;
 
@@ -88,8 +88,12 @@ class AfterSplash extends StatelessWidget {
 }
 
 void initialiseUsers() {
-  MySharedPreferences.instance.setConsumer("ana@gmail.com", ana);
-  MySharedPreferences.instance.setConsumer("hakeem@gmail.com", hakeem);
+  MySharedPreferences.instance.initializeEverything();
+  MySharedPreferences.instance.setConsumer(ana.email, ana);
+  MySharedPreferences.instance.setConsumer(hakeem.email, hakeem);
+
+  MySharedPreferences.instance.setVendor(julio.email, julio);
+  MySharedPreferences.instance.setVendor(josefina.email, josefina);
 
   MySharedPreferences.instance.setBooleanValue("isfirstRun", true);
   print("Users Initialized");

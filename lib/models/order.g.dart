@@ -19,7 +19,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) {
         : Consumer.fromJson(json['consumer'] as Map<String, dynamic>),
     quantity: (json['quantity'] as num)?.toDouble(),
     isUnits: json['isUnits'] as bool,
-    deposit: json['deposit'] as double,
+    deposit: (json['deposit'] as num)?.toDouble(),
   );
 }
 

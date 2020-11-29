@@ -19,18 +19,4 @@ class User{
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  /*User.fromJson(Map<String, dynamic> json){
-    name = json['name'];
-    email = json['email'];
-    password = json['password'];
-    imageName = json['imageName'];
-  }
-
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'email': email,
-    'password': password,
-    'imageName': imageName,
-  };*/
-
 }

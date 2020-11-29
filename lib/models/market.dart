@@ -26,19 +26,5 @@ class Market{
 
   factory Market.fromJson(Map<String, dynamic> json) => _$MarketFromJson(json);
   Map<String, dynamic> toJson() => _$MarketToJson(this);
-  /*
-  Market.fromJson(Map<String, dynamic> json){
-    name = json['name'];
-    mapLocation = LatLng.fromJson(json['mapLocation']);
-    imageName = json['imageName'];
-    items  = List<Sell>.from(json["items"].map((x) => Sell.fromJson(x)));
-  }
 
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'mapLocation': mapLocation.toJson(),
-    'imageName': imageName,
-    'items': List<dynamic>.from(items.map((x) => x.toJson())),
-  };
-  */
 }

@@ -28,25 +28,6 @@ class Order {
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
-/*
-  Order.fromJson(Map<String, dynamic> json){
-    vendor = Vendor.fromJson(json['vendor']);
-    sell = Sell.fromJson(json['sell']);
-    consumer = Consumer.fromJson(json['consumer']);
-    quantity = json['quantity'];
-    isUnits = json['isUnits'];
-    deposit = json['deposit'];
-  }
-
-  Map<String, dynamic> toJson() => {
-    'vendor': vendor.toJson(),
-    'sell': sell.toJson(),
-    'consumer': consumer.toJson(),
-    'quantity': quantity,
-    'isUnits': isUnits,
-    'deposit': deposit,
-  };
-*/
 
   double getWeight(){
     if(isUnits)

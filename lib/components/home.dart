@@ -1,4 +1,5 @@
 import 'package:fisheller_app/components/home_components/add_PopUp.dart';
+import 'package:fisheller_app/screens/cart/background.dart';
 import 'package:fisheller_app/screens/cart/body.dart';
 import 'package:fisheller_app/screens/feed/components/body.dart';
 import 'package:fisheller_app/screens/feed/components/search_bar.dart';
@@ -164,7 +165,7 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CartBody(),
+      body: CartBackground(),
     );
   }
 }

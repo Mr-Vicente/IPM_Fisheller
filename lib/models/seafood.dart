@@ -34,25 +34,5 @@ class Seafood{
   }
   factory Seafood.fromJson(Map<String, dynamic> json) => _$SeafoodFromJson(json);
   Map<String, dynamic> toJson() => _$SeafoodToJson(this);
-/*
-  Seafood.fromJson(Map<String, dynamic> json){
-    type = getSeafoodTypeEnum(json['type']);
-    tags = List<Tag>.from(json["tags"].map((x) => getTagEnum(x)));
-    price = json['price'];
-    quantityUnits = json['quantityUnits'];
-    quantityMass = json['quantityMass'];
-    media = List<String>.from(json["media"].map((x) => x));
-    description  = json['description'];
-  }
 
-  Map<String, dynamic> toJson() => {
-    'type': type.name,
-    'tags': List<dynamic>.from(tags.map((x) => x.name)),
-    'price': price,
-    'quantityUnits': quantityUnits,
-    'quantityMass': quantityMass,
-    'media': List<dynamic>.from(media.map((x) => x)),
-    'description': description,
-  };
-*/
 }

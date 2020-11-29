@@ -5,6 +5,7 @@ import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
 import 'package:fisheller_app/models/order.dart';
+import 'package:fisheller_app/models/post.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/recipies.dart';
 
@@ -73,13 +74,13 @@ Vendor julio = new Vendor(
   "Júlio Adamastor", //name
   "julio@gmail.com", //email
   "1234", //password
-  "assets/images/julio.png"
+  "assets/images/julio.png",
 );
 Vendor josefina = new Vendor(
   "Josefina Peixeira",
   "josefina@gmail.com", //email
   "1234", //password
-  "assets/images/josefina.png"
+  "assets/images/josefina.png",
 );
 
 /// ************************* Sells ******************************/
@@ -300,4 +301,22 @@ FishNTips codTips = FishNTips(
     codFun,
     codRecipies);
 
+/// ************************* Posts *******************************/
+
+Post post1 = new Post(
+  "Cheiro a bacalhau!",
+  "Nas profundezas do oceano há grelos que não são algas :))",
+  new List<String>(),
+);
+
+Post post2 = new Post(
+  "Passa ai um nite!",
+  "Chamem a polícia: mau mau mau!",
+  new List<String>(),
+);
+
+List<Post> posts = <Post>[
+  post1,
+  post2
+];
 

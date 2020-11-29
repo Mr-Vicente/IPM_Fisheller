@@ -1,4 +1,5 @@
 import 'package:fisheller_app/components/Selling_Card.dart';
+import 'package:fisheller_app/components/post_card.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/feed/components/background.dart';
 import 'package:fisheller_app/screens/fish_description/stage1_description.dart';
@@ -15,7 +16,7 @@ class FeedBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            for (var market in markets)
+            /*for (var market in markets)
               for (var sell in market.items)
                 Selling_Card(
                   sell: sell,
@@ -27,7 +28,9 @@ class FeedBody extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => Stage1Description(sell,"feed")));
                   },
-                )
+                )*/
+            for(var post in posts)
+              PostCard(post: post,),
           ],
         ),
       ),

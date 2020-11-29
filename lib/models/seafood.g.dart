@@ -12,7 +12,7 @@ Seafood _$SeafoodFromJson(Map<String, dynamic> json) {
     tags: (json['tags'] as List)
         ?.map((e) => _$enumDecodeNullable(_$TagEnumMap, e))
         ?.toList(),
-    price: json['price'] as double,
+    price: (json['price'] as num)?.toDouble(),
     quantityUnits: json['quantityUnits'] as int,
     quantityMass: (json['quantityMass'] as num)?.toDouble(),
     media: (json['media'] as List)?.map((e) => e as String)?.toList(),
@@ -70,9 +70,9 @@ const _$Seafood_TypeEnumMap = {
 };
 
 const _$TagEnumMap = {
-  Tag.fish: 'fish',
   Tag.aquaculture: 'aquaculture',
-  Tag.shellfish: 'shellfish',
-  Tag.sea: 'sea',
+  Tag.fish: 'fish',
   Tag.imported: 'imported',
+  Tag.sea: 'sea',
+  Tag.shellfish: 'shellfish',
 };
