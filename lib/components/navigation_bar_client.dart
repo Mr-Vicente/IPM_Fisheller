@@ -33,7 +33,7 @@ class BottomAppBarClient extends StatefulWidget {
   final int selectedIndex;
 
   @override
-  State<StatefulWidget> createState() => BottomAppBarState();
+  State<StatefulWidget> createState() => BottomAppBarState(selectedIndex);
 }
 
 class BottomAppBarState extends State<BottomAppBarClient> {
