@@ -16,7 +16,7 @@ class OrdersBody extends StatelessWidget {
     _something() {
       return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
         print(email);
-        return MySharedPreferences.instance.getConsumer(email).then((value) {
+        return MySharedPreferences.instance.getUser(email).then((value) {
           print(value);
           return Consumer.fromJson(value);
         });

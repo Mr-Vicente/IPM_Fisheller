@@ -137,7 +137,9 @@ class CardListState extends State<CardList> {
                 booking: booking,
                 press: () {
                   return null;
-                }),
+                },
+                isPending: isPending,
+            ),
           );
         }
         if (l.isEmpty) ws = [CartEmpty()];

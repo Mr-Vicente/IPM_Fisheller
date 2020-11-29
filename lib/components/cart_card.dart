@@ -15,6 +15,7 @@ class CartCard extends StatelessWidget {
   final Order booking;
   final Color color, textColor;
   final double percentage_width;
+  final bool isPending;
   const CartCard({
     Key key,
     this.booking,
@@ -22,6 +23,7 @@ class CartCard extends StatelessWidget {
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
+    this.isPending = false,
   }) : super(key: key);
 
   @override
@@ -36,7 +38,7 @@ class CartCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Image_Box(seafood: booking.sell.seafood),
-              Info_Box(order: order),
+              Info_Box(order: order, isPending: isPending,),
             ],
           ),
       decoration: BoxDecoration(
@@ -90,9 +92,11 @@ class Image_Box extends StatelessWidget {
 
 class Info_Box extends StatelessWidget {
   final Order order;
+  final isPending;
   const Info_Box({
     Key key,
     this.order,
+    this.isPending,
   }) : super(key: key);
 
   @override
@@ -112,7 +116,8 @@ class Info_Box extends StatelessWidget {
           text_info(categoryText: "Market:", content: order.sell.marketName),
           text_info(categoryText: "Deposit", content: sprintf("%2.2f €",[order.deposit])),
           Vendor_Box(vendor: order.vendor),
-          DrawButtons(order:order),
+          if(isPending)
+            DrawButtons(order:order),
         ],
       ),
     );

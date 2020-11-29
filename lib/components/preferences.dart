@@ -124,7 +124,6 @@ removeBookingFromCurrentUser(Order o) {
   MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
     MySharedPreferences.instance.getUser(email).then((consumer) {
       Consumer c = Consumer.fromJson(consumer);
-      //c.bookings.remove(o);
       if(c.bookings.isNotEmpty)
         c.bookings.removeLast();
       print(c.bookings);
