@@ -1,4 +1,5 @@
 
+import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/sell.dart';
 import 'package:fisheller_app/models/vendor.dart';
@@ -11,7 +12,7 @@ class Order {
   Vendor vendor;
   Sell sell;
   Consumer consumer;
-  int deposit;
+  double deposit;
 
   double quantity;
   bool isUnits;
@@ -20,41 +21,44 @@ class Order {
     this.vendor,
     this.sell,
     this.consumer,
-    this.quantity,
-    this.isUnits,
-    this.deposit = 0,
+    this.quantity = 0.0,
+    this.isUnits = false,
+    this.deposit = 0.0,
   });
+
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
   Map<String, dynamic> toJson() => _$OrderToJson(this);
-/*
-  Order.fromJson(Map<String, dynamic> json){
-    vendor = Vendor.fromJson(json['vendor']);
-    sell = Sell.fromJson(json['sell']);
-    consumer = Consumer.fromJson(json['consumer']);
-    quantity = json['quantity'];
-    isUnits = json['isUnits'];
-    deposit = json['deposit'];
-  }
 
-  Map<String, dynamic> toJson() => {
-    'vendor': vendor.toJson(),
-    'sell': sell.toJson(),
-    'consumer': consumer.toJson(),
-    'quantity': quantity,
-    'isUnits': isUnits,
-    'deposit': deposit,
-  };
-*/
-
-
-  //TODO
   double getWeight(){
-    return 0.0;
+    if(isUnits)
+      return sell.seafood.quantityMass * quantity;
+    else
+      return quantity;
   }
 
   //TODO
   double getTotalPrice(){
-    return 0.0;
+    return avrgPrice();
+  }
+
+  String isUnitsText(){
+    return isUnits ? "units" : "kg";
+  }
+
+  double avrgPrice(){
+    if(isUnits)
+      return avrgUnitPrice();
+    return avrgMassPrice();
+  }
+
+  double avrgUnitPrice(){
+    return quantity*
+       sell.seafood.price*
+        seafoodTips[sell.seafood.type].avrgWeight/1000;
+  }
+
+  double avrgMassPrice(){
+    return quantity * sell.seafood.price;
   }
 
 }

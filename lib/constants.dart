@@ -5,6 +5,7 @@ import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/models/market.dart';
 import 'package:fisheller_app/models/order.dart';
+import 'package:fisheller_app/models/post.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/recipies.dart';
 
@@ -26,15 +27,15 @@ const WHITE_COLOUR = Colors.white;
 /// ************************* POPUPS TEXTS ***************************/
 
 const String TEXT_QUESTION_COMFIRM = "Are you sure you want to book?";
-const String TEXT_NOTE_COMFIRM = "The deposit (%d€) will be discounted from your account";
+const String TEXT_NOTE_COMFIRM = "The deposit (%2.2f€) will be discounted from your account";
 
 const String TEXT_QUESTION_CANCEL = "Are you sure you want to cancel?";
-const String TEXT_NOTE_CANCEL = "The deposit (%d€) will not be reimbursed?";
+const String TEXT_NOTE_CANCEL = "The deposit (%2.2f€) will not be reimbursed?";
 
 const String FINALISE_BUY = "Finalise Buy";
 const String FINALISE_SEAFOOD = "Seafood: %s";
-const String FINALISE_Quantity = "Quantity: %2.1f units";
-const String FINALISE_Weight = "Weight: %2.1f Kg";
+const String FINALISE_Quantity = "Quantity: %2.2f %s";
+const String FINALISE_Weight = "Weight: %2.2f Kg";
 const String FINALISE_TOTAL = "Total: %2.2f €";
 
 /// ************************* Google Maps ***************************/
@@ -73,13 +74,13 @@ Vendor julio = new Vendor(
   "Júlio Adamastor", //name
   "julio@gmail.com", //email
   "1234", //password
-  "assets/images/julio.png"
+  "assets/images/julio.png",
 );
 Vendor josefina = new Vendor(
   "Josefina Peixeira",
   "josefina@gmail.com", //email
   "1234", //password
-  "assets/images/josefina.png"
+  "assets/images/josefina.png",
 );
 
 /// ************************* Sells ******************************/
@@ -300,4 +301,22 @@ FishNTips codTips = FishNTips(
     codFun,
     codRecipies);
 
+/// ************************* Posts *******************************/
+
+Post post1 = new Post(
+  "Cheiro a bacalhau!",
+  "Nas profundezas do oceano há grelos que não são algas :))",
+  new List<String>(),
+);
+
+Post post2 = new Post(
+  "Passa ai um nite!",
+  "Chamem a polícia: mau mau mau!",
+  new List<String>(),
+);
+
+List<Post> posts = <Post>[
+  post1,
+  post2
+];
 

@@ -8,12 +8,14 @@ import 'package:fisheller_app/models/order.dart';
 import 'package:fisheller_app/models/seafood.dart';
 import 'package:fisheller_app/models/vendor.dart';
 import 'package:flutter/material.dart';
+import 'package:sprintf/sprintf.dart';
 
 class CartCard extends StatelessWidget {
   final Function press;
   final Order booking;
   final Color color, textColor;
   final double percentage_width;
+  final bool isPending;
   const CartCard({
     Key key,
     this.booking,
@@ -21,6 +23,7 @@ class CartCard extends StatelessWidget {
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
+    this.isPending = false,
   }) : super(key: key);
 
   @override
@@ -35,7 +38,7 @@ class CartCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Image_Box(seafood: booking.sell.seafood),
-              Info_Box(order: order),
+              Info_Box(order: order, isPending: isPending,),
             ],
           ),
       decoration: BoxDecoration(
@@ -89,10 +92,24 @@ class Image_Box extends StatelessWidget {
 
 class Info_Box extends StatelessWidget {
   final Order order;
+  final isPending;
   const Info_Box({
     Key key,
     this.order,
+    this.isPending,
   }) : super(key: key);
+
+
+  Widget _getHistoryInfo(){
+    String unit = (order.quantity == 1) ? "%2.0f Unit": "%2.0f Units";
+    String format = order.isUnits ? unit: "%2.2f Kg";
+    return Column(
+      children: <Widget>[
+        text_info(categoryText: "Price", content: sprintf("%2.2f €",[order.getTotalPrice()])),
+        text_info(categoryText: "Quantity", content: sprintf(format,[order.quantity]))
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +126,13 @@ class Info_Box extends StatelessWidget {
         children: <Widget>[
           Title_Tags_Box(order: order),
           text_info(categoryText: "Market:", content: order.sell.marketName),
-          text_info(categoryText: "Deposit", content: order.deposit.toString()),
+          if(!isPending)
+            _getHistoryInfo(),
+          if(isPending)
+              text_info(categoryText: "Deposit", content: sprintf("%2.2f €",[order.deposit])),
           Vendor_Box(vendor: order.vendor),
-          DrawButtons(order:order),
+          if(isPending)
+            DrawButtons(order:order),
         ],
       ),
     );
@@ -183,7 +204,7 @@ class Tag_Box extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8.0),
         child: Container(
           child: Text(
             tag,
@@ -193,7 +214,7 @@ class Tag_Box extends StatelessWidget {
             ),
           ),
           color: PRIMARY_COLOUR,
-          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+          padding: EdgeInsets.symmetric(horizontal: 6,vertical: 6),
         ),
       ),
     );
@@ -261,6 +282,8 @@ class Vendor_Box extends StatelessWidget {
                   //color: Colors.black38,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                        width: 2, color: Colors.black, style: BorderStyle.solid),
                     image: DecorationImage(
                       fit: BoxFit.fill,
                       image: Image.asset(vendor.profile).image,
@@ -306,7 +329,7 @@ class DrawButtons extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return PopUpCard(order:order,percentage_width: 0.8,popupType:2);
+                    return PopUpCard(order:order,percentage_width: 0.8, popupType:2);
                   },
                 );
               },

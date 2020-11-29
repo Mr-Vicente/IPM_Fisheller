@@ -5,6 +5,7 @@ import 'package:fisheller_app/screens/auth/login/login_screen.dart';
 import 'package:fisheller_app/screens/auth/welcome/welcome_screen.dart';
 import 'package:fisheller_app/screens/book_fish/book_screen.dart';
 import 'package:fisheller_app/screens/catch/catch.dart';
+import 'package:fisheller_app/screens/catch/catch_media.dart';
 import 'package:fisheller_app/screens/market/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fisheller_app/screens/map/map_screen.dart';
@@ -70,7 +71,7 @@ class AfterSplash extends StatelessWidget {
     MySharedPreferences.instance.getBooleanValue("isfirstRun").then((value) {
       print(value);
       //if (value == false)
-      initialiseUsers();
+        initialiseUsers();
     });
     //seabass2.media = seabassMedia;
 
@@ -87,8 +88,12 @@ class AfterSplash extends StatelessWidget {
 }
 
 void initialiseUsers() {
-  MySharedPreferences.instance.setConsumer("ana@gmail.com", ana);
-  MySharedPreferences.instance.setConsumer("hakeem@gmail.com", hakeem);
+  MySharedPreferences.instance.initializeEverything();
+  MySharedPreferences.instance.setConsumer(ana.email, ana);
+  MySharedPreferences.instance.setConsumer(hakeem.email, hakeem);
+
+  MySharedPreferences.instance.setVendor(julio.email, julio);
+  MySharedPreferences.instance.setVendor(josefina.email, josefina);
 
   MySharedPreferences.instance.setBooleanValue("isfirstRun", true);
   print("Users Initialized");

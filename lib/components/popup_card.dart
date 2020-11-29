@@ -168,7 +168,7 @@ class PayPopUp extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0)),
       content: Container(
-        height: 250,
+        height: 220,
         width: size.width * percentage_width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -197,17 +197,7 @@ class PayPopUp extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(top: 5),
               child: Text(
-                sprintf(FINALISE_Quantity, [order.quantity]),
-                style: TextStyle(
-                    fontSize: 15,
-                    color: PRIMARY_COLOUR,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 5),
-              child: Text(
-                sprintf(FINALISE_Weight, [order.getWeight()]),
+                sprintf(FINALISE_Quantity, [order.quantity,order.isUnitsText()]),
                 style: TextStyle(
                     fontSize: 15,
                     color: PRIMARY_COLOUR,
@@ -236,7 +226,7 @@ class PayPopUp extends StatelessWidget {
                         "Buy",
                         style: TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 10,
+                            fontSize: 15,
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
@@ -259,7 +249,7 @@ class PayPopUp extends StatelessWidget {
                         "Back",
                         style: TextStyle(
                             fontFamily: 'Raleway',
-                            fontSize: 10,
+                            fontSize: 15,
                             color: WHITE_COLOUR),
                       ),
                       onPressed: () {
@@ -336,7 +326,7 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                   fontWeight: FontWeight.w900),
             ),
           ),
-          Vendor_Box(vendor: julio),
+          Vendor_Box(vendor: order.vendor),
           RatingBar.builder(
             initialRating: 1,
             minRating: 1,
@@ -426,6 +416,9 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) => Home(index: 2,)));
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -442,6 +435,9 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) => Home(index: 2,)));
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),

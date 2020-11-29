@@ -30,7 +30,8 @@ class MapState extends State<Map> {
   /// ************************* Variables ***************************/
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set<Marker>();
-  BitmapDescriptor markerIcon;
+  BitmapDescriptor markerIcon_fixe;
+  BitmapDescriptor markerIcon_doca;
   LocationData currentLocation;
   Location location = new Location();
 
@@ -39,8 +40,13 @@ class MapState extends State<Map> {
   void _setMarkerIcons()  {
     BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
-        'assets/icons/map_marker.png').then((onValue) {
-      markerIcon = onValue;
+        'assets/icons/fixe_fixe_marker.png').then((onValue) {
+      markerIcon_fixe = onValue;
+    });
+    BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/icons/doca_marker.png').then((onValue) {
+      markerIcon_doca = onValue;
     });
   }
 
@@ -71,20 +77,30 @@ class MapState extends State<Map> {
 
   void _addMarkers() {
 
-    markets.forEach((m) {
-      _markers.add(
-          Marker(
-            markerId: MarkerId(m.name+"pin"),
-            position: m.mapLocation,
-            icon: markerIcon,
-            onTap: (){
-              print(m.name);
-              editModalBottomSheet(context,m);
-
-            },
-          )
-      );
-    });
+    Market m1 = markets[0];
+    _markers.add(
+        Marker(
+          markerId: MarkerId(m1.name+"pin"),
+          position: m1.mapLocation,
+          icon: markerIcon_fixe,
+          onTap: (){
+            print(m1.name);
+            editModalBottomSheet(context,m1);
+          },
+        )
+    );
+    Market m2 = markets[1];
+    _markers.add(
+        Marker(
+          markerId: MarkerId(m2.name+"pin"),
+          position: m2.mapLocation,
+          icon: markerIcon_doca,
+          onTap: (){
+            print(m2.name);
+            editModalBottomSheet(context,m2);
+          },
+        )
+    );
   }
 
   void editModalBottomSheet(BuildContext context, Market m) {
@@ -157,7 +173,7 @@ class MapState extends State<Map> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Stage1Description(sell)
+                                    builder: (context) => Stage1Description(sell,"map")
                                 )
                               );
                             },
@@ -255,10 +271,11 @@ class MapState extends State<Map> {
           print(addMarket.toString());
 
           if (addMarket) {
+            BitmapDescriptor marker = m.name == "Doca Portimão" ? markerIcon_doca : markerIcon_fixe;
             aux.add(Marker(
               markerId: MarkerId(m.name + "pin"),
               position: m.mapLocation,
-              icon: markerIcon,
+              icon: marker,
               onTap: () {
                 editModalBottomSheet(context,m);
               },
