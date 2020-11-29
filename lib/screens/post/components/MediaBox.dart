@@ -4,21 +4,31 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import 'package:image_picker/image_picker.dart';
 
+typedef void StringCallback(String val);
+
 class MediaBox extends StatefulWidget {
   final Size mediaSize;
   final Color fillColor;
   final Color borderColor;
+  final String fillImage;
+  final StringCallback callback;
 
-  File _image;
+  //File _image;
   String _filePath;
   final picker = ImagePicker();
 
-  MediaBox({Key key, this.mediaSize, this.fillColor, this.borderColor})
+  MediaBox(
+      {Key key,
+      this.mediaSize,
+      this.fillColor,
+      this.borderColor,
+      this.fillImage: '',
+      this.callback})
       : super(key: key);
 
-  File getFile() {
-    return _image;
-  }
+  // File getFile() {
+  //   return _image;
+  // }
 
   String getFilePath() {
     return _filePath;
@@ -39,7 +49,8 @@ class _MediaBoxState extends State<MediaBox> {
       if (pickedFile != null) {
         print('whatttt' + pickedFile.path);
         widget._filePath = pickedFile.path;
-        widget._image = File(pickedFile.path);
+        widget.callback(widget._filePath);
+        //widget._image = File(pickedFile.path);
       } else {
         print('No image selected.');
       }
@@ -48,6 +59,7 @@ class _MediaBoxState extends State<MediaBox> {
 
   @override
   Widget build(BuildContext build) {
+    print("value of fill" + widget.fillImage);
     return Stack(
       overflow: Overflow.visible,
       children: [
@@ -63,10 +75,11 @@ class _MediaBoxState extends State<MediaBox> {
             decoration: BoxDecoration(
               image: new DecorationImage(
                 fit: BoxFit.cover,
-                image: widget._image == null
+                image: widget.fillImage == ''
                     ? Image.asset(
-                        'assets/images/image_placeholder_portrait.png').image
-                    : Image.file(widget._image).image,
+                            'assets/images/image_placeholder_portrait.png')
+                        .image
+                    : Image.file(File(widget.fillImage)).image,
               ),
               color: widget.fillColor,
               border: Border.all(

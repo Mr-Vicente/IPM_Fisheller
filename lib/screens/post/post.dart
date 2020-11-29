@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fisheller_app/components/back.dart';
 import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 import 'package:fisheller_app/screens/post/components/MediaBox.dart';
 import 'package:flutter/material.dart';
@@ -7,95 +8,23 @@ import 'package:fisheller_app/screens/post/components/TextBox.dart';
 import 'package:fisheller_app/components/add_catch_card.dart';
 import '../../constants.dart';
 
-class PostPage extends StatelessWidget {
-  
-  final titleController = TextEditingController();
-  final descriptionController = TextEditingController();
-  var scaffoldKey = GlobalKey<ScaffoldState>();
-
-  var image1_Box = MediaBox();
-  var image2_Box = MediaBox();
-
-  var image1_FilePath;
-  var image2_FilePath;
-
-
-  String getFP1(){
-    return image1_FilePath;
-  }
-
-  String getFP2(){
-    return image1_FilePath;
-  }
+class PostPage extends StatefulWidget {
 
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    
+  State<StatefulWidget> createState() {
+    return _PostState();
+  }
+}
 
-    var mediaBox1 = MediaBox(
-      borderColor: Color(0xFFc2d1e2),
-      fillColor: Color(0xFFc3c7d1),
-      mediaSize: Size(size.width * 0.7, size.width * 0.3),
-    );
+class _PostState extends State<PostPage> {
+  String image1_FilePath = '';
+  String image2_FilePath = '';
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
 
-    var mediaBox2 = MediaBox(
-      borderColor: Color(0xFFc2d1e2),
-      fillColor: Color(0xFFc3c7d1),
-      mediaSize: Size(size.width * 0.7, size.width * 0.3),
-    );
-    image1_Box = mediaBox1;
-    image2_Box = mediaBox2;
-
-    return Scaffold(
-        backgroundColor: WHITE_COLOUR,
-        key: scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          toolbarHeight: size.height * 0.09,
-          actions: <Widget>[
-            Container(
-                margin: EdgeInsets.only(right: 10),
-                child: FloatingActionButton(
-                  onPressed: () => scaffoldKey.currentState.openEndDrawer(),
-                  child: Image.asset('assets/icons/extra_menu.png', height: 20),
-                  backgroundColor: Colors.white,
-                )),
-          ],
-          leadingWidth: size.width,
-          leading: FlatButton.icon(
-            icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-            label: new Text('back',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ),
-        drawerScrimColor: Colors.grey.withOpacity(0.54),
-        endDrawer: AmazDrawer(
-            topPosition: size.width * 0.35,
-            width: size.width * 0.74,
-            height: size.height * 0.1,
-            elevation: 5,
-            color: PRIMARY_COLOUR,
-            items: [
-              AmazDrawerItem(
-                  iconData: Icons.face,
-                  iconSize: size.width * 0.1,
-                  text: "Profile",
-                  textSize: size.width * 0.08),
-              AmazDrawerItem(
-                  iconData: Icons.settings,
-                  iconSize: size.width * 0.1,
-                  text: "Settings",
-                  textSize: size.width * 0.08),
-              AmazDrawerItem(
-                  iconData: Icons.help,
-                  iconSize: size.width * 0.1,
-                  text: "Help",
-                  textSize: size.width * 0.08),
-            ]),
-        body: GestureDetector(
+  Widget _screen(Size size) {
+    return Container(
+        child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
               FocusScopeNode currentFocus = FocusScope.of(context);
@@ -104,9 +33,8 @@ class PostPage extends StatelessWidget {
                   currentFocus.focusedChild != null) {
                 FocusManager.instance.primaryFocus.unfocus();
               }
-            }, //TODO add drawerButton, how? if you want all scroll -> put stack with back button and drawer btn there inside scrollview, else just put it outside
+            },
             child: SingleChildScrollView(
-              
               //To avoid
               child: Container(
                 color: WHITE_COLOUR,
@@ -155,11 +83,23 @@ class PostPage extends StatelessWidget {
                       maxChars: 150,
                       width: size.width * 0.9,
                     ),
-                    mediaBox1,
+                    MediaBox(
+                        borderColor: Color(0xFFc2d1e2),
+                        fillColor: Color(0xFFc3c7d1),
+                        mediaSize: Size(size.width * 0.7, size.width * 0.3),
+                        callback: (val) =>
+                            setState(() => image1_FilePath = val),
+                        fillImage: image1_FilePath),
                     SizedBox(
                       height: size.height * 0.025,
                     ),
-                    mediaBox2,
+                    MediaBox(
+                      borderColor: Color(0xFFc2d1e2),
+                      fillColor: Color(0xFFc3c7d1),
+                      mediaSize: Size(size.width * 0.7, size.width * 0.3),
+                      callback: (val) => setState(() => image2_FilePath = val),
+                      fillImage: image2_FilePath,
+                    ),
 
                     Expanded(
                         child: Align(
@@ -195,11 +135,24 @@ class PostPage extends StatelessWidget {
             )));
   }
 
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Back(body: _screen(size));
+  }
+
   Future<dynamic> publish(context) {
     //TODO Icon
     Size size = MediaQuery.of(context).size;
-    image1_FilePath = image1_Box.getFilePath();
-    image2_FilePath = image2_Box.getFilePath();
+
+    List<String> imgs = [];
+    if (image1_FilePath != null) imgs.add(image1_FilePath);
+
+    if (image2_FilePath != null) imgs.add(image2_FilePath);
+    // post = Post(
+    //     title: titleController.text,
+    //     description: descriptionController.text,
+    //     info: imgs);
 
     double hPercentage = 0.05;
     double wPercentage = 0.32;
@@ -287,5 +240,3 @@ class PostPage extends StatelessWidget {
         });
   }
 }
-
-
