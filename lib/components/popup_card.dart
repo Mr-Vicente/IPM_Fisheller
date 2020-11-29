@@ -69,7 +69,7 @@ class InfoPopUp extends StatelessWidget {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       content: Container(
-        height: 200,
+        height: 170,
         width: size.width * percentage_width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -108,7 +108,9 @@ class InfoPopUp extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Raleway',
                             fontSize: 15,
-                            color: WHITE_COLOUR),
+                            color: WHITE_COLOUR,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                       onPressed: () {
                         if(popupType == 0) {
@@ -134,7 +136,9 @@ class InfoPopUp extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Raleway',
                             fontSize: 15,
-                            color: WHITE_COLOUR),
+                            color: WHITE_COLOUR,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -227,7 +231,9 @@ class PayPopUp extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Raleway',
                             fontSize: 15,
-                            color: WHITE_COLOUR),
+                            color: WHITE_COLOUR,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                       onPressed: () {
                         paySeafoodFromCurrentUser(order);
@@ -250,7 +256,9 @@ class PayPopUp extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Raleway',
                             fontSize: 15,
-                            color: WHITE_COLOUR),
+                            color: WHITE_COLOUR,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -412,7 +420,9 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                       style: TextStyle(
                           fontFamily: 'Raleway',
                           fontSize: 10,
-                          color: WHITE_COLOUR),
+                          color: WHITE_COLOUR,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -431,7 +441,9 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                       style: TextStyle(
                           fontFamily: 'Raleway',
                           fontSize: 10,
-                          color: WHITE_COLOUR),
+                          color: WHITE_COLOUR,
+                          fontWeight: FontWeight.bold
+                      ),
                     ),
                     onPressed: () {
                       Navigator.pop(context);

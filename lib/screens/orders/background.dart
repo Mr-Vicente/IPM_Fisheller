@@ -30,24 +30,15 @@ class BackgroundOrdersMain extends State<BackgroundOrders>{
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            top: 50.0,
-            child: Text(
-              "ORDERS",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 50,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 150.0,
+            top: 70.0,
             child:
             Container(
+              height: 30.0,
               padding: EdgeInsets.zero,
               decoration: BoxDecoration(
                 color: Colors.black87,
                 //border: Border.all(color: Colors.black, width: 1.0),
-                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               child:
               ToggleButtons(
@@ -55,13 +46,13 @@ class BackgroundOrdersMain extends State<BackgroundOrders>{
                   Text("      Pending      ",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 17,
+                      fontSize: 15,
                     ),
                   ),
                   Text("      History      ",
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      fontSize: 17,
+                      fontSize: 15,
                     ),
                   ),
                 ],
@@ -78,7 +69,7 @@ class BackgroundOrdersMain extends State<BackgroundOrders>{
 
                 },
                 isSelected: isSelected,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10.0),
                 fillColor: PRIMARY_COLOUR,
                 selectedColor: WHITE_COLOUR,
                 color: WHITE_COLOUR,

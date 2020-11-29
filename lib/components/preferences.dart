@@ -56,13 +56,22 @@ class MySharedPreferences {
     myPrefs.setStringList("posts", new List<String>());
   }
 
-  getConsumers() async {
+  Future<List<String>> getConsumers() async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
     return myPrefs.getStringList("consumers");
   }
 
   getUser(String key) async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    print("Consumers:");
+    print(myPrefs.getStringList("consumers"));
+    return json.decode(myPrefs.getString(key));
+  }
+
+  getVendor(String key) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    print("vendors:");
+    print(myPrefs.getStringList("vendors"));
     return json.decode(myPrefs.getString(key));
   }
 
@@ -99,16 +108,19 @@ class MySharedPreferences {
 
 }
 
-getPosts(){
-  return MySharedPreferences.instance.getPosts().then((value) {
-    return value;
+getCurrentUserObject() {
+  return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    print(email);
+    return MySharedPreferences.instance.getUser(email).then((value) {
+      return Consumer.fromJson(value);
+    });
   });
 }
 
-getCurrentUserObject() {
+getCurrentVendorObject() {
   return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
-    return MySharedPreferences.instance.getUser(email).then((value) {
-      return Consumer.fromJson(value);
+    return MySharedPreferences.instance.getVendor(email).then((value) {
+      return Vendor.fromJson(value);
     });
   });
 }
@@ -129,6 +141,7 @@ removeBookingFromCurrentUser(Order o) {
       Consumer c = Consumer.fromJson(consumer);
       if(c.bookings.isNotEmpty)
         c.bookings.removeLast();
+      print(c.bookings);
       MySharedPreferences.instance.setConsumer(email,c);
     });
   });
@@ -140,16 +153,19 @@ paySeafoodFromCurrentUser(Order o) {
       Consumer c = Consumer.fromJson(consumer);
       if(c.bookings.isNotEmpty)
         c.bookings.removeLast();
+      print(c.bookings);
       c.purchases.add(o);
       MySharedPreferences.instance.setConsumer(email,c);
     });
   });
 }
 
-isConsumer(){
+  Future<bool> isConsumer(){
   return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
-    List<String> consumers = MySharedPreferences.instance.getConsumers();
-    return consumers.contains(email);
+    print(MySharedPreferences.instance.getConsumers());
+    return MySharedPreferences.instance.getConsumers().then((consumers){
+      return consumers.contains(email);
+    });
+
   });
 }
-

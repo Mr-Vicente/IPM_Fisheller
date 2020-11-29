@@ -1,3 +1,4 @@
+import 'package:fisheller_app/models/vendor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'post.g.dart';
@@ -9,11 +10,13 @@ class Post{
   String title;
   String description;
   List<String> imagesNames;
+  Vendor vendor;
 
-  Post(String title, String description, List<String> imagesNames){
+  Post(String title, String description, List<String> imagesNames, Vendor vendor){
     this.title = title;
     this.description = description;
     this.imagesNames = imagesNames;
+    this.vendor = vendor;
     //this.id = idCounter++;
   }
 

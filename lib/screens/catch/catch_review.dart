@@ -198,11 +198,11 @@ class CatchReviewState extends State<CatchReview> {
                             isFirst: true,
                             indicatorStyle: const IndicatorStyle(
                               width: 20,
-                              color: Colors.teal,
+                              color: PRIMARY_COLOUR,
                             ),
                             endChild: Text("Info", style: TextStyle(fontWeight: FontWeight.bold)),
                             afterLineStyle:
-                            const LineStyle(color: Colors.teal),
+                            const LineStyle(color: PRIMARY_COLOUR),
                           ),
                         ),
                         SizedBox(
@@ -213,10 +213,10 @@ class CatchReviewState extends State<CatchReview> {
                             lineXY:0.5,
                             indicatorStyle: const IndicatorStyle(
                               width: 20,
-                              color: Colors.teal,
+                              color: PRIMARY_COLOUR,
                             ),
                             beforeLineStyle:
-                            const LineStyle(color: Colors.teal),
+                            const LineStyle(color: PRIMARY_COLOUR),
                             endChild: Text("Media", style: TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ),
@@ -229,10 +229,10 @@ class CatchReviewState extends State<CatchReview> {
                             isLast: true,
                             indicatorStyle: const IndicatorStyle(
                               width: 20,
-                              color: Colors.teal,
+                              color: PRIMARY_COLOUR,
                             ),
                             beforeLineStyle:
-                            const LineStyle(color: Colors.teal),
+                            const LineStyle(color: PRIMARY_COLOUR),
                             endChild: Text("Review", style: TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ),
