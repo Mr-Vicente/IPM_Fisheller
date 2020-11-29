@@ -19,6 +19,7 @@ class FeedToggleState extends State<FeedToggle>{
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         Container(
@@ -62,12 +63,20 @@ class FeedToggleState extends State<FeedToggle>{
             )
         ),
         //food
-        Padding(
-            padding: EdgeInsets.only(top: 70),
+        Container(
+            margin: EdgeInsets.only(top: 90),
+            alignment: Alignment.center,
+            width: size.width,
             child: AnimatedCrossFade(
               duration: const Duration(microseconds: 1),
-              firstChild: food,
-              secondChild: post,
+              firstChild: Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: food
+              ),
+              secondChild: Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: post
+              ),
               crossFadeState: isSelected[0] ? CrossFadeState.showFirst : CrossFadeState.showSecond,
             )
         ),
