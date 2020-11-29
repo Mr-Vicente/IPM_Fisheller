@@ -1,4 +1,5 @@
 import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/page_transitions.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/fish_and_tips.dart';
 import 'package:fisheller_app/models/seafood.dart';
@@ -34,10 +35,6 @@ class _CatchMedia extends State<CatchMedia> {
   File imageFile4;
 
   _CatchMedia(this.seafoods, this.seafoodImages);
-
-
-
-
 
   void _updateSeafood(){
     setState(() {
@@ -141,7 +138,7 @@ class _CatchMedia extends State<CatchMedia> {
                       Text(
                         "Add Seafood",
                         textScaleFactor: 3.0,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.w900),
                       ),
                     ]),
                 Padding(
@@ -162,7 +159,7 @@ class _CatchMedia extends State<CatchMedia> {
                               width: 20,
                               color: Colors.teal,
                             ),
-                            endChild: Text("Info"),
+                            endChild: Text("Info", style: TextStyle(fontWeight: FontWeight.bold)),
                             beforeLineStyle:
                             const LineStyle(color: Colors.teal),
                           ),
@@ -177,7 +174,7 @@ class _CatchMedia extends State<CatchMedia> {
                               width: 20,
                               color: Colors.teal,
                             ),
-                            endChild: Text("Media"),
+                            endChild: Text("Media", style: TextStyle(fontWeight: FontWeight.bold)),
                             beforeLineStyle:
                             const LineStyle(color: Colors.teal),
                             afterLineStyle: const LineStyle(),
@@ -190,7 +187,7 @@ class _CatchMedia extends State<CatchMedia> {
                             alignment: TimelineAlign.manual,
                             lineXY: 0.5,
                             isLast: true,
-                            endChild: Text("Review"),
+                            endChild: Text("Review", style: TextStyle(fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ]),
@@ -443,7 +440,7 @@ class _CatchMedia extends State<CatchMedia> {
                   child: Column(children: <Widget>[
                     FlatButton(
                       onPressed: () {
-                        _updateSeafood();
+                        //_updateSeafood();
                         Navigator.push(
                           context, SlideLeftRoute(page: CatchReview(seafoods, seafoodImages)),
                         );
