@@ -26,19 +26,19 @@ class BackgroundMain extends State<CartBackground>{
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned(
+          /*Positioned(
             top: 50.0,
             child: Text(
               "CART",
               style: TextStyle(
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
                 fontSize: 50,
               ),
             ),
-          ),
+          ),*/
           Positioned(child:
             CartToggle(),
-            top: 150.0,
+            top: 70.0,
           ),
         ],
       ),

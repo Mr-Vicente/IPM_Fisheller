@@ -23,7 +23,6 @@ class FeedToggleState extends State<FeedToggle>{
       children: <Widget>[
         Container(
             height: 30,
-            width: 167,
             decoration: BoxDecoration(
               color: Colors.black87,
               //border: Border.all(color: Colors.black, width: 1.0),

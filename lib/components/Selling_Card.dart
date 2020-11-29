@@ -283,6 +283,7 @@ class Numbers_Box extends StatelessWidget {
             text: "Price\n(€ / Kg)",
             sz: Size(75, 75),
             space: 15.0,
+            fontSize: 26,
           ),
           Equivalent_Box(seafood: seafood),
         ],
@@ -296,8 +297,9 @@ class Number_Info_Box extends StatelessWidget {
   final String text;
   final Size sz;
   final num space;
+  final double fontSize;
   const Number_Info_Box(
-      {Key key, this.number, this.text, this.sz, this.space, thi})
+      {Key key, this.number, this.text, this.sz, this.space, this.fontSize})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -310,6 +312,7 @@ class Number_Info_Box extends StatelessWidget {
           Number_Circle(
             text: number.toString(),
             circle_size: sz,
+            fontSize: fontSize,
           ),
           Container(
             margin: EdgeInsets.only(top: space / 2),
@@ -343,6 +346,7 @@ class Equivalent_Box extends StatelessWidget {
             text: "Quantity\n(Unit.)",
             sz: Size(60, 60),
             space: 35.0,
+            fontSize: 20,
           ),
           Container(
               margin: EdgeInsets.symmetric(
@@ -355,6 +359,7 @@ class Equivalent_Box extends StatelessWidget {
             text: "Quantity\n(Kg.)",
             sz: Size(60, 60),
             space: 35.0,
+            fontSize: 20,
           ),
         ],
       ),
@@ -413,12 +418,14 @@ class Number_Circle extends StatelessWidget {
   final Size circle_size;
   static const Size s = Size(200, 200);
   final String text;
+  final double fontSize;
 
   const Number_Circle({
     Key key,
     this.text,
     this.arcWidth,
     this.circle_size = s,
+    this.fontSize
   }) : super(key: key);
 
   @override
@@ -432,7 +439,7 @@ class Number_Circle extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: 30 - (circle_size.width / s.width) * 30,
+            fontSize: fontSize,
             color: Colors.black,
             fontWeight: FontWeight.w600,
           ),

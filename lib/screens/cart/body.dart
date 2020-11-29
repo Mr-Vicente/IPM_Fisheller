@@ -27,11 +27,12 @@ class CartToggleState extends State<CartToggle> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
           Container(
+            height: 30,
             padding: EdgeInsets.zero,
             decoration: BoxDecoration(
               color: Colors.black87,
               //border: Border.all(color: Colors.black, width: 1.0),
-              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
             child: ToggleButtons(
               children: <Widget>[
@@ -39,14 +40,14 @@ class CartToggleState extends State<CartToggle> {
                   "      Pending      ",
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 17,
+                    fontSize: 15,
                   ),
                 ),
                 Text(
                   "      History      ",
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 17,
+                    fontSize: 15,
                   ),
                 ),
               ],
@@ -64,14 +65,14 @@ class CartToggleState extends State<CartToggle> {
                 });
               },
               isSelected: isSelected,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
               fillColor: PRIMARY_COLOUR,
               selectedColor: WHITE_COLOUR,
               color: WHITE_COLOUR,
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 50),
+            margin: EdgeInsets.only(top: 30),
             alignment: Alignment.center,
             width: size.width,
             child: AnimatedCrossFade(
@@ -102,87 +103,92 @@ class CardListState extends State<CardList> {
 
   CardListState(this.isPending);
 
+  _fetchConsumerObject() {
+    return MySharedPreferences.instance
+        .getCurrentUser("currentUser")
+        .then((email) {
+      print(email);
+      return MySharedPreferences.instance.getUser(email).then((value) {
+        print(value);
+        return Consumer.fromJson(value);
+      });
+    });
+  }
+
+  List<Widget> showCards(AsyncSnapshot snapshot) {
+    List<Widget> ws = [];
+    if (!snapshot.hasData) {
+      ws = [CartEmpty()];
+    } else {
+      Consumer currentUser = snapshot.data;
+      print(currentUser);
+      print(currentUser.bookings);
+      List<Order> l;
+      if (isPending)
+        l = currentUser.bookings;
+      else
+        l = currentUser.purchases;
+      for (var booking in l) {
+        ws.add(
+          CartCard(
+            booking: booking,
+            press: () {
+              return null;
+            },
+            isPending: isPending,
+          ),
+        );
+      }
+      if (l.isEmpty) ws = [CartEmpty()];
+    }
+    return ws;
+  }
+
+  Widget _getHistory() {
+    return
+      SingleChildScrollView(
+        padding: EdgeInsets.only(bottom: 100),
+          child:
+          FutureBuilder(
+        future: _fetchConsumerObject(),
+        builder: (context, snapshot) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: showCards(snapshot),
+          );
+        }));
+  }
+
+  Widget _getPending() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.only(bottom: 100),
+      child: FutureBuilder(
+          future: _fetchConsumerObject(),
+          builder: (context, snapshot) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: showCards(snapshot),
+            );
+          }),
+    );
+  }
+
+  Widget _getList() {
+    if (isPending)
+      return _getPending();
+    else
+      return _getHistory();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    _fetchConsumerObject() {
-      return MySharedPreferences.instance
-          .getCurrentUser("currentUser")
-          .then((email) {
-        print(email);
-        return MySharedPreferences.instance.getUser(email).then((value) {
-          print(value);
-          return Consumer.fromJson(value);
-        });
-      });
-    }
-
-    List<Widget> showCards(AsyncSnapshot snapshot) {
-      List<Widget> ws = [];
-      if (!snapshot.hasData) {
-        ws = [CartEmpty()];
-      } else {
-        Consumer currentUser = snapshot.data;
-        print(currentUser);
-        print(currentUser.bookings);
-        List<Order> l;
-        if (isPending)
-          l = currentUser.bookings;
-        else
-          l = currentUser.purchases;
-        for (var booking in l) {
-          ws.add(
-            CartCard(
-                booking: booking,
-                press: () {
-                  return null;
-                },
-                isPending: isPending,
-            ),
-          );
-        }
-        if (l.isEmpty) ws = [CartEmpty()];
-      }
-      return ws;
-    }
-
-    Widget _getPending() {
-      return SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 100),
-        child: FutureBuilder(
-            future: _fetchConsumerObject(),
-            builder: (context, snapshot) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: showCards(snapshot),
-              );
-            }),
-      );
-    }
-
-    Widget _getHistory() {
-      return SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 100),
-        child: FutureBuilder(
-            future: _fetchConsumerObject(),
-            builder: (context, snapshot) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: showCards(snapshot),
-              );
-            }),
-      );
-    }
-
-    Widget _getList() {
-      if (isPending)
-        return _getPending();
-      else
-        return _getHistory();
-    }
-
-    return Container(child: _getList());
+    return SingleChildScrollView(
+        child: SizedBox(
+            height: size.height - 150,
+            child: _getList()
+        )
+    );
   }
 }
 
@@ -193,7 +199,7 @@ class CartEmpty extends StatelessWidget {
     // This size provide us total height and width of our screen
     return Container(
       margin: EdgeInsets.only(top:20),
-      width: size.width * 0.8,
+      width: size.width * 0.9,
       height: 70,
       decoration: BoxDecoration(
         color: WHITE_COLOUR,
