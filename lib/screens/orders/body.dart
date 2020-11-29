@@ -8,7 +8,9 @@ import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/screens/cart/background.dart';
 import 'package:flutter/material.dart';
 
-class CartBody extends StatelessWidget {
+import 'background.dart';
+
+class OrdersBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _something() {
@@ -24,37 +26,37 @@ class CartBody extends StatelessWidget {
     List<Widget> showCards(AsyncSnapshot snapshot){
       List<Widget> ws = [];
       if (!snapshot.hasData) {
-        ws = [CartEmpty()];
+        ws = [OrdersEmpty()];
       } else {
         Consumer currentUser = snapshot.data;
         print(currentUser);
         print(currentUser.bookings);
         for (var booking in currentUser.bookings) {
-            ws.add(CartCard(
-            booking: booking,
-            press: () {
-              return null;
-            }),
+          ws.add(CartCard(
+              booking: booking,
+              press: () {
+                return null;
+              }),
           );
         }
         if(currentUser.bookings.isEmpty)
-          ws = [CartEmpty()];
+          ws = [OrdersEmpty()];
       }
       return ws;
     }
 
     Size size = MediaQuery.of(context).size;
     // This size provide us total height and width of our screen
-    return BackgroundCart(
+    return BackgroundOrders(
       child: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 100),
         child: FutureBuilder(
             future: _something(),
             builder: (context, snapshot) {
-                return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: showCards(snapshot),
-                );
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: showCards(snapshot),
+              );
             }
         ),
       ),
@@ -62,7 +64,7 @@ class CartBody extends StatelessWidget {
   }
 }
 
-class CartEmpty extends StatelessWidget {
+class OrdersEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -89,7 +91,7 @@ class CartEmpty extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          "Cart empty",
+          "No Orders",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 30,

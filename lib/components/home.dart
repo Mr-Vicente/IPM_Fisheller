@@ -2,6 +2,7 @@ import 'package:fisheller_app/components/home_components/add_PopUp.dart';
 import 'package:fisheller_app/screens/cart/body.dart';
 import 'package:fisheller_app/screens/feed/components/body.dart';
 import 'package:fisheller_app/screens/feed/components/search_bar.dart';
+import 'package:fisheller_app/screens/orders/body.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fisheller_app/constants.dart';
@@ -23,7 +24,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex;
-  final List<Widget> _children = [MapPage(), Feed(), Cart()];
+  final List<Widget> _children = [MapPage(), Feed(), Orders()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   _HomeState({
@@ -165,6 +166,16 @@ class Cart extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: CartBody(),
+    );
+  }
+}
+
+class Orders extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: OrdersBody(),
     );
   }
 }

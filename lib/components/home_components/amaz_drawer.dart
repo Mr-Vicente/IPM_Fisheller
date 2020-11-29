@@ -91,18 +91,18 @@ class AmazDrawerState extends State<AmazDrawer> {
     return Positioned(
         top: widget.topPosition + index * (widget.height + widget.distance),
         right: widget.rightPosition,
-        child: Container(
-            height: widget.height,
-            width: widget.width,
-            color: widget.backgroundColor,
-            child: ClipRRect(
-              borderRadius: BorderRadius.horizontal(
-                  left: Radius.circular(20.0), right: Radius.circular(20.0)),
-              child: Drawer(
-                elevation: widget.elevation,
-                child: Row(
-                  children: [
-
+        child: Row(
+          children: [
+            Container(
+              height: widget.height,
+              width: widget.width,
+              color: widget.backgroundColor,
+              child: ClipRRect(
+                borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(20.0), right: Radius.circular(20.0)),
+                child: Drawer(
+                  elevation: widget.elevation,
+                  child: Row(children: [
                     Expanded(
                       child: ListTile(
                         title: Text(
@@ -114,32 +114,38 @@ class AmazDrawerState extends State<AmazDrawer> {
                           ),
                         ),
                         onTap: () {
-                            redirectScreen(index);
+                          redirectScreen(index);
                         },
                       ),
                     ),
                     SizedBox(width: item.iconSize + 20, child: icon),
-
-                  ]
+                  ]),
                 ),
               ),
-            )));
+            ),
+            SizedBox(
+              width: 10,
+            )
+          ],
+        ));
   }
 
   void redirectScreen(int index) {
-    if(index == 0){
+    if (index == 0) {
       Navigator.pop(context);
     }
-    if(index == 1){
+    if (index == 1) {
       Navigator.pop(context);
     }
-    if(index == 2){
+    if (index == 2) {
       Navigator.pop(context);
     }
-    if(index == 3){
+    if (index == 3) {
       Navigator.pop(context);
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()),
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
       );
     }
   }
