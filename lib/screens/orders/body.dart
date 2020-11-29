@@ -13,54 +13,20 @@ import 'background.dart';
 class OrdersBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _something() {
-      return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
-        print(email);
-        return MySharedPreferences.instance.getUser(email).then((value) {
-          print(value);
-          return Consumer.fromJson(value);
-        });
-      });
-    }
-
-    List<Widget> showCards(AsyncSnapshot snapshot){
-      List<Widget> ws = [];
-      if (!snapshot.hasData) {
-        ws = [OrdersEmpty()];
-      } else {
-        Consumer currentUser = snapshot.data;
-        print(currentUser);
-        print(currentUser.bookings);
-        for (var booking in currentUser.bookings) {
-          ws.add(CartCard(
-              booking: booking,
-              press: () {
-                return null;
-              }),
-          );
-        }
-        if(currentUser.bookings.isEmpty)
-          ws = [OrdersEmpty()];
-      }
-      return ws;
-    }
 
     Size size = MediaQuery.of(context).size;
     // This size provide us total height and width of our screen
     return BackgroundOrders(
       child: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 100),
-        child: FutureBuilder(
-            future: _something(),
-            builder: (context, snapshot) {
-              return Column(
+        child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: showCards(snapshot),
-              );
-            }
+                children: [OrdersEmpty()],
+              ),
+
         ),
-      ),
-    );
+      );
+
   }
 }
 

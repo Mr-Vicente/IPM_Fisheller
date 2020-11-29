@@ -1,5 +1,6 @@
 import 'package:fisheller_app/components/back.dart';
 import 'package:fisheller_app/components/home.dart';
+import 'package:fisheller_app/components/preferences.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/fish_and_tips.dart';
 import 'package:fisheller_app/models/seafood.dart';
@@ -372,13 +373,8 @@ class _Stage1Description extends State<Stage1Description> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 20.0),
-              child: _bookButton(),
-            )
-          )
+          showButton()
+
         ]
       )
 
@@ -450,6 +446,31 @@ class _Stage1Description extends State<Stage1Description> {
     );
 
 
+  }
+
+  Widget showButton() {
+    return FutureBuilder(future: isConsumer(),
+      builder: (context,snapshot) {
+        print(snapshot.hasData);
+        if (snapshot.hasData) {
+          bool consumer = snapshot.data;
+          if (consumer) {
+            return Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  child: _bookButton(),
+                )
+            );
+          }
+          else {
+            return SizedBox.shrink();
+          }
+        }
+        return SizedBox.shrink();
+      }
+      ,
+    );
   }
 
 }

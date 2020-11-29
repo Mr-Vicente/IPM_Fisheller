@@ -157,11 +157,11 @@ class _CatchMedia extends State<CatchMedia> {
                             isFirst: true,
                             indicatorStyle: const IndicatorStyle(
                               width: 20,
-                              color: Colors.teal,
+                              color: PRIMARY_COLOUR,
                             ),
                             endChild: Text("Info", style: TextStyle(fontWeight: FontWeight.bold)),
                             beforeLineStyle:
-                            const LineStyle(color: Colors.teal),
+                            const LineStyle(color: PRIMARY_COLOUR),
                           ),
                         ),
                         SizedBox(
@@ -172,12 +172,12 @@ class _CatchMedia extends State<CatchMedia> {
                             lineXY: 0.5,
                             indicatorStyle: const IndicatorStyle(
                               width: 20,
-                              color: Colors.teal,
+                              color: PRIMARY_COLOUR,
                             ),
                             endChild: Text("Media", style: TextStyle(fontWeight: FontWeight.bold)),
                             beforeLineStyle:
-                            const LineStyle(color: Colors.teal),
-                            afterLineStyle: const LineStyle(),
+                            const LineStyle(color: PRIMARY_COLOUR),
+                            afterLineStyle: const LineStyle(color: LIGHT_GRAY_COLOUR),
                           ),
                         ),
                         SizedBox(
@@ -187,7 +187,14 @@ class _CatchMedia extends State<CatchMedia> {
                             alignment: TimelineAlign.manual,
                             lineXY: 0.5,
                             isLast: true,
+                            indicatorStyle: const IndicatorStyle(
+                              width: 20,
+                              color: LIGHT_GRAY_COLOUR,
+                            ),
                             endChild: Text("Review", style: TextStyle(fontWeight: FontWeight.bold)),
+                            beforeLineStyle:
+                            const LineStyle(color: LIGHT_GRAY_COLOUR),
+                            afterLineStyle: const LineStyle(color: LIGHT_GRAY_COLOUR),
                           ),
                         ),
                       ]),
