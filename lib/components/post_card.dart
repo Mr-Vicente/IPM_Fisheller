@@ -27,6 +27,7 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var images = post.imagesNames;
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -35,7 +36,7 @@ class PostCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Image_Box(imageName: null),
+          Image_Box(imageName: images.isEmpty ? null : images[0]),
           Info_Box(post: post),
         ],
       ),

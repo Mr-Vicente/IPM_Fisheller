@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/home.dart';
 import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 import 'package:fisheller_app/components/preferences.dart';
 import 'package:fisheller_app/models/post.dart';
@@ -215,12 +216,9 @@ class _PostState extends State<PostPage> {
     Size size = MediaQuery.of(context).size;
 
     List<String> imgs = [];
-    if (image1_FilePath != null)
-      imgs.add(image1_FilePath);
-    else
-      imgs.add('assets/images/image_placeholder_portrait.png');
+    if (image1_FilePath != "") imgs.add(image1_FilePath);
 
-    if (image2_FilePath != null) imgs.add(image2_FilePath);
+    if (image2_FilePath != "") imgs.add(image2_FilePath);
 
     print(titleController.text +
         " " +
@@ -232,6 +230,7 @@ class _PostState extends State<PostPage> {
     getCurrentVendorObject().then((currentUser) {
       vd = currentUser;
       post = Post(titleController.text, descriptionController.text, imgs, vd);
+      posts.add(post);
     });
     //MySharedPreferences.instance.setPost(post);
 
@@ -294,7 +293,13 @@ class _PostState extends State<PostPage> {
                                         color: Colors.white)),
                                 onPressed: () => {
                                       Navigator.pop(context),
-                                      Navigator.pop(context)
+                                      Navigator.pop(context),
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Home(
+                                                    index: 1,
+                                                  )))
                                     }),
                           ),
                         ],
