@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fisheller_app/components/NumberBox.dart';
 import 'package:fisheller_app/components/back.dart';
+import 'package:fisheller_app/components/page_transitions.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/models/Tag.dart';
 import 'package:fisheller_app/models/seafood.dart';
@@ -160,7 +161,7 @@ class CatchState extends State<Catch> {
                     Text(
                       "Add Seafood",
                       textScaleFactor: 3.0,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.w900),
                     ),
                   ]
               ),
@@ -182,7 +183,7 @@ class CatchState extends State<Catch> {
                             width: 20,
                             color: Colors.teal,
                           ),
-                          endChild: Text("Info"),
+                          endChild: Text("Info", style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                       SizedBox(
@@ -191,7 +192,7 @@ class CatchState extends State<Catch> {
                           axis: TimelineAxis.horizontal,
                           alignment: TimelineAlign.manual,
                           lineXY:0.5,
-                          endChild: Text("Media"),
+                          endChild: Text("Media", style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                       SizedBox(
@@ -201,7 +202,7 @@ class CatchState extends State<Catch> {
                           alignment: TimelineAlign.manual,
                           lineXY:0.5,
                           isLast: true,
-                          endChild: Text("Review"),
+                          endChild: Text("Review", style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ]
@@ -426,34 +427,6 @@ class CatchState extends State<Catch> {
   }
 
 }
-
-
-class SlideLeftRoute extends PageRouteBuilder {
-  final Widget page;
-  SlideLeftRoute({this.page})
-      : super(
-    pageBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        ) =>
-    page,
-    transitionsBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-        Widget child,
-        ) =>
-        SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(1, 0),
-            end: Offset.zero,
-          ).animate(animation),
-          child: child,
-        ),
-  );
-}
-
 
 class ErrorPopUp extends StatefulWidget{
   List<String> errors;

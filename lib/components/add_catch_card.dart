@@ -18,7 +18,7 @@ class CatchCard extends StatelessWidget {
     this.image,
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
-    this.percentage_width = 0.9,
+    this.percentage_width = 0.95,
   }) : super(key: key);
 
   @override
@@ -137,7 +137,17 @@ class Title_Tags_Box extends StatelessWidget {
         children: <Widget>[
           Title_Box(title: seafood.type.name),
           SizedBox(width: 10, height: 5),
-          for (var tag in seafood.tags) Tag_Box(tag: tag.name),
+          Flexible(
+            child:
+            Wrap(
+                spacing: 3,
+                runSpacing: 2,
+                children: <Widget> [
+                  for (int i = 0; i<2 && i<seafood.tags.length; i++)
+                    Tag_Box(tag: seafood.tags[i].name),
+                ]
+            )
+          )
         ],
       ),
     );
@@ -225,15 +235,15 @@ class Numbers_Box extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 5),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Number_Info_Box(
             number: seafood.price,
             text: "Price\n(€ / Kg)",
-            sz: Size(60, 60),
-            space: 15.0,
-            fontSize: 30,
+            sz: Size(70, 70),
+            space: 5.0,
+            fontSize: 24,
           ),
           Equivalent_Box(seafood: seafood),
         ],
@@ -253,7 +263,6 @@ class Number_Info_Box extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -293,23 +302,25 @@ class Equivalent_Box extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Number_Info_Box(
+            fontSize: 18,
             number: seafood.quantityUnits,
             text: "Quantity\n(Unit.)",
-            sz: Size(40, 40),
-            space: 35.0,
+            sz: Size(55, 55),
+            space: 20.0,
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 50),
+            padding: EdgeInsets.only(bottom: 40),
             child: Image.asset(
               "assets/icons/double-arrow.png",
               width: 20,
             ),
           ),
           Number_Info_Box(
+            fontSize: 18,
             number: seafood.quantityMass,
             text: "Quantity\n(Kg.)",
-            sz: Size(40, 40),
-            space: 35.0,
+            sz: Size(55, 55),
+            space: 20.0,
           ),
         ],
       ),
@@ -326,7 +337,7 @@ class Number_Circle extends StatelessWidget {
 
   const Number_Circle({
     Key key,
-    this.fontSize: 30,
+    this.fontSize: 35,
     this.text,
     this.arcWidth,
     this.circle_size: s,
