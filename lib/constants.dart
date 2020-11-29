@@ -23,7 +23,7 @@ const PRIMARY_COLOUR = Color(0xFF00847C); // GREEN
 const SECONDARY_COLOUR = Color.fromRGBO(35, 35, 35, 1.0); // DARK GRAY
 const SALMON_COLOUR = Color(0xFFfd766f);
 const WHITE_COLOUR = Colors.white;
-
+const LIGHT_GRAY_COLOUR = Color.fromRGBO(167, 188, 214, 1.0);
 /// ************************* POPUPS TEXTS ***************************/
 
 const String TEXT_QUESTION_COMFIRM = "Are you sure you want to book?";

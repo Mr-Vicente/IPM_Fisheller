@@ -181,9 +181,10 @@ class CatchState extends State<Catch> {
                           isFirst: true,
                           indicatorStyle: const IndicatorStyle(
                             width: 20,
-                            color: Colors.teal,
+                            color: PRIMARY_COLOUR,
                           ),
                           endChild: Text("Info", style: TextStyle(fontWeight: FontWeight.bold)),
+                          afterLineStyle: const LineStyle(color: LIGHT_GRAY_COLOUR),
                         ),
                       ),
                       SizedBox(
@@ -192,7 +193,14 @@ class CatchState extends State<Catch> {
                           axis: TimelineAxis.horizontal,
                           alignment: TimelineAlign.manual,
                           lineXY:0.5,
+                          indicatorStyle: const IndicatorStyle(
+                            width: 20,
+                            color: LIGHT_GRAY_COLOUR,
+                          ),
                           endChild: Text("Media", style: TextStyle(fontWeight: FontWeight.bold)),
+                          beforeLineStyle:
+                          const LineStyle(color: LIGHT_GRAY_COLOUR),
+                          afterLineStyle: const LineStyle(color: LIGHT_GRAY_COLOUR),
                         ),
                       ),
                       SizedBox(
@@ -202,7 +210,14 @@ class CatchState extends State<Catch> {
                           alignment: TimelineAlign.manual,
                           lineXY:0.5,
                           isLast: true,
+                          indicatorStyle: const IndicatorStyle(
+                            width: 20,
+                            color: LIGHT_GRAY_COLOUR,
+                          ),
                           endChild: Text("Review", style: TextStyle(fontWeight: FontWeight.bold)),
+                          beforeLineStyle:
+                          const LineStyle(color: LIGHT_GRAY_COLOUR),
+                          afterLineStyle: const LineStyle(color: LIGHT_GRAY_COLOUR),
                         ),
                       ),
                     ]

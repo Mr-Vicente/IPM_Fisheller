@@ -1,4 +1,5 @@
 import 'package:fisheller_app/components/home_components/add_PopUp.dart';
+import 'package:fisheller_app/components/preferences.dart';
 import 'package:fisheller_app/screens/cart/background.dart';
 import 'package:fisheller_app/components/navigation_bar_client.dart';
 import 'package:fisheller_app/screens/cart/body.dart';
@@ -16,7 +17,7 @@ import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 class Home extends StatefulWidget {
   final int index;
   Home({
-    this.index = 0,
+    this.index,
   });
 
   @override
@@ -28,10 +29,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex;
   final List<Widget> _children = [MapPage(), Feed(), Cart()];
+  final List<Widget> _childrenVendor = [MapPage(), Feed(), Orders()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  Future userType = isConsumer();
 
   _HomeState({
-    this.currentIndex = 0,
+    this.currentIndex,
   });
 
   @override
@@ -40,7 +43,7 @@ class _HomeState extends State<Home> {
       key: scaffoldKey,
       extendBody: true,
       body: Stack(children: <Widget>[
-        _children[currentIndex],
+        chooseChildren(),
         Positioned(
             top: 25,
             right: 10,
@@ -49,7 +52,7 @@ class _HomeState extends State<Home> {
                   onPressed: () => scaffoldKey.currentState.openEndDrawer(),
                   child: Image.asset('assets/icons/extra_menu.png', height: 20),
                   backgroundColor: Colors.white,
-            ))),
+                ))),
         if (currentIndex == 1)
           Positioned(
               top: 25,
@@ -61,9 +64,9 @@ class _HomeState extends State<Home> {
                       IconData(59828, fontFamily: 'MaterialIcons'),
                       color: Colors.black87,
                       size: 35,
-                ),
-                backgroundColor: Colors.white,
-              ))),
+                    ),
+                    backgroundColor: Colors.white,
+                  ))),
       ]),
       drawerScrimColor: Colors.grey.withOpacity(0.54),
       endDrawer: AmazDrawer(
@@ -79,62 +82,27 @@ class _HomeState extends State<Home> {
             AmazDrawerItem(
                 iconData: Icons.settings, iconSize: 50.0, text: "Settings"),
             AmazDrawerItem(iconData: Icons.help, iconSize: 50.0, text: "Help"),
-            AmazDrawerItem(iconData: Icons.logout, iconSize: 50.0, text: "Logout")
+            AmazDrawerItem(
+                iconData: Icons.logout, iconSize: 50.0, text: "Logout")
           ]),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              offset: const Offset(0.0, 70.0),
-              spreadRadius: 5,
-              color: Colors.black,
-              blurRadius: 200,
-            ),
-          ],
-        ),
-        child: FABBottomAppBar(
-
-          color: Colors.grey,
-          backgroundColor: Colors.white, //Color(0xFFFFFFF0)
-          selectedColor: PRIMARY_COLOUR,
-          notchedShape: CircularNotchedRectangle(),
-          onTabSelected: _onTabTapped,
-          items: [
-            FABBottomAppBarItem(iconData: Icons.location_pin, text: 'Map'),
-            FABBottomAppBarItem(
-                imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
-            FABBottomAppBarItem(iconData: Icons.shopping_cart, text: 'Orders'),
-          ],
-        ),
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                offset: const Offset(0.0, 70.0),
+                spreadRadius: 5,
+                color: Colors.black,
+                blurRadius: 200,
+              ),
+            ],
+          ),
+          child:
+          decideNavigation(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
-      floatingActionButton: Container(
-        height: 70.0,
-        width: 70.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              spreadRadius: 1,
-              color: Colors.grey[600],
-              blurRadius: 5,
-            )
-          ],
-        ),
-        child: FittedBox(
-          child: FloatingActionButton(
-            onPressed: add,
-            tooltip: 'Increment',
-            child: Icon(
-              Icons.add,
-              size: 50,
-            ),
-            elevation: 3.0,
-            backgroundColor: PRIMARY_COLOUR,
-          ),
-        ),
-      ),
+      floatingActionButton: plusButton(),
+
     );
   }
 
@@ -153,20 +121,124 @@ class _HomeState extends State<Home> {
         });
   }
 
+  Widget vendorNavigationBar() {
+    return FABBottomAppBar(
 
-  Widget clientNavigationBar()  {
+      color: Colors.grey,
+      backgroundColor: Colors.white,
+      //Color(0xFFFFFFF0)
+      selectedColor: PRIMARY_COLOUR,
+      notchedShape: CircularNotchedRectangle(),
+      onTabSelected: _onTabTapped,
+      selectedIndex: currentIndex,
+      items: [
+        FABBottomAppBarItem(iconData: Icons.location_pin, text: 'Map'),
+        FABBottomAppBarItem(
+            imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
+        FABBottomAppBarItem(iconData: Icons.shopping_cart, text: 'Orders'),
+      ],
+    );
+  }
+
+
+  Widget clientNavigationBar() {
     return BottomAppBarClient(
       color: Colors.grey,
-      backgroundColor: Colors.white, //Color(0xFFFFFFF0)
+      backgroundColor: Colors.white,
+      //Color(0xFFFFFFF0)
       selectedColor: PRIMARY_COLOUR,
+      selectedIndex: currentIndex,
       onTabSelected: _onTabTapped,
-      items: [ BottomAppBarItemClient(iconData: Icons.location_pin, text: 'Map'),
-                BottomAppBarItemClient(imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
-                BottomAppBarItemClient(iconData: Icons.shopping_cart, text: 'Cart'),
-              ],
-  );
+      items: [
+        BottomAppBarItemClient(iconData: Icons.location_pin, text: 'Map'),
+        BottomAppBarItemClient(
+            imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
+        BottomAppBarItemClient(iconData: Icons.shopping_cart, text: 'Cart'),
+      ],
+    );
   }
+
+  Widget decideNavigation() {
+    return FutureBuilder(future: userType,
+    builder: (context,snapshot) {
+      print(snapshot.hasData);
+        if (snapshot.hasData) {
+          bool consumer = snapshot.data;
+          if (consumer) {
+            return clientNavigationBar();
+          }
+          else {
+            return vendorNavigationBar();
+          }
+      }
+        return SizedBox.shrink();
+    }
+,
+    );
+  }
+
+  Widget plusButton() {
+      return FutureBuilder(future: isConsumer(),
+          builder: (context,snapshot)
+      {
+        if (snapshot.hasData) {
+          bool consumer = snapshot.data;
+          if (!consumer) {
+            return Container(
+              height: 70.0,
+              width: 70.0,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    spreadRadius: 1,
+                    color: Colors.grey[600],
+                    blurRadius: 5,
+                  )
+                ],
+              ),
+              child: FittedBox(
+                child: FloatingActionButton(
+                  onPressed: add,
+                  tooltip: 'Increment',
+                  child: Icon(
+                    Icons.add,
+                    size: 50,
+                  ),
+                  elevation: 3.0,
+                  backgroundColor: PRIMARY_COLOUR,
+                ),
+              ),
+            );
+          }
+          return SizedBox.shrink();
+        }
+        return SizedBox.shrink();
+      }
+      );
+  }
+
+  Widget chooseChildren() {
+    return FutureBuilder(future: userType,
+      builder: (context,snapshot) {
+        print(snapshot.hasData);
+        if (snapshot.hasData) {
+          bool consumer = snapshot.data;
+          if (consumer) {
+            return _children[currentIndex];
+          }
+          else {
+            return _childrenVendor[currentIndex];
+          }
+        }
+        return SizedBox.shrink();
+      }
+      ,
+    );
+  }
+
 }
+
 
 class Feed extends StatelessWidget {
   @override

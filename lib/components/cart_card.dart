@@ -323,7 +323,7 @@ class DrawButtons extends StatelessWidget {
               color: PRIMARY_COLOUR,
               child: Text(
                 "Buy",
-                style: TextStyle(fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
+                style: TextStyle(fontFamily: 'Raleway', fontSize: 12, color: WHITE_COLOUR, fontWeight: FontWeight.bold),
               ),
               onPressed: (){
                 showDialog(
@@ -341,7 +341,7 @@ class DrawButtons extends StatelessWidget {
               color: SALMON_COLOUR,
               child: Text(
                 "Cancel",
-                style: TextStyle(fontFamily: 'Raleway', fontSize: 10, color: WHITE_COLOUR),
+                style: TextStyle(fontFamily: 'Raleway', fontSize: 12, color: WHITE_COLOUR, fontWeight: FontWeight.bold),
               ),
               onPressed: (){
                 print("--------CANCEL--------");

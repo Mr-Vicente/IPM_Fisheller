@@ -56,7 +56,7 @@ class MySharedPreferences {
     myPrefs.setStringList("posts", new List<String>());
   }
 
-  getConsumers() async {
+  Future<List<String>> getConsumers() async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
     return myPrefs.getStringList("consumers");
   }
@@ -160,8 +160,12 @@ paySeafoodFromCurrentUser(Order o) {
   });
 }
 
-isConsumer(String email){
-  List<String> consumers = MySharedPreferences.instance.getConsumers();
-  return consumers.contains(email);
-}
+  Future<bool> isConsumer(){
+  return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    print(MySharedPreferences.instance.getConsumers());
+    return MySharedPreferences.instance.getConsumers().then((consumers){
+      return consumers.contains(email);
+    });
 
+  });
+}

@@ -77,8 +77,14 @@ class CartToggleState extends State<CartToggle> {
             width: size.width,
             child: AnimatedCrossFade(
               duration: const Duration(microseconds: 1),
-              firstChild: pending,
-              secondChild: history,
+              firstChild: Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: pending
+              ),
+              secondChild: Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
+                  child: history
+              ),
               crossFadeState: isSelected[0]
                   ? CrossFadeState.showFirst
                   : CrossFadeState.showSecond,
@@ -199,7 +205,6 @@ class CartEmpty extends StatelessWidget {
     // This size provide us total height and width of our screen
     return Container(
       margin: EdgeInsets.only(top:20),
-      width: size.width * 0.8,
       height: 70,
       decoration: BoxDecoration(
         color: WHITE_COLOUR,
