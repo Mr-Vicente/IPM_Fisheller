@@ -416,6 +416,9 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) => Home(index: 2,)));
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
@@ -432,6 +435,9 @@ class _ReviewPopUp extends State<ReviewPopUp> {
                     ),
                     onPressed: () {
                       Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) => Home(index: 2,)));
                     },
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),

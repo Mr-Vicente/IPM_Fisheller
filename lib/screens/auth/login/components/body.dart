@@ -3,6 +3,7 @@ import 'package:fisheller_app/components/preferences.dart';
 import 'package:fisheller_app/components/rounded_button.dart';
 import 'package:fisheller_app/components/rounded_input_field.dart';
 import 'package:fisheller_app/constants.dart';
+import 'package:fisheller_app/models/User.dart';
 import 'package:fisheller_app/models/consumer.dart';
 import 'package:fisheller_app/screens/auth/login/components/background.dart';
 import 'package:fisheller_app/screens/auth/components/rounded_password_field.dart';
@@ -47,9 +48,9 @@ class Body extends StatelessWidget {
                 text: "LOGIN",
                 press: () {
                     MySharedPreferences.instance
-                          .getConsumer(email).then(
+                          .getUser(email).then(
                               (value) {
-                                Consumer c  = Consumer.fromJson(value);
+                                User c  = User.fromJson(value);
                                 print(c.password);
                               if (c != null && c.password == password){
                                 MySharedPreferences.instance

@@ -1,4 +1,5 @@
 import 'package:fisheller_app/components/Selling_Card.dart';
+import 'package:fisheller_app/components/post_card.dart';
 import 'package:fisheller_app/constants.dart';
 import 'package:fisheller_app/screens/feed/components/background.dart';
 import 'package:fisheller_app/screens/fish_description/stage1_description.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 class FeedToggle extends StatefulWidget{
   @override
   FeedToggleState createState() => FeedToggleState();
-  
+
 }
 
 class FeedToggleState extends State<FeedToggle>{
@@ -61,6 +62,8 @@ class FeedToggleState extends State<FeedToggle>{
               color: WHITE_COLOUR,
             )
         ),
+        for(var post in posts)
+          PostCard(post: post,),
         //food
         Padding(
             padding: EdgeInsets.only(top: 70),
@@ -138,14 +141,3 @@ class FeedListState extends State<FeedList>{
     else
       return _getPosts();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child:_getList()
-    );
-  }
-
-}
-
-

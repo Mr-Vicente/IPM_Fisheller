@@ -1,4 +1,6 @@
 import 'package:fisheller_app/components/home_components/add_PopUp.dart';
+import 'package:fisheller_app/screens/cart/background.dart';
+import 'package:fisheller_app/components/navigation_bar_client.dart';
 import 'package:fisheller_app/screens/cart/body.dart';
 import 'package:fisheller_app/screens/feed/components/background.dart';
 import 'package:fisheller_app/screens/feed/components/body.dart';
@@ -25,7 +27,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex;
-  final List<Widget> _children = [MapPage(), Feed(), Orders()];
+  final List<Widget> _children = [MapPage(), Feed(), Cart()];
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   _HomeState({
@@ -92,6 +94,7 @@ class _HomeState extends State<Home> {
           ],
         ),
         child: FABBottomAppBar(
+
           color: Colors.grey,
           backgroundColor: Colors.white, //Color(0xFFFFFFF0)
           selectedColor: PRIMARY_COLOUR,
@@ -149,6 +152,20 @@ class _HomeState extends State<Home> {
           return add_PopUp();
         });
   }
+
+
+  Widget clientNavigationBar()  {
+    return BottomAppBarClient(
+      color: Colors.grey,
+      backgroundColor: Colors.white, //Color(0xFFFFFFF0)
+      selectedColor: PRIMARY_COLOUR,
+      onTabSelected: _onTabTapped,
+      items: [ BottomAppBarItemClient(iconData: Icons.location_pin, text: 'Map'),
+                BottomAppBarItemClient(imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
+                BottomAppBarItemClient(iconData: Icons.shopping_cart, text: 'Cart'),
+              ],
+  );
+  }
 }
 
 class Feed extends StatelessWidget {
@@ -166,7 +183,7 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CartBody(),
+      body: CartBackground(),
     );
   }
 }
@@ -180,3 +197,6 @@ class Orders extends StatelessWidget {
     );
   }
 }
+
+
+

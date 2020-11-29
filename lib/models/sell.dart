@@ -19,17 +19,5 @@ class Sell{
 
   factory Sell.fromJson(Map<String, dynamic> json) => _$SellFromJson(json);
   Map<String, dynamic> toJson() => _$SellToJson(this);
-/*
-  Sell.fromJson(Map<String, dynamic> json){
-    seafood = Seafood.fromJson(json['seafood']);
-    vendor = Vendor.fromJson(json['vendor']);
-    _market = Market.fromJson(json['_market'].fromJson);
-  }
 
-  Map<String, dynamic> toJson() => {
-    'seafood': seafood.toJson(),
-    'vendor': vendor.toJson(),
-    '_market': _market.toJson(),
-  };
-  */
 }

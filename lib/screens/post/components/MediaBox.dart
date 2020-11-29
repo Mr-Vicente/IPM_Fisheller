@@ -72,7 +72,7 @@ class _MediaBoxState extends State<MediaBox> {
               border: Border.all(
                 color: widget.borderColor,
               ),
-              borderRadius: BorderRadius.all(Radius.circular(40)),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
           ),
         ),
