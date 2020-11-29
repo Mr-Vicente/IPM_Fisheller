@@ -47,7 +47,6 @@ class _MediaBoxState extends State<MediaBox> {
 
     setState(() {
       if (pickedFile != null) {
-        print('whatttt' + pickedFile.path);
         widget._filePath = pickedFile.path;
         widget.callback(widget._filePath);
         //widget._image = File(pickedFile.path);
@@ -59,7 +58,6 @@ class _MediaBoxState extends State<MediaBox> {
 
   @override
   Widget build(BuildContext build) {
-    print("value of fill" + widget.fillImage);
     return Stack(
       overflow: Overflow.visible,
       children: [

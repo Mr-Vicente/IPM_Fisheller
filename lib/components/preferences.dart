@@ -68,6 +68,13 @@ class MySharedPreferences {
     return json.decode(myPrefs.getString(key));
   }
 
+  getVendor(String key) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    print("vendors:");
+    print(myPrefs.getStringList("vendors"));
+    return json.decode(myPrefs.getString(key));
+  }
+
   setVendor(String key, Vendor value) async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
 
@@ -106,6 +113,14 @@ getCurrentUserObject() {
     print(email);
     return MySharedPreferences.instance.getUser(email).then((value) {
       return Consumer.fromJson(value);
+    });
+  });
+}
+
+getCurrentVendorObject() {
+  return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    return MySharedPreferences.instance.getVendor(email).then((value) {
+      return Vendor.fromJson(value);
     });
   });
 }

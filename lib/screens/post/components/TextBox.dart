@@ -27,6 +27,7 @@ class TextBox extends StatelessWidget {
   final BorderRadius borderRadius;
   final BorderStyle borderSyle;
   final double borderWidth;
+  // static GlobalKey<FormState> key1 = new GlobalKey<FormState>();
   //TODO other things
   @override
   Widget build(BuildContext context) {
@@ -39,12 +40,12 @@ class TextBox extends StatelessWidget {
       margin: margins,
       width: width,
       child: TextFormField(
+        key: key,
         controller: controller,
         maxLines: maxLines,
         maxLength: maxChars,
         decoration: new InputDecoration(          
           hintText: hint,
-          
           contentPadding: contentPadding,
           fillColor: fillColor,
           border: border,

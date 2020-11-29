@@ -138,7 +138,7 @@ class CatchState extends State<Catch> {
           barrierDismissible: false,
           context: context,
           builder: (BuildContext context) {
-            return ErrorPopUp(errors);
+            return ErrorPopUp(errors, "All fields must be filled",);
           });
     }
     return canAdd;
@@ -430,18 +430,19 @@ class CatchState extends State<Catch> {
 
 class ErrorPopUp extends StatefulWidget{
   List<String> errors;
-
-  ErrorPopUp(this.errors);
+  String subMessage;
+  ErrorPopUp(this.errors, this.subMessage);
 
   @override
-  ErrorPopUpState createState() => ErrorPopUpState(errors);
+  ErrorPopUpState createState() => ErrorPopUpState(errors, subMessage);
 }
 
 class ErrorPopUpState extends State<ErrorPopUp>{
   List<String> errors;
+  String subMessage;
 
 
-  ErrorPopUpState(this.errors);
+  ErrorPopUpState(this.errors, this.subMessage);
 
  Widget _messages(){
     List <Widget> m = [];
@@ -486,7 +487,7 @@ class ErrorPopUpState extends State<ErrorPopUp>{
 
                             Padding(
                                 padding: EdgeInsets.only(top: 30.0),
-                                child: Text('All fields must be filled', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SALMON_COLOUR)),
+                                child: Text(subMessage, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20, color: SALMON_COLOUR)),
                             ),
                             Padding(
                                 padding: EdgeInsets.only(top: 60.0),

@@ -307,12 +307,14 @@ Post post1 = new Post(
   "Cheiro a bacalhau!",
   "Nas profundezas do oceano há grelos que não são algas :))",
   new List<String>(),
+  julio,
 );
 
 Post post2 = new Post(
   "Passa ai um nite!",
   "Chamem a polícia: mau mau mau!",
   new List<String>(),
+  josefina,
 );
 
 List<Post> posts = <Post>[

@@ -3,6 +3,7 @@ import 'package:fisheller_app/models/Tag.dart';
 import 'package:fisheller_app/models/post.dart';
 import 'package:fisheller_app/models/seafood_type.dart';
 import 'package:fisheller_app/models/seafood.dart';
+import 'package:fisheller_app/models/vendor.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
@@ -14,12 +15,14 @@ class PostCard extends StatelessWidget {
   final Post post;
   final Color color, textColor;
   final double percentage_width;
+  final Vendor vendor;
   const PostCard({
     Key key,
     this.post,
     this.color = PRIMARY_COLOUR,
     this.textColor = Colors.white,
     this.percentage_width = 0.9,
+    this.vendor,
   }) : super(key: key);
 
   @override
