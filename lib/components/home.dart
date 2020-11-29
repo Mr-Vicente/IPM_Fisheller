@@ -1,5 +1,6 @@
 import 'package:fisheller_app/components/home_components/add_PopUp.dart';
 import 'package:fisheller_app/screens/cart/body.dart';
+import 'package:fisheller_app/screens/feed/components/background.dart';
 import 'package:fisheller_app/screens/feed/components/body.dart';
 import 'package:fisheller_app/screens/feed/components/search_bar.dart';
 import 'package:fisheller_app/screens/orders/body.dart';
@@ -155,7 +156,7 @@ class Feed extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: FeedBody(),
+      body: FeedBackground(),
     );
   }
 }
