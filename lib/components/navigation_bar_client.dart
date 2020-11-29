@@ -19,6 +19,7 @@ class BottomAppBarClient extends StatefulWidget {
     this.selectedColor,
     this.notchedShape,
     this.onTabSelected,
+    this.selectedIndex,
   }) {}
   final List<BottomAppBarItemClient> items;
   //final String centerItemText;
@@ -29,13 +30,16 @@ class BottomAppBarClient extends StatefulWidget {
   final Color selectedColor;
   final NotchedShape notchedShape;
   final ValueChanged<int> onTabSelected;
+  final int selectedIndex;
 
   @override
   State<StatefulWidget> createState() => BottomAppBarState();
 }
 
 class BottomAppBarState extends State<BottomAppBarClient> {
-  int _selectedIndex = 0;
+  int _selectedIndex;
+
+  BottomAppBarState(this._selectedIndex);
 
   _updateIndex(int index) {
     widget.onTabSelected(index);

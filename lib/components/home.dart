@@ -16,7 +16,7 @@ import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 class Home extends StatefulWidget {
   final int index;
   Home({
-    this.index = 0,
+    this.index,
   });
 
   @override
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   _HomeState({
-    this.currentIndex = 0,
+    this.currentIndex,
   });
 
   @override
@@ -100,6 +100,7 @@ class _HomeState extends State<Home> {
           selectedColor: PRIMARY_COLOUR,
           notchedShape: CircularNotchedRectangle(),
           onTabSelected: _onTabTapped,
+          selectedIndex: currentIndex,
           items: [
             FABBottomAppBarItem(iconData: Icons.location_pin, text: 'Map'),
             FABBottomAppBarItem(
@@ -159,6 +160,7 @@ class _HomeState extends State<Home> {
       color: Colors.grey,
       backgroundColor: Colors.white, //Color(0xFFFFFFF0)
       selectedColor: PRIMARY_COLOUR,
+      selectedIndex: currentIndex,
       onTabSelected: _onTabTapped,
       items: [ BottomAppBarItemClient(iconData: Icons.location_pin, text: 'Map'),
                 BottomAppBarItemClient(imageName: "assets/icons/feed_green_icon.png", text: 'Feed'),
