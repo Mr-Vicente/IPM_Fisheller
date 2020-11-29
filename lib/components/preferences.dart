@@ -63,8 +63,6 @@ class MySharedPreferences {
 
   getUser(String key) async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
-    print("Consumers:");
-    print(myPrefs.getStringList("consumers"));
     return json.decode(myPrefs.getString(key));
   }
 
@@ -101,9 +99,14 @@ class MySharedPreferences {
 
 }
 
+getPosts(){
+  return MySharedPreferences.instance.getPosts().then((value) {
+    return value;
+  });
+}
+
 getCurrentUserObject() {
   return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
-    print(email);
     return MySharedPreferences.instance.getUser(email).then((value) {
       return Consumer.fromJson(value);
     });
@@ -126,7 +129,6 @@ removeBookingFromCurrentUser(Order o) {
       Consumer c = Consumer.fromJson(consumer);
       if(c.bookings.isNotEmpty)
         c.bookings.removeLast();
-      print(c.bookings);
       MySharedPreferences.instance.setConsumer(email,c);
     });
   });
@@ -138,15 +140,16 @@ paySeafoodFromCurrentUser(Order o) {
       Consumer c = Consumer.fromJson(consumer);
       if(c.bookings.isNotEmpty)
         c.bookings.removeLast();
-      print(c.bookings);
       c.purchases.add(o);
       MySharedPreferences.instance.setConsumer(email,c);
     });
   });
 }
 
-isConsumer(String email){
-  List<String> consumers = MySharedPreferences.instance.getConsumers();
-  return consumers.contains(email);
+isConsumer(){
+  return MySharedPreferences.instance.getCurrentUser("currentUser").then((email) {
+    List<String> consumers = MySharedPreferences.instance.getConsumers();
+    return consumers.contains(email);
+  });
 }
 
