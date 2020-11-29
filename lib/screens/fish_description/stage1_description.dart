@@ -280,7 +280,7 @@ class _Stage1Description extends State<Stage1Description> {
                               ),
                             ),
                             SizedBox(height: 5.0),
-                            Text("Price (Euro/KG)", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500)),
+                            Text("Price\n(€/KG)", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
                           ]
                       ),
                       SizedBox(width: 20.0),
@@ -290,7 +290,7 @@ class _Stage1Description extends State<Stage1Description> {
                               width: 70.0,
                               height: 70.0,
                               child:Center(
-                                  child: Text(description.seafood.quantityUnits.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 25))
+                                  child: Text(description.seafood.quantityUnits.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 22))
                               ),
                               decoration: BoxDecoration(
                                 border: Border.all(width: 7.0,color: Colors.teal,style: BorderStyle.solid),
@@ -298,7 +298,7 @@ class _Stage1Description extends State<Stage1Description> {
                               ),
                             ),
                             SizedBox(height: 5.0),
-                            Text("Quantity (Unit.)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                            Text("Quantity\n(Unit.)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
                           ]
                       ),
                       SizedBox(width: 5.0),
@@ -314,7 +314,7 @@ class _Stage1Description extends State<Stage1Description> {
                               width: 70.0,
                               height: 70.0,
                               child:Center(
-                                  child: Text(description.seafood.quantityMass.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 25))
+                                  child: Text(description.seafood.quantityMass.toString(), style: TextStyle(fontFamily: 'RobotoMono', fontSize: 22))
                               ),
                               decoration: BoxDecoration(
                                 border: Border.all(width: 7.0,color: Colors.teal,style: BorderStyle.solid),
@@ -322,7 +322,7 @@ class _Stage1Description extends State<Stage1Description> {
                               ),
                             ),
                             SizedBox(height: 5.0),
-                            Text("Quantity (KG)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                            Text("Quantity\n(KG)", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
                           ]
                       ),
 

@@ -199,7 +199,7 @@ class CartEmpty extends StatelessWidget {
     // This size provide us total height and width of our screen
     return Container(
       margin: EdgeInsets.only(top:20),
-      width: size.width * 0.8,
+      width: size.width * 0.9,
       height: 70,
       decoration: BoxDecoration(
         color: WHITE_COLOUR,

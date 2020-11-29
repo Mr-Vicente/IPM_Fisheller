@@ -38,7 +38,7 @@ class FeedBackgroundState extends State<FeedBackground>{
             ),
           ),
           Positioned(
-            top: 100.0,
+            top: 70.0,
             child:
             FeedToggle()
           )
