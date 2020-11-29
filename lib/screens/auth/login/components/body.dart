@@ -13,15 +13,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../components/already_have_an_account_acheck.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({
     Key key,
   }) : super(key: key);
+  @override
+  BodyLogin createState() => BodyLogin();
+}
+
+class BodyLogin extends State<Body> {
+  bool areCredencialscorrect = true;
+  String email = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
-    String email = null;
-    String password = null;
+
     Size size = MediaQuery.of(context).size;
     return Background(
         child: SingleChildScrollView(
@@ -44,28 +51,56 @@ class Body extends StatelessWidget {
                   password = value;
                 },
               ),
+              if(!areCredencialscorrect)
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    "Wrong credentials!",
+                    style: TextStyle(
+                      color: SALMON_COLOUR,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ),
               RoundedButton(
                 text: "LOGIN",
                 press: () {
-                    MySharedPreferences.instance
+                    try {
+                      MySharedPreferences.instance
                           .getUser(email).then(
                               (value) {
-                                User c  = User.fromJson(value);
-                                print(c.password);
-                              if (c != null && c.password == password){
-                                MySharedPreferences.instance
-                                    .setCurrentUser("currentUser", email);
-                                Navigator.pop(context);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                       return Home(index:0);
-                                    },
-                                  ),
-                                );
-                            }
+                            User c = User.fromJson(value);
+                            print(c.password);
+                            print(password);
+                            if (c != null && c.password == password) {
+                              MySharedPreferences.instance
+                                  .setCurrentUser("currentUser", email);
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return Home(index: 0);
+                                  },
+                                ),
+                              );
+
+                            }else{
+                              setState(() {
+                                areCredencialscorrect = false;
                               });
+                              print(areCredencialscorrect);
+                              return;
+                            }
+                          });
+                    }catch(e){
+                      setState(() {
+                        areCredencialscorrect = false;
+                      });
+                      print(areCredencialscorrect);
+                      return;
+                    }
                 },
                 color: WHITE_COLOUR,
                 textColor: PRIMARY_COLOUR,
@@ -74,14 +109,14 @@ class Body extends StatelessWidget {
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 press: () {
-                  Navigator.push(
+                  /*Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
                         return SignUpScreen();
                       },
                     ),
-                  );
+                  );*/
                 },
               ),
             ]

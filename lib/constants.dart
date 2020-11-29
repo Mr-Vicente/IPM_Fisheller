@@ -304,16 +304,16 @@ FishNTips codTips = FishNTips(
 /// ************************* Posts *******************************/
 
 Post post1 = new Post(
-  "Cheiro a bacalhau!",
-  "Nas profundezas do oceano há grelos que não são algas :))",
-  new List<String>(),
+  "Paz da Natureza!",
+  "O sol estridente aquece os peixes, aquece a minha alma",
+  ["assets/images/post1.png"],
   julio,
 );
 
 Post post2 = new Post(
-  "Passa ai um nite!",
-  "Chamem a polícia: mau mau mau!",
-  new List<String>(),
+  "Pesca-Corrida",
+  "Dia de corrida entre pescadores",
+  ["assets/images/post2.png"],
   josefina,
 );
 
