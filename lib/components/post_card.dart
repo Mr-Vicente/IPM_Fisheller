@@ -34,7 +34,7 @@ class PostCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Image_Box(imageName: images.isEmpty ? null : images[0]),
+          Image_Box(imageName: images.isEmpty ? null : images[0], file: true,),
           Info_Box(post: post,vendor:post.vendor),
         ],
       ),
@@ -56,16 +56,21 @@ class PostCard extends StatelessWidget {
 
 class Image_Box extends StatelessWidget {
   final String imageName;
+  final bool file;
   const Image_Box({
     Key key,
     this.imageName,
+    this.file: false,
   }) : super(key: key);
 
   ImageProvider _image() {
     if (imageName == null) {
       return Image.asset("assets/images/image_placeholder_portrait.png").image;
     } else {
-      return Image.asset(imageName).image;
+      if (!file) {
+        return Image.file(File(imageName)).image;
+      }
+        else return Image.asset(imageName).image;
     }
   }
 
