@@ -6,16 +6,21 @@ import 'package:fisheller_app/screens/fish_description/stage1_description.dart';
 import 'package:flutter/material.dart';
 
 class FeedToggle extends StatefulWidget{
+  List<bool> isSelected;
+  FeedToggle(this.isSelected);
   @override
-  FeedToggleState createState() => FeedToggleState();
+  FeedToggleState createState() => FeedToggleState(isSelected);
 
 }
 
 class FeedToggleState extends State<FeedToggle>{
   FeedList food = FeedList(true);
   FeedList post = FeedList(false);
-  List<bool> isSelected = [true,false];
+  List<bool> isSelected;
 
+  FeedToggleState(List<bool> selected){
+    this.isSelected = (selected == null ? [true,false]:selected);
+  }
 
   @override
   Widget build(BuildContext context) {
