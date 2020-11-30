@@ -152,8 +152,8 @@ class _CatchMedia extends State<CatchMedia> {
             SizedBox(
               height: 20.0,
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 0.0, 0.0),
+            Center(
+              
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -175,9 +175,8 @@ class _CatchMedia extends State<CatchMedia> {
                     ),
                   ]),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(
-                  32.0, size.height * 0.03, 0.0, 0.0),
+            SizedBox(height: 10,),
+            Center(
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -258,16 +257,7 @@ class _CatchMedia extends State<CatchMedia> {
     ));
   }
 
-  @override
-  void initState() {
-    super.initState();
-    if (seafoodImages == null) 
-      print("sea leangtha sah wass NULL");
-    else print("sea leangtha sahduahdu + $seafoodImages.length");
-    
-    if (seafoodImages == null) seafoodImages = [];
-    seafoodImages.add('');
-  }
+  
 
   @override
   Widget build(BuildContext context) {

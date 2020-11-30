@@ -433,6 +433,10 @@ class CatchState extends State<Catch> {
     if(seafoods == null)
       seafoods = [];
     seafoods.add(seafood);
+    if (seafoodImages == null) {
+      seafoodImages = [];
+      print("I was null idk");}
+    seafoodImages.add('');
   }
 
   @override

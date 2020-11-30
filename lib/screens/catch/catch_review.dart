@@ -240,7 +240,7 @@ class CatchReviewState extends State<CatchReview> {
                   ),
                 ),
                 SizedBox(height: 10.0,),
-                SeafoodReviews(seafoods, seafoodImages),
+                SeafoodReviewsState(seafoods, seafoodImages),
                 SizedBox(height: 100.0,),
               ]
           ),
@@ -266,25 +266,26 @@ class CatchReviewState extends State<CatchReview> {
 }
 
 
-class SeafoodReviews extends StatefulWidget{
-  List<Seafood> seafoods;
-  List<String> seafoodImages;
-  SeafoodReviews(this.seafoods, this.seafoodImages);
+// class SeafoodReviews extends StatefulWidget{
+//   List<Seafood> seafoods;
+//   List<String> seafoodImages;
+//   SeafoodReviews(this.seafoods, this.seafoodImages);
 
-  @override
-  SeafoodReviewsState createState() => SeafoodReviewsState(this.seafoods, this.seafoodImages);
+//   @override
+//   SeafoodReviewsState createState() => SeafoodReviewsState(this.seafoods, this.seafoodImages);
   
-}
+// }
 
-class SeafoodReviewsState extends State<SeafoodReviews>{
-  List<Seafood> seafoods;
-  List<String> seafoodImages;
+class SeafoodReviewsState extends StatelessWidget{
+  final List<Seafood> seafoods;
+  final List<String> seafoodImages;
   SeafoodReviewsState(this.seafoods, this.seafoodImages);
 
-  List<Widget> seafoodReviews(){
+  List<Widget> seafoodReviews(context){
     List<Widget> temp = [];
     int index = 0;
     print("noooooooobaskdoaksodl ");
+    print("seafoo images");
     for (Seafood s in seafoods){
       print("NEEEEGGAA $index");
       temp.add(
@@ -300,24 +301,22 @@ class SeafoodReviewsState extends State<SeafoodReviews>{
     temp.add(
       Align(
         alignment: Alignment.bottomRight,
-        child: _addMore()
+        child: _addMore(context)
       )
     );
     temp.add(SizedBox(height: 20));
     return temp;
   }
 
-
-
   
-  Widget _addMore(){
+  Widget _addMore(context){
     return FlatButton(
       onPressed: () {
         Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  Catch(seafoods, seafoodImages)
+                  new Catch(new List<Seafood>.from(seafoods), new List<String>.from(seafoodImages))
           ),//stage2description
         );
       },
@@ -365,7 +364,7 @@ class SeafoodReviewsState extends State<SeafoodReviews>{
   @override
   Widget build(BuildContext context) {
     return  Column(
-      children: seafoodReviews());
+      children: seafoodReviews(context));
   }
   
 }
