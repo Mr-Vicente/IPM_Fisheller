@@ -94,7 +94,6 @@ void initialiseUsers() {
 
   MySharedPreferences.instance.setVendor(julio.email, julio);
   MySharedPreferences.instance.setVendor(josefina.email, josefina);
-
   MySharedPreferences.instance.setBooleanValue("isfirstRun", true);
   print("Users Initialized");
 }
