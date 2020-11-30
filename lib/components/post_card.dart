@@ -67,7 +67,7 @@ class Image_Box extends StatelessWidget {
     if (imageName == null) {
       return Image.asset("assets/images/image_placeholder_portrait.png").image;
     } else {
-      if (!file) {
+      if (!imageName.contains("assets")) {
         return Image.file(File(imageName)).image;
       }
         else return Image.asset(imageName).image;
