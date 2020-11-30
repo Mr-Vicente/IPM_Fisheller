@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
@@ -12,6 +13,8 @@ class MediaBox extends StatefulWidget {
   final Color borderColor;
   final String fillImage;
   final StringCallback callback;
+  final Size factor;
+  var rng = new Random();
 
   //File _image;
   String _filePath;
@@ -23,7 +26,8 @@ class MediaBox extends StatefulWidget {
       this.fillColor,
       this.borderColor,
       this.fillImage: '',
-      this.callback})
+      this.callback,
+      this.factor: const Size(1,1)})
       : super(key: key);
 
   // File getFile() {
@@ -58,6 +62,7 @@ class _MediaBoxState extends State<MediaBox> {
 
   @override
   Widget build(BuildContext build) {
+    var j = widget.rng.nextInt(100);
     return Stack(
       overflow: Overflow.visible,
       children: [
@@ -88,8 +93,8 @@ class _MediaBoxState extends State<MediaBox> {
           ),
         ),
         Positioned(
-          top: widget.mediaSize.height * 0.75,
-          left: widget.mediaSize.width * 1.05,
+          top: widget.mediaSize.height * 0.75*widget.factor.height,
+          left: widget.mediaSize.width * 1.05*widget.factor.width,
           child: Container(
             height: 40.0,
             width: 40.0,
@@ -105,6 +110,7 @@ class _MediaBoxState extends State<MediaBox> {
             ),
             child: FittedBox(
               child: FloatingActionButton(
+                heroTag: Text("LOLADA $j"),
                 onPressed: _getMedia,
                 tooltip: 'Increment',
                 child: Icon(

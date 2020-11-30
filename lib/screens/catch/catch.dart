@@ -19,7 +19,7 @@ import 'catch_media.dart';
 
 class Catch extends StatefulWidget {
   List<Seafood> seafoods;
-  List<File> seafoodImages;
+  List<String> seafoodImages;
 
   Catch(this.seafoods, this.seafoodImages);
 
@@ -37,7 +37,7 @@ class CatchState extends State<Catch> {
   final quantityController = TextEditingController();
 
   List<Seafood> seafoods;
-  List<File> seafoodImages;
+  List<String> seafoodImages;
 
   Seafood seafood = new Seafood();
   DropDown dd = new DropDown('SELECT SEAFOOD', SEAFOODS, 300, 40, PRIMARY_COLOUR, Colors.white, 15, null);
@@ -382,6 +382,7 @@ class CatchState extends State<Catch> {
                         onPressed: (){
                           if(_checkState()){
                             _updateSeafood();
+                            Navigator.pop(context);
                             Navigator.push(
                               context, SlideLeftRoute(page: CatchMedia(seafoods, seafoodImages)),
                             );
@@ -436,7 +437,6 @@ class CatchState extends State<Catch> {
 
   @override
   Widget build(BuildContext context) {
-    seafoodImages = [];
     tb = TagsButtons(currentTags: currentTags, parent: this);
     return Back(body: _screen(),current: Text("catch"),);
   }

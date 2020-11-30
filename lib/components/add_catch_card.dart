@@ -9,7 +9,7 @@ import 'dart:io';
 
 class CatchCard extends StatelessWidget {
   final Seafood seafood;
-  final File image;
+  final String image;
   final Color color, textColor;
   final double percentage_width;
   const CatchCard({
@@ -23,6 +23,7 @@ class CatchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("HELOO MOTHERFUCKER " + image);
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -31,7 +32,7 @@ class CatchCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Image_Box(image: image),
+          Image_Box(image: image == '' ? null :File(image)),
           Info_Box(seafood: seafood),
         ],
       ),

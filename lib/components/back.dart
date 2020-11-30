@@ -1,3 +1,5 @@
+import 'package:fisheller_app/models/seafood.dart';
+import 'package:fisheller_app/screens/catch/catch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +11,17 @@ class Back extends StatelessWidget{
   Widget body;
   Widget bottom;
   Text current;
+  List<Seafood> seafoods;
+  List<String> seafoodImages;
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   Back({
     this.body,
     this.bottom,
-    this.current
+    this.current,
+    this.seafoods : null,
+    this.seafoodImages : null,
   });
 
   @override

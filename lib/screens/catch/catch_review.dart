@@ -24,7 +24,7 @@ import 'catch_media.dart';
 class CatchReview extends StatefulWidget {
 
   List<Seafood> seafoods;
-  List<File> seafoodImages;
+  List<String> seafoodImages;
   CatchReview(this.seafoods, this.seafoodImages);
 
   @override
@@ -34,7 +34,7 @@ class CatchReview extends StatefulWidget {
 class CatchReviewState extends State<CatchReview> {
 
   List<Seafood> seafoods;
-  List<File> seafoodImages = [];
+  List<String> seafoodImages = [];
   CatchReviewState(this.seafoods, this.seafoodImages);
 
 
@@ -135,7 +135,7 @@ class CatchReviewState extends State<CatchReview> {
                                   color: Colors.white)),
                           onPressed: () => {
                             Navigator.push(
-                              context, SlideRightRoute(page: Home()),
+                              context, SlideRightRoute(page: Home(index: 0,)),
                             )
 
                           }),
@@ -268,7 +268,7 @@ class CatchReviewState extends State<CatchReview> {
 
 class SeafoodReviews extends StatefulWidget{
   List<Seafood> seafoods;
-  List<File> seafoodImages;
+  List<String> seafoodImages;
   SeafoodReviews(this.seafoods, this.seafoodImages);
 
   @override
@@ -278,17 +278,19 @@ class SeafoodReviews extends StatefulWidget{
 
 class SeafoodReviewsState extends State<SeafoodReviews>{
   List<Seafood> seafoods;
-  List<File> seafoodImages;
+  List<String> seafoodImages;
   SeafoodReviewsState(this.seafoods, this.seafoodImages);
 
   List<Widget> seafoodReviews(){
     List<Widget> temp = [];
     int index = 0;
+    print("noooooooobaskdoaksodl ");
     for (Seafood s in seafoods){
+      print("NEEEEGGAA $index");
       temp.add(
           CatchCard(
             seafood: s,
-            image: null,
+            image: seafoodImages[index],
           )
       );
       temp.add(SizedBox(height: 10));
