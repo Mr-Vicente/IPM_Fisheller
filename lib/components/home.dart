@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
                   child: FloatingActionButton(
                     onPressed: () => SearchBarFeed(),
                     child: Icon(
-                      IconData(59828, fontFamily: 'MaterialIcons'),
+                      Icons.search,
                       color: Colors.black87,
                       size: 35,
                     ),
