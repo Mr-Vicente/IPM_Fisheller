@@ -5,21 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'body.dart';
 
 class FeedBackground extends StatefulWidget {
-  final Widget child;
-  FeedBackground({
-    Key key,
-    @required this.child,
-  });
-  FeedBackgroundState createState() => FeedBackgroundState(child: child);
+  List<bool> isSelected;
+  FeedBackground(this.isSelected);
+  FeedBackgroundState createState() => FeedBackgroundState(isSelected);
 }
 
 class FeedBackgroundState extends State<FeedBackground>{
-  List<bool> isSelected = [true,false];
-  final Widget child;
-  FeedBackgroundState({
-    Key key,
-    @required this.child,
-  });
+  List<bool> isSelected;
+  FeedBackgroundState(this.isSelected);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +33,7 @@ class FeedBackgroundState extends State<FeedBackground>{
           Positioned(
             top: 70.0,
             child:
-            FeedToggle()
+            FeedToggle(isSelected)
           )
         ],
       ),

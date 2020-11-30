@@ -16,26 +16,36 @@ import 'package:fisheller_app/components/home_components/amaz_drawer.dart';
 
 class Home extends StatefulWidget {
   final int index;
+  List<bool> isSelected;
   Home({
     this.index,
+    this.isSelected
   });
 
   @override
   State<StatefulWidget> createState() {
-    return _HomeState(currentIndex: index);
+    return _HomeState(currentIndex: index, isSelected: isSelected);
   }
 }
 
 class _HomeState extends State<Home> {
   int currentIndex;
-  final List<Widget> _children = [MapPage(), Feed(), Cart()];
-  final List<Widget> _childrenVendor = [MapPage(), Feed(), Orders()];
+  List<Widget> _children;
+  List<Widget> _childrenVendor;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   Future userType = isConsumer();
+  List<bool> isSelected;
 
   _HomeState({
     this.currentIndex,
+    this.isSelected
   });
+
+  @override void initState() {
+    super.initState();
+    _children = [MapPage(), Feed(isSelected), Cart()];
+    _childrenVendor = [MapPage(), Feed(isSelected), Orders()];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,11 +251,13 @@ class _HomeState extends State<Home> {
 
 
 class Feed extends StatelessWidget {
+  List<bool> isSelected;
+  Feed(this.isSelected);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: FeedBackground(),
+      body: FeedBackground(isSelected),
     );
   }
 }

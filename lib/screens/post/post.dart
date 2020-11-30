@@ -230,7 +230,7 @@ class _PostState extends State<PostPage> {
     getCurrentVendorObject().then((currentUser) {
       vd = currentUser;
       post = Post(titleController.text, descriptionController.text, imgs, vd);
-      posts.add(post);
+      posts.insert(0, post);
     });
     //MySharedPreferences.instance.setPost(post);
 
@@ -298,7 +298,7 @@ class _PostState extends State<PostPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => Home(
-                                                    index: 1,
+                                                    index: 1, isSelected: [false, true],
                                                   )))
                                     }),
                           ),
