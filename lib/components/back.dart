@@ -24,6 +24,31 @@ class Back extends StatelessWidget{
     this.seafoodImages : null,
   });
 
+
+
+  Widget _getLeading(BuildContext context){
+    if(current.data != "review"){
+      return FlatButton.icon(
+        icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
+        label: new Text('back',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+        onPressed: () {
+          Navigator.pop(context);
+          if(current.data == "feed"){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      Home(index:1)
+              ),
+            );
+          }
+        },
+      );
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -31,36 +56,20 @@ class Back extends StatelessWidget{
         backgroundColor: Colors.white,
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        toolbarHeight: size.height * 0.09,
-        actions: <Widget>[
-          Container(
-              margin: EdgeInsets.only(right: 10),
-              child: FloatingActionButton(
-                onPressed: () => scaffoldKey.currentState.openEndDrawer(),
-                child: Image.asset('assets/icons/extra_menu.png', height: 20),
-                backgroundColor: Colors.white,
-              )),
-        ],
-        leadingWidth: size.width,
-        leading: FlatButton.icon(
-          icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
-          label: new Text('back',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-          onPressed: () {
-            Navigator.pop(context);
-            if(current.data == "feed"){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        Home(index:1)
-                ),
-              );
-            }
-          },
-        ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          toolbarHeight: size.height * 0.09,
+          actions: <Widget>[
+            Container(
+                margin: EdgeInsets.only(right: 10),
+                child: FloatingActionButton(
+                  onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+                  child: Image.asset('assets/icons/extra_menu.png', height: 20),
+                  backgroundColor: Colors.white,
+                )),
+          ],
+          leadingWidth: size.width,
+          leading: _getLeading(context),
       ),
       drawerScrimColor: Colors.grey.withOpacity(0.54),
       endDrawer: AmazDrawer(
