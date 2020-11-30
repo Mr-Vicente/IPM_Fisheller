@@ -382,7 +382,6 @@ class CatchState extends State<Catch> {
                         onPressed: (){
                           if(_checkState()){
                             _updateSeafood();
-                            Navigator.pop(context);
                             Navigator.push(
                               context, SlideLeftRoute(page: CatchMedia(seafoods, seafoodImages)),
                             );
